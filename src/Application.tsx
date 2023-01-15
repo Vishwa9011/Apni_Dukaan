@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import Admin from './Admin/Pages/Home/Admin'
 import Cart from './Pages/Cart/Cart'
 import Home from './Pages/Home/Home'
 import Login from './Pages/Login/Login'
@@ -15,6 +16,7 @@ const Application = () => {
                <Route path='cart' element={<Cart />} />
                <Route path='wishlist' element={<Wishlist />} />
                <Route path='login' element={<Login />} />
+               <Route path='admin' element={<Admin />} />
                <Route path='*' element={<PageNotFound />} />
           </Routes>
      )

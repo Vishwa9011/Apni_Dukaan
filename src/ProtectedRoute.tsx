@@ -8,4 +8,4 @@ const ProtectedRoute = ({ children }: Ichildren) => {
      return children;
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;
