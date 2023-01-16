@@ -1,8 +1,8 @@
 import { Box, Button, Heading, Input, Text } from '@chakra-ui/react'
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react'
-import { IProduct } from '../../../Constants/Constatn';
-import { db } from '../../../Firebase/FirebaseConfig';
+import { IProduct } from '../../../../Constants/Constant';
+import { db } from '../../../../Firebase/FirebaseConfig';
 import './Add-product.css'
 
 const initialState: IProduct = {
@@ -56,7 +56,7 @@ const AddProduct = () => {
      }
 
      return (
-          <Box w='80%' m='auto'>
+          <Box >
                <Heading textAlign={'center'} my='4'> Add Product in <Text color={'red.500'} as='span' textTransform={'uppercase'}>{category}</Text></Heading>
                <Box display={'flex'} border='1px'>
                     <Box w='20%' className='category-link'>
