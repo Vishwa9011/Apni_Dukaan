@@ -55,4 +55,9 @@ export interface IProductUpdate {
 export interface IAuthDetailLogin {
      email: string
      password: string
+     Toast: Function
+}
+
+export interface IToastProps {
+     Toast: (msg: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined) => void
 }

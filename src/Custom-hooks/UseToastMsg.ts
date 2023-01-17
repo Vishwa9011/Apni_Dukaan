@@ -6,12 +6,12 @@ type Props = {
 }
 
 
-export enum ToastType {
-     info = "info",
-     warning = "warning",
-     success = "success",
-     error = "error",
-     loading = "loading"
+export const ToastType = {
+     info: "info",
+     warning: "warning",
+     success: "success",
+     error: "error",
+     loading: "loading"
 }
 
 interface IStatus {
