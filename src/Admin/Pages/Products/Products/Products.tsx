@@ -6,7 +6,7 @@ import { IProduct, IProductUpdate } from '../../../../Constants/Constant'
 import UseToggle from '../../../../Custom-hooks/UseToggle'
 import { db } from '../../../../Firebase/FirebaseConfig'
 import { admin_delete_products, admin_products_update } from '../../../../Redux/Admin/Action.admin'
-import AddProduct from './../AddProduct/AddProduct';
+import AddProduct, { initialStateAddProduct } from './../AddProduct/AddProduct';
 
 
 const Products = () => {
@@ -111,7 +111,7 @@ export default Products
 
 const UpdateProductInput = ({ product }: IProduct) => {
 
-  const [UpdateProducts, setUpdateProducts] = useState<IProductUpdate | undefined>({})
+  const [UpdateProducts, setUpdateProducts] = useState<IProductUpdate>(product)
 
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if ((e.target.name).slice(0, 5) !== 'image') {
