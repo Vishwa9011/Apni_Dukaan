@@ -6,6 +6,7 @@ import { db } from '../../../../Firebase/FirebaseConfig';
 import './Add-product.css'
 
 const initialState: IProduct = {
+     id: "",
      brand: "",
      description: "",
      price: 0,

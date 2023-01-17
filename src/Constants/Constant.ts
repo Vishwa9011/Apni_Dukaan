@@ -15,7 +15,7 @@ export interface IUser {
 
 //* Single Product
 export interface IProduct {
-     id?: any;
+     id?: string
      brand: string
      description: string
      rating: string
@@ -27,6 +27,25 @@ export interface IProduct {
      defaultImage: string
      images: {
           image1: string
+          image2?: string
+          image3?: string
+     }
+}
+
+//* Single Product
+export interface IProductUpdate {
+     id: string
+     brand?: string
+     description?: string
+     rating?: string
+     totalReview?: string
+     price?: number
+     mrp?: number
+     discount?: number
+     category?: string
+     defaultImage?: string
+     images?: {
+          image1?: string
           image2?: string
           image3?: string
      }

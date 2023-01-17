@@ -4,6 +4,7 @@ import { Reducer as CartReducer } from "./CartRedux/Reducer.cart";
 import { Reducer as ShopReducer } from "./ShopRedux/Reducer.shop";
 import { Reducer as AuthReducer } from "./Auth/Reducer.auth";
 import thunk from "redux-thunk";
+import { Reducer as AdminReducer } from "./Admin/Reducer.admin";
 
 declare global {
      interface Window {
@@ -17,7 +18,8 @@ const RootReducers = {
      auth: AuthReducer,
      cart: CartReducer,
      shop: ShopReducer,
-     wishlist: WishlistReducer
+     wishlist: WishlistReducer,
+     admin: AdminReducer
 }
 
 export const store = legacy_createStore(combineReducers(RootReducers), composeEnhancers(applyMiddleware(thunk)));
