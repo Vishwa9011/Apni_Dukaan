@@ -1,11 +1,20 @@
+import { IUser } from '../../Constants/Constant';
 import * as Types from './Types.auth';
 
 
-const inititalState = {
+export interface IAuthInitialState {
+     loading: boolean
+     error: string
+     authenticated: boolean
+     userCredential: IUser | {}
+}
+
+
+const inititalState: IAuthInitialState = {
      loading: false,
      error: '',
      authenticated: false,
-     userCredentital: {}
+     userCredential: {}
 }
 
 export const Reducer = (state = inititalState, { type, payload }: any) => {
@@ -14,9 +23,9 @@ export const Reducer = (state = inititalState, { type, payload }: any) => {
                return ({ ...state, loading: true });
           case Types.AUTH_ERROR:
                return ({ ...state, loading: false, error: payload });
-          case Types.SIGNIN_SUCESS:
+          case Types.SIGNIN_SUCCESS:
                return ({ loading: false, error: '', userCredential: payload, authenticated: true })
-          case Types.SIGNOUT_SUCESS:
+          case Types.SIGNOUT_SUCCESS:
                return inititalState;
           default:
                return state;

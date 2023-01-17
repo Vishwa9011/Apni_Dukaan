@@ -13,7 +13,7 @@ const Products = () => {
   const [isOpen, toggle]: any = UseToggle();
   const dispatch: Dispatch<any> = useDispatch();
   const [category, setCategory] = useState('men');
-  const [UpdateProduct, setUpdateProduct] = useState<IProductUpdate>(initialStateAddProduct)
+  const [UpdateProduct, setUpdateProduct] = useState<IProduct>(initialStateAddProduct)
   const [products, setProducts] = useState<IProduct[]>([]);
 
 
@@ -29,7 +29,8 @@ const Products = () => {
   useEffect(() => {
     const productsCollectionRef = collection(db, `shop/${category}/${category}Data`);
     const unsub = onSnapshot(productsCollectionRef, (snapShot) => {
-      const data: IProduct[] = snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const data: IProduct[] = snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id.toString() }));
+      console.log('data: ', data);
       setProducts(data)
     }, (err) => {
       console.log('err: ', err);
@@ -139,10 +140,6 @@ const UpdateProductInput = ({ product, toggle, category }: IUpdateProductInput) 
       })
   }
 
-  // todo cancelupdate
-  const cancelUpdates = () => {
-
-  }
 
   // todo: onchange state updates
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

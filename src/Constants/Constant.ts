@@ -15,16 +15,17 @@ export interface IUser {
 
 //* Single Product
 export interface IProduct {
-     id: string
+     id: string 
      brand: string
      description: string
-     rating: string
+     rating: number
      totalReview: string
      price: number
      mrp: number
      discount?: number
      category: string
      defaultImage: string
+     qty?: number
      images: {
           image1: string
           image2?: string

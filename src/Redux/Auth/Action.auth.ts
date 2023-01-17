@@ -22,10 +22,9 @@ export const signInWithGoogleAuth = (Toast: Function) => async (dispatch: Dispat
 
           // * setting the document into the database
           await setDoc(userRef, userDetail);
-          dispatch({ type: Types.SIGNIN_SUCESS, payload: userDetail })
+          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
           Toast("Login Success", ToastType.success)
      } catch (error) {
-          console.log('error: ', error);
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
      }
@@ -46,10 +45,9 @@ export const signUp = ({ email, password, Toast }: IAuthDetailLogin) => async (d
           }
           // * setting  the details into userscollection
           await setDoc(userRef, userDetail);
-          dispatch({ type: Types.SIGNIN_SUCESS, payload: userDetail })
+          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
           Toast("Signup Success", ToastType.success)
      } catch (error) {
-          console.log('error: ', error);
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
      }
@@ -65,10 +63,9 @@ export const signIn = ({ email, password, Toast }: IAuthDetailLogin) => async (d
           // * getting the document from server 
           const userRef = doc(db, 'users', user.uid);
           const userDetail = await getDoc(userRef);
-          dispatch({ type: Types.SIGNIN_SUCESS, payload: userDetail })
+          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
           Toast("Login Success", ToastType.success)
      } catch (error) {
-          console.log('error: ', error);
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
      }
@@ -79,10 +76,9 @@ export const logout = (Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.AUTH_LOADING });
      try {
           await signOut(auth)
-          dispatch({ type: Types.SIGNOUT_SUCESS })
+          dispatch({ type: Types.SIGNOUT_SUCCESS })
           Toast("Logout Success", ToastType.success)
      } catch (error) {
-          console.log('error: ', error);
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
      }
