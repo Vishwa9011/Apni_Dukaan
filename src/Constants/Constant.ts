@@ -15,7 +15,7 @@ export interface IUser {
 
 //* Single Product
 export interface IProduct {
-     id?: string
+     id: string
      brand: string
      description: string
      rating: string

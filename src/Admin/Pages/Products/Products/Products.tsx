@@ -1,36 +1,36 @@
 import { Box, Button, Heading, Image, Input, Select, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
-import { collection, onSnapshot } from 'firebase/firestore'
-import React, { Dispatch, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { IProduct, IProductUpdate } from '../../../../Constants/Constant'
-import UseToggle from '../../../../Custom-hooks/UseToggle'
-import { db } from '../../../../Firebase/FirebaseConfig'
 import { admin_delete_products, admin_products_update } from '../../../../Redux/Admin/Action.admin'
 import AddProduct, { initialStateAddProduct } from './../AddProduct/AddProduct';
-
+import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { IProduct, IProductUpdate } from '../../../../Constants/Constant'
+import React, { Dispatch, useEffect, useState } from 'react'
+import UseToggle from '../../../../Custom-hooks/UseToggle'
+import { db } from '../../../../Firebase/FirebaseConfig'
+import { useDispatch } from 'react-redux'
+import './Product.css'
 
 const Products = () => {
-  const [isOpen, toggle] = UseToggle();
+  const [isOpen, toggle]: any = UseToggle();
   const dispatch: Dispatch<any> = useDispatch();
   const [category, setCategory] = useState('men');
-  const [products, setUpdateProductss] = useState<IProduct[]>([]);
+  const [UpdateProduct, setUpdateProduct] = useState<IProductUpdate>(initialStateAddProduct)
+  const [products, setProducts] = useState<IProduct[]>([]);
 
-  const updateProduct = (id: string) => {
-    const data = {
 
-    }
-    // admin_products_update()
+  const updateProductFunc = (productItem: IProduct) => {
+    toggle();
+    setUpdateProduct(productItem);
   }
+
   const deleteProduct = (id: string) => {
     dispatch(admin_delete_products({ id, category }))
   }
-
 
   useEffect(() => {
     const productsCollectionRef = collection(db, `shop/${category}/${category}Data`);
     const unsub = onSnapshot(productsCollectionRef, (snapShot) => {
       const data: IProduct[] = snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setUpdateProductss(data)
+      setProducts(data)
     }, (err) => {
       console.log('err: ', err);
     })
@@ -39,7 +39,14 @@ const Products = () => {
   }, [category])
 
   return (
-    <Box>
+    <Box pos='relative'>
+      <Box >
+        {isOpen &&
+          <Box pos={'fixed'} className='product-update-container'>
+            <UpdateProductInput product={UpdateProduct} toggle={toggle} category={category} />
+          </Box>
+        }
+      </Box>
       <Box ml='2' my='5'>
         <Heading>Categories</Heading>
         <Select my='5' w='400px' onChange={(e) => setCategory(e.target.value)}>
@@ -91,7 +98,7 @@ const Products = () => {
                   <Image src={product.images.image3} />
                 </Td>
                 <Td>
-                  <Button bg='blue.500'>Update</Button>
+                  <Button bg='blue.500' onClick={() => updateProductFunc(product)}>Update</Button>
                 </Td>
                 <Td>
                   <Button bg='red.500' onClick={() => deleteProduct(product.id)}>Delete</Button>
@@ -109,36 +116,67 @@ const Products = () => {
 export default Products
 
 
-const UpdateProductInput = ({ product }: IProduct) => {
+interface IUpdateProductInput {
+  product: IProduct
+  category: string
+  toggle(): void
+}
 
-  const [UpdateProducts, setUpdateProducts] = useState<IProductUpdate>(product)
+const UpdateProductInput = ({ product, toggle, category }: IUpdateProductInput) => {
 
+  const [UpdateProduct, setUpdateProduct] = useState<IProduct>({ ...product })
+
+
+  // todo saveUpdates
+  const SaveUpdates = () => {
+    const pathRef = doc(db, `shop/${category}/${category}Data`, UpdateProduct.id)
+    updateDoc(pathRef, { ...UpdateProduct })
+      .then(() => {
+        alert("product updated")
+        toggle()
+      }).catch((err) => {
+        console.log('err: ', err);
+      })
+  }
+
+  // todo cancelupdate
+  const cancelUpdates = () => {
+
+  }
+
+  // todo: onchange state updates
   const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if ((e.target.name).slice(0, 5) !== 'image') {
       if (e.target.name === 'price' || e.target.name === 'mrp' || e.target.name === 'discount' || e.target.name === "rating") {
-        setUpdateProducts(prev => ({ ...prev, [e.target.name]: +(e.target.value) }));
-      } else setUpdateProducts(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        setUpdateProduct(prev => ({ ...prev, [e.target.name]: +(e.target.value) }));
+      } else setUpdateProduct(prev => ({ ...prev, [e.target.name]: e.target.value }));
     } else {
       if (e.target.name === 'image0') {
-        setUpdateProducts(prev => ({ ...prev, defaultImage: e.target.value }))
-      } else setUpdateProducts(prev => ({ ...prev, images: { ...prev.images, [e.target.name]: e.target.value } }))
+        setUpdateProduct(prev => ({ ...prev, defaultImage: e.target.value }))
+      } else setUpdateProduct(prev => ({ ...prev, images: { ...prev.images, [e.target.name]: e.target.value } }))
     }
   }
 
   return (
     <>
-      <Input value={product?.brand} name='brand' onChange={HandleChange} placeholder='brand' />
-      <Input value={product?.description} name='description' onChange={HandleChange} placeholder='description' />
-      <Input value={product?.price || ''} name='price' onChange={HandleChange} placeholder='price' />
-      <Input value={product?.mrp || ''} name='mrp' onChange={HandleChange} placeholder='mrp' />
-      <Input value={product?.discount || ''} name='discount' onChange={HandleChange} placeholder='discount' />
-      <Input value={product?.rating || ''} name='rating' onChange={HandleChange} placeholder='rating' />
-      <Input value={product?.category} name='category' onChange={HandleChange} placeholder='category' />
-      <Input value={product?.totalReview} name='totalReview' onChange={HandleChange} placeholder='total review' />
-      <Input value={product?.defaultImage} name='image0' onChange={HandleChange} placeholder='main image' />
-      <Input value={product?.images?.image1} name='image1' onChange={HandleChange} placeholder='image 2' />
-      <Input value={product?.images?.image2} name='image2' onChange={HandleChange} placeholder='image 3' />
-      <Input value={product?.images?.image3} name='image3' onChange={HandleChange} placeholder='image 4' />
+      <Box className='update-product-input-container'>
+        <Input value={UpdateProduct?.brand} name='brand' onChange={HandleChange} placeholder='brand' />
+        <Input value={UpdateProduct?.description} name='description' onChange={HandleChange} placeholder='description' />
+        <Input value={UpdateProduct?.price || ''} name='price' onChange={HandleChange} placeholder='price' />
+        <Input value={UpdateProduct?.mrp || ''} name='mrp' onChange={HandleChange} placeholder='mrp' />
+        <Input value={UpdateProduct?.discount || ''} name='discount' onChange={HandleChange} placeholder='discount' />
+        <Input value={UpdateProduct?.rating || ''} name='rating' onChange={HandleChange} placeholder='rating' />
+        <Input value={UpdateProduct?.category} name='category' onChange={HandleChange} placeholder='category' />
+        <Input value={UpdateProduct?.totalReview} name='totalReview' onChange={HandleChange} placeholder='total review' />
+        <Input value={UpdateProduct?.defaultImage} name='image0' onChange={HandleChange} placeholder='main image' />
+        <Input value={UpdateProduct?.images?.image1} name='image1' onChange={HandleChange} placeholder='image 2' />
+        <Input value={UpdateProduct?.images?.image2} name='image2' onChange={HandleChange} placeholder='image 3' />
+        <Input value={UpdateProduct?.images?.image3} name='image3' onChange={HandleChange} placeholder='image 4' />
+      </Box>
+      <Box>
+        <Button bg='blue.500' onClick={SaveUpdates}>Update</Button>
+        <Button bg='blue.500' onClick={toggle}>Cancel</Button>
+      </Box>
     </>
   )
 }

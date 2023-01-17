@@ -1,0 +1,23 @@
+.product-update-container {
+     width: 90%;
+     top: 50%;
+     left: 50%;
+     background: white;
+     padding: 30px;
+     border: 1px solid black;
+     z-index: 99;
+     transform: translate(-50%, -50%);
+     border-radius: 10px;
+}
+
+.update-product-input-container {
+     width: 100%;
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 10px;
+     padding: 10px;
+}
+
+.update-product-input-container input {
+     font-size: 17px;
+}

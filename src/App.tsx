@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Card } from '@chakra-ui/react';
 import React from 'react'
 import './App.css';
 import Application from './Application';
