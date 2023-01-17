@@ -50,3 +50,9 @@ export interface IProductUpdate {
           image3?: string
      }
 }
+
+
+export interface IAuthDetailLogin {
+     email: string
+     password: string
+}
