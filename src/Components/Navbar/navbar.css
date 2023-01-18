@@ -26,3 +26,43 @@
 #navsearch>input:hover{
     background-color: white;
 }
+
+#navmen, #navwomen, #navkid,#navhome,#navbeauty,#navstudio{
+    border-bottom: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    width: 12%;
+}
+
+#navhome{
+    border-bottom: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    width: 25%;
+}
+
+
+#navmen:hover{
+    border-bottom: 3px solid rgb(235, 24, 24);
+   
+}
+#navwomen:hover{
+    border-bottom: 3px solid rgb(240, 12, 99);
+}
+#navkid:hover{
+    border-bottom: 3px solid rgb(250, 102, 48);
+   
+}
+#navhome:hover{
+    border-bottom: 3px solid rgb(236, 182, 65);
+}
+#navbeauty:hover{
+    border-bottom: 3px solid rgb(23, 143, 143);
+}
+#navstudio:hover{
+    border-bottom: 3px solid rgb(241, 39, 72);
+}
