@@ -16,7 +16,7 @@ const Navbar = () => {
       <Hide below='lg'>
         <Box boxShadow='sm' >
           <Flex position={'relative'}  w={"95%"} align="center" m='auto' h={"75px"} justify="space-between" color={"gray.600"}>
-            <Link to="#">
+            <Link to="/shop/men">
             <Image w="90px" src={apnidukan} alt='' />
              </Link>
             <Flex w="35%" justifyContent={"space-between"}>
@@ -28,35 +28,35 @@ const Navbar = () => {
               </Box>
 
               <Box className='nav-link'>
-                <Link to="#" id="navwomen">WOMEN</Link>
+                <Link to="/shop/women" id="navwomen">WOMEN</Link>
                 <Box className='mega-menu'>
                   <Box className='mega-menu-container'><Dropwomen/></Box>
                 </Box>
               </Box>
 
               <Box className='nav-link'>
-                <Link to="#"  id="navkid">KIDS</Link>
+                <Link to="/shop/kids"  id="navkid">KIDS</Link>
                 <Box className='mega-menu'>
                   <Box className='mega-menu-container'><Dropkid/></Box>
                 </Box>
               </Box>
 
               <Box className='nav-link'>
-                <Link to="#"  id="navhome">HOME & LIVING</Link>
+                <Link to="/shop/home"  id="navhome">HOME & LIVING</Link>
                 <Box className='mega-menu'>
                   <Box className='mega-menu-container'><Drophome/></Box>
                 </Box>
               </Box>
 
               <Box className='nav-link'>
-                <Link to="#" id="navbeauty">BEAUTY</Link>
+                <Link to="/shop/beauty" id="navbeauty">BEAUTY</Link>
                 <Box className='mega-menu'>
                   <Box className='mega-menu-container'><Dropbeauty/></Box>
                 </Box>
               </Box>
 
               <Box className='nav-link-studio'>
-                <Link to="#" id="navstudio">STUDIO</Link>
+                <Link to="/shop/studio" id="navstudio">STUDIO</Link>
                 <Box className='mega-menu-studio'>
                   <Box className='mega-menu-container-studio'><Studio/></Box>
                 </Box>
