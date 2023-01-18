@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, getDocs, onSnapshot } from "firebase/firestore"
 import * as Types from './Types.shop'
 import { Dispatch } from "redux"
 import { ToastType } from "../../Custom-hooks/UseToastMsg"
@@ -8,7 +8,6 @@ import { IToastProps } from "../../Constants/Constant"
 
 // todo: getData from Database
 export const getDataShop = (id: string | undefined, Toast: Function) => async (dispatch: Dispatch) => {
-     console.log('called')
      dispatch({ type: Types.SHOP_LOADING })
      const shopCollectionRef = collection(db, `shop/${id}/${id}Data`)
      const unsubscribe = onSnapshot(shopCollectionRef, (snapShot) => {
@@ -20,4 +19,21 @@ export const getDataShop = (id: string | undefined, Toast: Function) => async (d
      })
      // * clean
      return unsubscribe
+}
+
+
+// todo: querry for searching document inside the firebase server
+export const searchInDatabase = (category: string, Toast: Function) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.SHOP_LOADING });
+     try {
+          const searchRef = collection(db, `shop/${category}/${category}Data`)
+          const Result = await getDocs(searchRef)
+          const data = Result.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+          dispatch({ type: Types.SHOP_SEARCH_SUCCESS, payload: data })
+          // Toast('Product updated successfully.', ToastType.success)
+     } catch (error) {
+          console.log('error: ', error);
+          dispatch({ type: Types.SHOP_ERROR })
+          Toast("Failed to fetch products.", ToastType.error)
+     }
 }

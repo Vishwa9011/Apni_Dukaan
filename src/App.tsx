@@ -2,24 +2,32 @@ import { Box, Button, Card } from '@chakra-ui/react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, Dispatch } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Application from './Application';
 
 import Navbar from './Components/Navbar/Navbar';
+import SearchBar from './Components/SearchBar/SearchBar';
 import UseToastMsg from './Custom-hooks/UseToastMsg';
+import UseToggle from './Custom-hooks/UseToggle';
 import { auth, db } from './Firebase/FirebaseConfig';
 import { signInWithGoogleAuth } from './Redux/Auth/Action.auth';
 import { AUTH_ERROR, SIGNIN_SUCCESS } from './Redux/Auth/Types.auth';
+import { searchInDatabase } from './Redux/ShopRedux/Action.shop';
+import { RootState } from './Redux/store';
 
 function App() {
-  const dispatch: Dispatch<any> = useDispatch()
   const { Toast, Type } = UseToastMsg();
-  console.log('Toast: ', Toast);
+  const dispatch: Dispatch<any> = useDispatch()
+  const { searchData } = useSelector((store: RootState) => store.shop)
+  const [isOpen, toggleSearchBar]: any = UseToggle(false)
+
+  console.log('searchData: from app ', searchData);
 
   useEffect(() => {
     Toast("Welcome Robo's", Type.success)
-    onAuthStateChanged(auth, (user) => {
+
+    const unsubsribe = onAuthStateChanged(auth, (user) => {
       console.log('user: ', user);
       if (user) {
         getDoc(doc(db, 'users', user.uid))
@@ -31,22 +39,24 @@ function App() {
           })
       }
     })
+    // dispatch(searchInDatabase('men', Toast))
+    // todo: cleanup function
+    return unsubsribe;
   }, [])
 
   const Login = () => {
     console.log("login")
-
     dispatch(signInWithGoogleAuth(Toast))
     console.log("login end")
   }
 
   return (
-    <Box>
+    <Box position={'relative'}>
+      {isOpen && < SearchBar toggle={toggleSearchBar} />}
 
       <Navbar/>
 
-      <Button onClick={Login}>Auth</Button>
-
+      <Button onClick={toggleSearchBar}>Auth</Button>
       <Application />
     </Box>
   )

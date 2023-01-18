@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 
-const UseToggle = () => {
-     const [state, setState] = useState(false);
+interface IProps {
+
+}
+
+const UseToggle = (init?: boolean) => {
+     const [state, setState] = useState(init ?? false);
      const toggle = (): void => {
           setState(v => !v)
      }
-
      return [state, toggle]
 }
 
