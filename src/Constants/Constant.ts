@@ -11,6 +11,7 @@ export interface IUser {
      isAdmin: boolean
      gender: string
      address: string
+     timeStamp: object
 }
 
 //* Single Product
