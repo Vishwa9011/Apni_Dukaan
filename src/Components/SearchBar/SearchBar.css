@@ -11,15 +11,16 @@
 }
 
 .search-container {
-     position: absolute;
+     z-index: 100;
+     /* position: absolute; */
 }
 
 .search-input {
      width: 100%;
      margin: auto;
      z-index: 100;
-     position: absolute;
      translate: 0 100px;
+     position: absolute;
 }
 
 .search-input input, .search-input select {
@@ -50,10 +51,11 @@
 }
 
 .search-cat {
-     top: 45px;
+     top: 43px;
      opacity: 1;
      opacity: .8;
      width: 100px;
+     overflow: hidden;
      position: absolute;
      background: white;
      border-bottom-left-radius: 5px;

@@ -1,4 +1,4 @@
-import { Box, Input, Select, Text } from '@chakra-ui/react'
+import { Box, Button, Input, Select, Text } from '@chakra-ui/react'
 import React, { useState, useEffect, Dispatch } from 'react'
 import { BsSearch } from "react-icons/bs"
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,6 +27,8 @@ const SearchBar = ({ toggle }: IProps) => {
 
      // todo: FilterData
      const FilterData = (e: React.ChangeEvent<HTMLInputElement>) => {
+          if (isOpen) ToggleCategory()
+
           const searchText = (e.target.value).toLowerCase();
           const filteredDataFromSearchData = searchData.filter((item: IProduct) => (
                item.brand.toLowerCase().includes(searchText) ||
@@ -41,21 +43,22 @@ const SearchBar = ({ toggle }: IProps) => {
      }, [category])
 
      return (
-          <Box pos='fixed' w='100%' height={'100vh'} border='1px' zIndex={'999'} className='search-main-container'>
-               <Box pos={'relative'} w='100%' h='100%'>
-                    <Box className='search-input' border={'1px'}>
-                         <Box w='45%' m='auto'>
+          <Box pos='fixed' w='100%' height={'100vh'} zIndex={'999'} className='search-main-container'>
+               <Box pos={'relative'} w='100%' h='100%' >
+                    <Box className='search-input' display='flex' justifyContent={'center'}>
+                         <Box w='40em' m='auto' className='search-container'>
                               <Box display={'flex'} border='1px' alignItems={'center'} bg='gray.900' justifyContent='space-between' gap='10px' padding={'10px'} borderRadius='10px'>
-                                   <Box color={'red.500'} fontSize='1.5rem' ml='10px' fontWeight={'extrabold'}>
+                                   <Button variant={'unstyled'} className='btn-clicked' color={'red.500'} fontSize='1.5rem' ml='10px' fontWeight={'extrabold'}>
                                         <BsSearch />
-                                   </Box>
+                                   </Button>
                                    <Box pos={'relative'} w='120px' height={'100%'} ml='10px'>
                                         <Box display={'flex'} onClick={ToggleCategory} justifyContent='space-between' alignItems='center' cursor={'pointer'}>
                                              <Text as='span' whiteSpace={'nowrap'} color={'white'}>{category}</Text>
-                                             <Text as='span' className='caret' ></Text>
+                                             <Text as='span' className='caret btn-clicked' ></Text>
                                              <Box border={'1px'} color='white' alignSelf={'stretch'} ml='10px'></Box>
                                         </Box>
-                                        {isOpen && <ul className='search-cat'>
+                                        <Box onBlur={ToggleCategory} tabIndex={0}>
+                                             {isOpen && <ul className='search-cat' >
                                              {categoryList.map((cat, i) => (
                                                   <li key={i} onClick={() => {
                                                        setCategory(cat)
@@ -63,6 +66,7 @@ const SearchBar = ({ toggle }: IProps) => {
                                                   }}>{cat}</li>
                                              ))}
                                         </ul>}
+                                        </Box>
                                    </Box>
                                    <Box w='100%'>
                                         <Input placeholder='Search for products, brand and more' variant='unstyled' onChange={FilterData} />
@@ -77,6 +81,7 @@ const SearchBar = ({ toggle }: IProps) => {
                                    }
                               </Box>
                          </Box>
+                         <Box className='search-overlay' bg='transparent' onClick={toggle}></Box>
                     </Box>
                     <Box className='search-overlay' onClick={toggle}></Box>
                </Box>

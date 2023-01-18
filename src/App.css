@@ -25,3 +25,11 @@ a {
 li {
   list-style: none;
 }
+
+.btn-clicked {
+  transition: all 400ms;
+}
+
+.btn-clicked:active {
+  scale: 1.1
+}
