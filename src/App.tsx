@@ -5,6 +5,8 @@ import React, { useEffect, Dispatch } from 'react'
 import { useDispatch } from 'react-redux';
 import './App.css';
 import Application from './Application';
+
+import Navbar from './Components/Navbar/Navbar';
 import UseToastMsg from './Custom-hooks/UseToastMsg';
 import { auth, db } from './Firebase/FirebaseConfig';
 import { signInWithGoogleAuth } from './Redux/Auth/Action.auth';
@@ -40,7 +42,11 @@ function App() {
 
   return (
     <Box>
+
+      <Navbar/>
+
       <Button onClick={Login}>Auth</Button>
+
       <Application />
     </Box>
   )
