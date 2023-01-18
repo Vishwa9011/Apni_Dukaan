@@ -23,3 +23,9 @@ const RootReducers = {
 }
 
 export const store = legacy_createStore(combineReducers(RootReducers), composeEnhancers(applyMiddleware(thunk)));
+
+// * use inside useSelector
+export type RootState = ReturnType<typeof store.getState>
+
+//* use 
+export type AppDispatch = typeof store.dispatch;

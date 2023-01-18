@@ -5,7 +5,7 @@ import { IProduct } from '../../../../Constants/Constant';
 import { db } from '../../../../Firebase/FirebaseConfig';
 import './Add-product.css'
 
-const initialState: IProduct = {
+export const initialStateAddProduct: IProduct = {
      id: "",
      brand: "",
      description: "",
@@ -25,7 +25,7 @@ const initialState: IProduct = {
 
 const AddProduct = () => {
      const [category, setCategory] = useState<string>('men');
-     const [product, setProduct] = useState<IProduct>(initialState);
+     const [product, setProduct] = useState<IProduct>(initialStateAddProduct);
 
      // todo: setproduct detail onChange in input
      const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,14 +50,14 @@ const AddProduct = () => {
           const productRef = collection(db, `shop/${category}/${category}Data`);
           addDoc(productRef, product)
                .then(() => {
-                    setProduct(initialState)
+                    setProduct(initialStateAddProduct)
                     alert('product added')
                })
                .catch(err => console.log(err))
      }
 
      return (
-          <Box >
+          <Box>
                <Heading textAlign={'center'} my='4'> Add Product in <Text color={'red.500'} as='span' textTransform={'uppercase'}>{category}</Text></Heading>
                <Box display={'flex'} border='1px'>
                     <Box w='20%' className='category-link'>
@@ -83,7 +83,7 @@ const AddProduct = () => {
                               <Input value={product?.images?.image3} name='image3' onChange={HandleChange} placeholder='image 4' />
                          </Box>
                          <Button bg='blue.500' color={'white'} mr='10' onClick={AddProductIntoDb}>Add Product</Button>
-                         <Button bg='blue.500' color={'white'} onClick={() => setProduct(initialState)}>Reset</Button>
+                         <Button bg='blue.500' color={'white'} onClick={() => setProduct(initialStateAddProduct)}>Reset</Button>
                     </Box>
                </Box>
 
