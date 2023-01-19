@@ -9,7 +9,7 @@ import PageNotFound from './Pages/Page404/PageNotFound'
 import Shop from './Pages/Shop/Shop'
 import SingleProductPage from './Pages/SingleProductPage/SingleProductPage'
 import Wishlist from './Pages/Wishlist/Wishlist'
-// import ProtectedRoute from './ProtectedRoute'
+import ProtectedRoute from './ProtectedRoute'
 
 const Application = () => {
      return (
@@ -19,9 +19,9 @@ const Application = () => {
                <Route path='shop/:id' element={<Shop />} />
                <Route path='product-detail' element={<SingleProductPage />} />
                <Route path='cart' element={
-                    // <ProtectedRoute>
+                    <ProtectedRoute>
                          <Cart />
-                    // </ProtectedRoute>
+                    </ProtectedRoute>
                } />
                <Route path='wishlist' element={
                     <ProtectedRoute>
