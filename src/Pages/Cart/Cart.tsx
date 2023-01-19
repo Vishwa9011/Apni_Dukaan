@@ -63,7 +63,11 @@ const Cart = () => {
                <Flex justifyContent={"center"} alignItems="center" rounded={"base"}  borderBottom="1px solid gray" h="50px">
                     <Text color={"gray.600"} letterSpacing="wide" >Sale End In <span style={{color:"#ff4d4d", fontSize:"20px", fontWeight:"bold"}}>03</span><span style={{fontSize:"13px"}}>Hrs:</span> <span style={{color:"#ff4d4d", fontSize:"20px", fontWeight:"bold"}}>40</span><span style={{fontSize:"13px"}}>Min:</span> <span style={{color:"#ff4d4d", fontSize:"20px", fontWeight:"bold"}}>24</span><span style={{fontSize:"13px"}}>Sec</span> </Text>
                </Flex>
-               
+               <Flex w="80%" m="auto">
+                    <Box>
+                         <Box></Box>
+                    </Box>
+               </Flex>
           </div>
      )
 }
