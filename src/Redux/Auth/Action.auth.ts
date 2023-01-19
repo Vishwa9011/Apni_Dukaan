@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, deleteUser, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
+import { createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { Dispatch } from "redux"
 import { auth, db, provider } from "../../Firebase/FirebaseConfig"
 import { IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
@@ -17,19 +17,28 @@ export const signInWithGoogleAuth = (Toast: Function, navigate: Function, locati
           const userCredential = await signInWithPopup(auth, provider)
           const user = userCredential.user;
 
+          const userRef = doc(db, 'users', user.uid)
+          const res = await getDoc(userRef);
+          const resData = res.data();
+
           const userDetail = {
                uid: user.uid, username: user.displayName, email: user.email, photoURL: user.photoURL,
                phoneNumber: user.phoneNumber, googleAuth: true, isActive: true, isAdmin: false,
-               gender: '', address: '', password: null, timeStamp: new Date()
+               gender: '', address: '', password: resData?.password ? resData.password : user.uid, timeStamp: new Date()
           }
 
-          // * setting the document into the database
-          const userRef = doc(db, 'users', user.uid)
-          await setDoc(userRef, userDetail);
-          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
+          if ((!resData || !resData?.googoogleAuth) && user?.email && auth?.currentUser) {
+               // * setting the document into the database
+               await setDoc(userRef, userDetail);
+               // todo: linking two accounts together
+               const credential = EmailAuthProvider.credential(user.email, resData?.password ? resData.password : user.uid);
+               const linkedCred = await linkWithCredential(auth.currentUser, credential);
+               console.log('linkedCred: ', linkedCred);
+          }
           Toast("Login Success", ToastType.success)
-          localStorage.setItem("IsAuthAD", 'true')
-          navigate(location?.state?.prevURL ? location.state.prevURL : '/')
+          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
+          localStorage.setItem("IsAuthAD", 'true') //todo: setting authentication inside the user
+          navigate(location?.state?.prevURL ? location.state.prevURL : '/') // todo: navigating to the previous page
      } catch (error) {
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)

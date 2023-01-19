@@ -21,7 +21,11 @@ const Application = () => {
                          <Cart />
                     </ProtectedRoute>
                } />
-               <Route path='wishlist' element={<Wishlist />} />
+               <Route path='wishlist' element={
+                    <ProtectedRoute>
+                         <Wishlist />
+                    </ProtectedRoute>
+               } />
                <Route path='login' element={<Login />} />
                <Route path='login/reset-password' element={<NewPassword />} />
                <Route path='admin/*' element={<Admin />} />
