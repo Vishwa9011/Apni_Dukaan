@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWith
 import { Dispatch } from "redux"
 import { auth, db, provider } from "../../Firebase/FirebaseConfig"
 import { IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
-import { doc, getDoc, setDoc } from "firebase/firestore"
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 import * as Types from './Types.auth'
 import { ToastType } from './../../Custom-hooks/UseToastMsg';
 
@@ -27,7 +27,7 @@ export const signInWithGoogleAuth = (Toast: Function, navigate: Function, locati
                gender: '', address: '', password: resData?.password ? resData.password : user.uid, timeStamp: new Date()
           }
 
-          if ((!resData || !resData?.googoogleAuth) && user?.email && auth?.currentUser) {
+          if ((!resData || !resData?.googleAuth) && user?.email && auth?.currentUser) {
                // * setting the document into the database
                await setDoc(userRef, userDetail);
                // todo: linking two accounts together
@@ -96,6 +96,10 @@ export const logout = (Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.AUTH_LOADING });
      try {
           await signOut(auth)
+          if (auth.currentUser?.email) {
+               const userRef = doc(db, 'users', auth.currentUser?.uid)
+               await updateDoc(userRef, { IsActive: false })
+          }
           dispatch({ type: Types.SIGNOUT_SUCCESS })
           Toast("Logout Success", ToastType.success)
           localStorage.setItem("IsAuthAD", 'false')
