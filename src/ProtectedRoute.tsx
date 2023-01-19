@@ -11,7 +11,7 @@ interface Ichildren {
 const ProtectedRoute = ({ children }: Ichildren) => {
      const location = useLocation()
      console.log('location: ', location);
-     const isAuth = JSON.parse(localStorage.getItem('IsAuthAD') || '');
+     const isAuth = JSON.parse(localStorage.getItem('IsAuthAD'));
      const { userCredential, authenticated } = useSelector((store: RootState) => store.auth);
 
      if (!isAuth) {
