@@ -1,11 +1,12 @@
-import { Button } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Text } from '@chakra-ui/react';
 import React, { useEffect, Dispatch } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IProduct } from '../../Constants/Constant';
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
 import { AddProductToCart, DeleteProductCart, getCartProduct, UpdateQty } from '../../Redux/CartRedux/Action.cart';
 import { RootState } from '../../Redux/store';
-
+import apnidukan from "./apnidukan.png"
+import secure from './secure.png'
 const Cart = () => {
      const dispatch: Dispatch<any> = useDispatch();
      const { Toast } = UseToastMsg();
@@ -47,8 +48,22 @@ const Cart = () => {
 
 
      return (
-          <div>Cart
-               <Button onClick={() => UpdateQtyOfProduct(-1, product)}>Add Product</Button>
+          <div>
+               {/* <Button onClick={() => UpdateQtyOfProduct(-1, product)}>Add Product</Button> */}
+               <Box  m={"auto"} display={"flex"} borderBottom="1px solid gray" h={"80px"} justifyContent="space-around" alignItems={"center"}>
+                    <Box>
+                         <Image w={"80px"} src={apnidukan} alt='apnidukan' />
+                    </Box>
+                    <Text fontSize={"xs"} fontWeight="bolder" color={"gray.600"} letterSpacing="widest"> <span style={{color:"#339933",}}>BAG</span> -------- ADDRESS -------- PAYMENT</Text>
+                    <Flex justifyContent={"center"} alignItems="center">
+                         <Image w="29px" src={secure} alt="secure" />
+                         <Text fontSize={"xs"} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">100% SECURE</Text>
+                    </Flex>
+               </Box>
+               <Flex justifyContent={"center"} alignItems="center" rounded={"base"}  borderBottom="1px solid gray" h="50px">
+                    <Text color={"gray.600"} letterSpacing="wide" >Sale End In <span style={{color:"#ff4d4d", fontSize:"20px", fontWeight:"bold"}}>03</span><span style={{fontSize:"13px"}}>Hrs:</span> <span style={{color:"#ff4d4d", fontSize:"20px", fontWeight:"bold"}}>40</span><span style={{fontSize:"13px"}}>Min:</span> <span style={{color:"#ff4d4d", fontSize:"20px", fontWeight:"bold"}}>24</span><span style={{fontSize:"13px"}}>Sec</span> </Text>
+               </Flex>
+               
           </div>
      )
 }

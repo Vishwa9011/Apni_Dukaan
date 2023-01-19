@@ -5,6 +5,7 @@ import React, { useEffect, Dispatch } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Application from './Application';
+import Footer from './Components/Footer/Footer';
 
 import Navbar from './Components/Navbar/Navbar';
 import SearchBar from './Components/SearchBar/SearchBar';
@@ -46,6 +47,7 @@ function App() {
       {isOpen && <SearchBar toggle={toggleSearchBar} />}
       {IsNav && <Navbar ToggleSearchBar={toggleSearchBar} />}
       <Application />
+      <Footer/>
     </Box>
   )
 }
