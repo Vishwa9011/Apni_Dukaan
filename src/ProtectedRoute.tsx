@@ -1,25 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // import type { ReactNode } from 'react'
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, Route, useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from './Redux/store';
 
 interface Ichildren {
-     children: React.ReactNode;
+     children: any;
 }
 
 const ProtectedRoute = ({ children }: Ichildren) => {
-
-     const navigate = useNavigate();
      const location = useLocation()
      console.log('location: ', location);
+     const isAuth = JSON.parse(localStorage.getItem('IsAuthAD') || '');
      const { userCredential, authenticated } = useSelector((store: RootState) => store.auth);
 
-     if (authenticated) {
-          return navigate('/login')
+     if (!isAuth) {
+          return <Navigate to='/login' state={{ prevURL: location.pathname }} />
      }
 
-     return children;
+     return children
 }
 
 export default ProtectedRoute;

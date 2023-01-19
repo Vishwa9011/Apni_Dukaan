@@ -33,14 +33,10 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
     const { userCredential }: any = useSelector((store: RootState) => store.auth)
     const [isOpen, ToggleMenu]: any = UseToggle(false);
 
+    // todo: logout function
     const Logout = () => {
         dispatch(logout(Toast))
     }
-
-    const LogIn = () => {
-
-    }
-
 
     return (
         <Box position={'sticky'} top='0' zIndex={99} bg='whiteAlpha.900' w='100%'>

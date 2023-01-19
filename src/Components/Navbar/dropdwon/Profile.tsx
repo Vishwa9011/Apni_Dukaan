@@ -49,11 +49,15 @@ const Profile = () => {
           <Link to="#">Save Cards</Link>
           <Link to="#">Save Addess</Link>
         </Flex>
-        <hr style={{ margin: "10px 0px 10px 0px" }} />
-        {userCredential && <Flex flexDir={"column"} fontSize={"sm"}>
-          <Link to="/profile">Profile</Link>
-          <Text cursor={'pointer'} _hover={{ fontWeight: 'semibold' }} onClick={Logout}>Logout</Text>
-        </Flex>}
+        {userCredential?.email &&
+          <>
+            <hr style={{ margin: "10px 0px 10px 0px" }} />
+            <Flex flexDir={"column"} fontSize={"sm"}>
+              <Link to="/profile">Profile</Link>
+              <Text cursor={'pointer'} _hover={{ fontWeight: 'semibold' }} onClick={Logout}>Logout</Text>
+            </Flex>
+          </>
+        }
       </Box>
     </Box>
   )

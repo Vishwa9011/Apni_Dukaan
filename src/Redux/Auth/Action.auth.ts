@@ -10,7 +10,8 @@ import { ToastType } from './../../Custom-hooks/UseToastMsg';
 // https://www.youtube.com/watch?v=MsDjbWUn3IE
 // https://firebase.google.com/docs/auth/web/account-linking
 // todo: to signInWithGoogle
-export const signInWithGoogleAuth = (Toast: Function) => async (dispatch: Dispatch) => {
+export const signInWithGoogleAuth = (Toast: Function, navigate: Function, location: any) => async (dispatch: Dispatch) => {
+     console.log('location: ', location);
      dispatch({ type: Types.AUTH_LOADING });
      try {
           const userCredential = await signInWithPopup(auth, provider)
@@ -27,6 +28,8 @@ export const signInWithGoogleAuth = (Toast: Function) => async (dispatch: Dispat
           await setDoc(userRef, userDetail);
           dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
           Toast("Login Success", ToastType.success)
+          localStorage.setItem("IsAuthAD", 'true')
+          navigate(location?.state?.prevURL ? location.state.prevURL : '/')
      } catch (error) {
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
@@ -35,7 +38,7 @@ export const signInWithGoogleAuth = (Toast: Function) => async (dispatch: Dispat
 
 
 // todo: to signUpWithEmailandPassword
-export const signUp = ({ email, password, Toast }: IAuthDetailLogin) => async (dispatch: Dispatch) => {
+export const signUp = ({ email, password, Toast, navigate, location }: IAuthDetailLogin) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.AUTH_LOADING });
      try {
           const userCredenital = await createUserWithEmailAndPassword(auth, email, password)
@@ -51,6 +54,8 @@ export const signUp = ({ email, password, Toast }: IAuthDetailLogin) => async (d
           await setDoc(userRef, userDetail);
           dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
           Toast("Signup Success", ToastType.success)
+          localStorage.setItem("IsAuthAD", 'true')
+          navigate(location?.state?.prevURL ? location.state.prevURL : '/')
      } catch (error) {
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
@@ -58,7 +63,7 @@ export const signUp = ({ email, password, Toast }: IAuthDetailLogin) => async (d
 }
 
 // todo: to signInWithEmailandPassword
-export const signIn = ({ email, password, Toast }: IAuthDetailLogin) => async (dispatch: Dispatch) => {
+export const signIn = ({ email, password, Toast, navigate, location }: IAuthDetailLogin) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.AUTH_LOADING });
      try {
           const userCredenital = await signInWithEmailAndPassword(auth, email, password)
@@ -69,6 +74,8 @@ export const signIn = ({ email, password, Toast }: IAuthDetailLogin) => async (d
           const userDetail = await getDoc(userRef);
           dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail.data() })
           Toast("Login Success", ToastType.success)
+          navigate(location?.state?.prevURL ? location.state.prevURL : '/')
+          localStorage.setItem("IsAuthAD", 'true')
      } catch (error) {
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
@@ -82,6 +89,7 @@ export const logout = (Toast: Function) => async (dispatch: Dispatch) => {
           await signOut(auth)
           dispatch({ type: Types.SIGNOUT_SUCCESS })
           Toast("Logout Success", ToastType.success)
+          localStorage.setItem("IsAuthAD", 'false')
      } catch (error) {
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
