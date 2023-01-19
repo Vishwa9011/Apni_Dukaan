@@ -6,7 +6,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -27,9 +27,17 @@ li {
 }
 
 .btn-clicked {
-  transition: all 400ms;
+  transition: all 200ms !important;
 }
 
 .btn-clicked:active {
-  scale: 1.1
+  scale: 1.02
+}
+
+.login-main-container * {
+  transition: all 600ms;
+}
+
+.transition {
+  transition: all 600ms;
 }

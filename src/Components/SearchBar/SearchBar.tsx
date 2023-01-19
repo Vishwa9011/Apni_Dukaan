@@ -16,7 +16,6 @@ interface IProps {
      toggle(): void
 }
 
-
 const SearchBar = ({ toggle }: IProps) => {
      const { Toast } = UseToastMsg()
      const dispatch: Dispatch<any> = useDispatch();
@@ -46,7 +45,7 @@ const SearchBar = ({ toggle }: IProps) => {
           <Box pos='fixed' w='100%' height={'100vh'} zIndex={'999'} className='search-main-container'>
                <Box pos={'relative'} w='100%' h='100%' >
                     <Box className='search-input' display='flex' justifyContent={'center'}>
-                         <Box w='40em' m='auto' className='search-container'>
+                         <Box w={{ base: "100%", sm: "100%", md: '40em' }} m='auto' className='search-container'>
                               <Box display={'flex'} border='1px' alignItems={'center'} bg='gray.900' justifyContent='space-between' gap='10px' padding={'10px'} borderRadius='10px'>
                                    <Button variant={'unstyled'} className='btn-clicked' color={'red.500'} fontSize='1.5rem' ml='10px' fontWeight={'extrabold'}>
                                         <BsSearch />
@@ -58,7 +57,7 @@ const SearchBar = ({ toggle }: IProps) => {
                                              <Box border={'1px'} color='white' alignSelf={'stretch'} ml='10px'></Box>
                                         </Box>
                                         <Box onBlur={ToggleCategory} tabIndex={0}>
-                                             {isOpen && <ul className='search-cat' >
+                                             {isOpen && <ul className='search-cat'>
                                              {categoryList.map((cat, i) => (
                                                   <li key={i} onClick={() => {
                                                        setCategory(cat)

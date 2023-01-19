@@ -10,7 +10,7 @@ export interface IAuthInitialState {
 }
 
 
-const inititalState: IAuthInitialState = {
+const inititalState: IAuthInitialState  = {
      loading: false,
      error: '',
      authenticated: false,
