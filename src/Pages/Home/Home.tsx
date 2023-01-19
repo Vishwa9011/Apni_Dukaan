@@ -53,6 +53,61 @@ function Home() {
                <Box>
                     <Image src="https://images-static.nykaa.com/uploads/542701f0-1711-4dab-8238-5ad274a6cd95.gif?tr=w-2400,cm-pad_resize"/>
                </Box>
+               <Box>
+                    <Heading textAlign={"center"} mt="10">SHOP BY CATEGORY</Heading>
+                    <Flex p="10">
+                         <Box w="80" p="5" textAlign="center"> 
+                              <Image  src="https://images-static.nykaa.com/uploads/93e7d2a0-743d-4a51-a11c-82def81351f3.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Indianwear</Text>
+                         </Box>
+                         <Box w="80" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/d1f60b37-4c14-45d5-aaa9-0030367cacc4.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Westernwear</Text>
+                         </Box>
+                         <Box w="80" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/85fbcd49-e8e8-415b-9257-73432c453cbf.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Menswear</Text>
+                         </Box>
+                         <Box w="80" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/f22438be-c923-4438-824e-5794b164abc6.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Kidswear</Text>
+                         </Box>
+                         <Box w="80" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/8951a9aa-a110-43a1-aeaf-c8f17853701b.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Heels & Flates</Text>
+                         </Box>
+                    </Flex>
+                    {/* second */}
+                    <Flex ml="30" mr="30"  alignItems="center" justifyContent={"center"}>
+                         <Box  w="60" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/3f3ab163-a0a2-4076-823e-72dcbce05662.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Sneaker</Text>
+                         </Box>
+                         <Box w="60" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/c25621b3-6932-4290-9f58-9b02d9ce7548.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Denims</Text>
+                         </Box>
+                         <Box w="60" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/28cfdec3-27bf-438a-a156-0781b67e2299.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Home</Text>
+                         </Box>
+                         <Box w="60" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/8a459a25-6e0d-4a91-8377-5da0c08f6a38.jpg?tr=w-480,cm-pad_resize"/>
+                              <Text>Tech</Text>
+                         </Box>
+                       
+                    </Flex>
+               </Box>
+               {/* bannerpart */}
+               <Box display={"flex"}>
+                    <Image src="https://images.bewakoof.com/uploads/grid/app/DOTW-Split-banner-Desktop-men-1674030025.jpg"/>
+                    <Image src="https://images.bewakoof.com/uploads/grid/app/DOTW-Split-banner-Desktop-Women-1674030025.jpg"/>
+              
+               </Box>
+               {/* gif part */}
+               <Box pl="20" pr="20" pt="10">
+                    <Image src="https://images-static.nykaa.com/uploads/7eba43ac-b3fa-441b-9e33-b2fb2bdd9e84.gif?tr=w-2400,cm-pad_resize"/>
+               </Box>
                
                
           </Box>
