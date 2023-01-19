@@ -18,9 +18,9 @@ const Shop = () => {
      const { data, loading, error } = useSelector((store: RootState) => store.shop)
 
 
-     useEffect(() => {
-          dispatch(getDataShop(param.id, Toast))
-     }, [param])
+     // useEffect(() => {
+     //      // dispatch(getDataShop(param.id, Toast))
+     // }, [param])
 
 
 

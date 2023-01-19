@@ -21,14 +21,10 @@ function App() {
   const dispatch: Dispatch<any> = useDispatch()
   const { searchData } = useSelector((store: RootState) => store.shop)
   const [isOpen, toggleSearchBar]: any = UseToggle(false)
-
-  console.log('searchData: from app ', searchData);
+  const [IsNav, setIsNav] = UseToggle(true)
 
   useEffect(() => {
-    Toast("Welcome Robo's", Type.success)
-
     const unsubsribe = onAuthStateChanged(auth, (user) => {
-      console.log('user: ', user);
       if (user) {
         getDoc(doc(db, 'users', user.uid))
           .then((res) => {
@@ -39,24 +35,16 @@ function App() {
           })
       }
     })
-    // dispatch(searchInDatabase('men', Toast))
+
     // todo: cleanup function
     return unsubsribe;
   }, [])
 
-  const Login = () => {
-    console.log("login")
-    dispatch(signInWithGoogleAuth(Toast))
-    console.log("login end")
-  }
 
   return (
     <Box position={'relative'}>
-      {isOpen && < SearchBar toggle={toggleSearchBar} />}
-
-      <Navbar/>
-
-      <Button onClick={toggleSearchBar}>Auth</Button>
+      {isOpen && <SearchBar toggle={toggleSearchBar} />}
+      {IsNav && <Navbar ToggleSearchBar={toggleSearchBar} />}
       <Application />
     </Box>
   )

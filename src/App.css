@@ -27,9 +27,9 @@ li {
 }
 
 .btn-clicked {
-  transition: all 400ms;
+  transition: all 200ms !important;
 }
 
 .btn-clicked:active {
-  scale: 1.1
+  scale: 1.02
 }

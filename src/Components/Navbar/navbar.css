@@ -1,12 +1,13 @@
 #navsearchbox {
-    border: 1px solid white;
-    width: 30%;
-    border-radius: 3px;
-    height: 40px;
+    padding: 10px;
+    cursor: pointer;
     display: flex;
+    border-radius: 5px;
     align-items: center;
-    background-color: rgb(247, 246, 246);
     transition: all 600ms;
+    justify-content: center;
+    background-color: rgb(247, 246, 246);
+    border: 1px solid white;
 }
 
 #navsearchbox:hover {
@@ -16,10 +17,8 @@
 
 #navsearch {
     display: flex;
+    font-size: 1.5rem;
     align-items: center;
-    gap: 20px;
-    margin-left: 20px;
-
 }
 
 #navmen, #navwomen, #navkid, #navhome, #navbeauty, #navstudio {
@@ -82,6 +81,16 @@
     opacity: 1;
 }
 
+.nav-link p {
+    transition: all 600ms;
+    cursor: pointer;
+}
+
+.nav-link p:hover {
+    color: #E53E3E;
+    font-weight: 600;
+}
+
 .mega-menu {
     left: 0;
     top: 110%;
@@ -97,12 +106,14 @@
 
 .mega-menu-container {
     width: 90%;
+    /* width: 1024px; */
     height: 100%;
     margin: auto;
     background-color: #ffff;
     border-top: 1px solid rgb(218, 215, 215);
     /* border: 1px solid red; */
 }
+
 /* .dropmen{
     display: flex;
 } */
@@ -110,26 +121,27 @@
 
 
 /* studio */
+.nav-link-studio {
+    position: relative;
+}
+
 .nav-link-studio:hover .mega-menu-studio {
-    display: block;
     top: 100%;
-    visibility: visible;
     opacity: 1;
-    padding-left: 340px;
-    padding-right: 340px;
-   
+    display: block;
+    visibility: visible;
 }
 
 .mega-menu-studio {
-    left: 0;
+    opacity: 0;
     top: 110%;
-    width: 100%;
+    left: -165px;
+    width: 400px;
     z-index: 999;
     margin: auto;
-    height: 500px;
+    height: 400px;
     position: absolute;
     visibility: hidden;
-    opacity: 0;
     transition: all 200ms;
 
 }
@@ -144,36 +156,37 @@
 }
 
 
-/* profle */
+/* *profle */
 .nav-link-profile:hover .mega-menu-profile {
     display: block;
     top: 100%;
     visibility: visible;
     opacity: 1;
-        
-   
 }
+
 
 .mega-menu-profile {
     left: 5;
-    top: 110%;
-    width: 45%;
+    top: 100%;
+    width: 100;
+    opacity: 0;
     z-index: 999;
     margin: auto;
-    height: 370px;
+    height: max-content;
     position: absolute;
     visibility: hidden;
-    opacity: 0;
     transition: all 200ms;
-
 }
 
 .mega-menu-container-profile {
-    width: 45%;
+    width: max-content;
     height: 100%;
+    padding-bottom: 10px;
     margin: auto;
     background-color: #ffff;
-    border-top: 1px solid rgb(218, 215, 215);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    /* border: 1px solid red; */
+}
+
+.mega-menu-container-profile a:hover {
+    font-weight: 600;
 }

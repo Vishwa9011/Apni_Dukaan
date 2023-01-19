@@ -342,7 +342,7 @@ export const Drophome = () => {
      <p>Laundry Bags</p>
     </div>
     <div>
-      <h3>Brands</h3>
+        <h3 style={home}>Brands</h3>
       <p>H&M</p>
       <p>Marks & Spencer</p>
       <p>Home Center</p>

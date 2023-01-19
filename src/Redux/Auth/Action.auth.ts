@@ -7,6 +7,8 @@ import * as Types from './Types.auth'
 import { ToastType } from './../../Custom-hooks/UseToastMsg';
 
 
+// https://www.youtube.com/watch?v=MsDjbWUn3IE
+// https://firebase.google.com/docs/auth/web/account-linking
 // todo: to signInWithGoogle
 export const signInWithGoogleAuth = (Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.AUTH_LOADING });
@@ -65,7 +67,7 @@ export const signIn = ({ email, password, Toast }: IAuthDetailLogin) => async (d
           // * getting the document from server 
           const userRef = doc(db, 'users', user.uid);
           const userDetail = await getDoc(userRef);
-          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
+          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail.data() })
           Toast("Login Success", ToastType.success)
      } catch (error) {
           dispatch({ type: Types.AUTH_ERROR, payload: error })
