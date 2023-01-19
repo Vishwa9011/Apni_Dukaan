@@ -13,6 +13,7 @@ import { getDataShop } from '../../Redux/ShopRedux/Action.shop';
 const Shop = () => {
 
      const param = useParams();
+     console.log('param: ', param);
      const { Toast } = UseToastMsg();
      const dispatch: Dispatch<any> = useDispatch();
      const { data, loading, error } = useSelector((store: RootState) => store.shop)

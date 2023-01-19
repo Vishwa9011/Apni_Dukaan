@@ -19,11 +19,11 @@ const Profile = () => {
 
   return (
     <Box>
-      <Box minW="90%" m={"auto"} pt="4" px='2'>
+      <Box minW="200px" m={"auto"} pt="4" px='2'>
         {userCredential?.email ?
           <Box fontSize='.8em'>
-            <Text fontWeight={'bold'} fontSize='.9em' textTransform='capitalize'>Hello {userCredential?.username ? userCredential?.username : userCredential?.email?.split("@")[0]}</Text>
-            <Text>{userCredential?.username ? userCredential?.username : userCredential?.email}</Text>
+            <Text fontWeight={'bold'} fontSize='1em' textTransform='capitalize'>Hello {userCredential?.username ? userCredential?.username : userCredential?.email?.split("@")[0]}</Text>
+            <Text>{userCredential?.email}</Text>
           </Box>
           :
           <Box>
