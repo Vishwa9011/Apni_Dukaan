@@ -1,0 +1,19 @@
+.card-image-container {
+     overflow: hidden;
+}
+
+.card-wishlist {
+     top: 100%;
+     width: 100%;
+     position: absolute;
+}
+
+.card-images {
+     transition: all 800ms;
+     cursor: pointer;
+}
+
+
+.card-image-container:hover .card-images {
+     transform: translateX(-100%);
+}
