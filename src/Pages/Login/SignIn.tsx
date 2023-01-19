@@ -53,7 +53,7 @@ const SignIn = ({ scrollPage, toggle }: IProps) => {
                     <Text onClick={toggle} color={'blue.400'} _hover={{ textDecoration: 'underline', cursor: 'pointer' }}>Forgot password?</Text>
                     {/* </Stack> */}
                </Box>
-               <Box display={"flex"} my={"20px"} fontSize='.75em'>
+               <Box display={"flex"} my={"20px"} fontSize='.75em' whiteSpace={'nowrap'}>
                     <Text >By continuing, I agree to the</Text>
                     <Text _hover={{ textDecoration: 'underline', cursor: 'pointer' }} fontWeight='bold' mx='3px' color={"#E53E3E"}>Terms of Use</Text>
                     <Text >&</Text>

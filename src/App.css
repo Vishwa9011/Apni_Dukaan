@@ -33,3 +33,11 @@ li {
 .btn-clicked:active {
   scale: 1.02
 }
+
+.login-main-container * {
+  transition: all 600ms;
+}
+
+.transition {
+  transition: all 600ms;
+}

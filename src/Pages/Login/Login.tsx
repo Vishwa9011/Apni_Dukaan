@@ -17,8 +17,8 @@ const Login = () => {
   }
 
   return (
-    <Box border={"1px solid #fceeeb"} backgroundColor={"#fceeeb"} h='max-content'>
-      <Box width={"450px"} marginTop={"50px"} marginLeft={"33%"} backgroundColor={"white"}>
+    <Box border={"1px solid #fceeeb"} backgroundColor={"#fceeeb"} h='max-content' className='login-main-container'>
+      <Box maxW={{ base: "100%", sm: "70%", md: "50%", lg: '35%' }} marginTop={"50px"} margin='auto' backgroundColor={"white"}>
         <Box height={"auto"}>
           <Image src="https://assets.myntassets.com/assets/images/2022/9/21/8fca3ae9-d245-443b-a142-8d568247794c1663700243878-offer-banner-300-600x240-code-_-MYNTRA400.jpg" alt="Login image" />
         </Box>
