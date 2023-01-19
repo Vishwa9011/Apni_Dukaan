@@ -7,8 +7,9 @@ import Login from './Pages/Login/Login'
 import NewPassword from './Pages/Login/NewPassword'
 import PageNotFound from './Pages/Page404/PageNotFound'
 import Shop from './Pages/Shop/Shop'
+import SingleProductPage from './Pages/SingleProductPage/SingleProductPage'
 import Wishlist from './Pages/Wishlist/Wishlist'
-import ProtectedRoute from './ProtectedRoute'
+// import ProtectedRoute from './ProtectedRoute'
 
 const Application = () => {
      return (
@@ -16,12 +17,17 @@ const Application = () => {
                <Route path='/' element={<Home />} />
                <Route path='shop' element={<Shop />} />
                <Route path='shop/:id' element={<Shop />} />
+               <Route path='product-detail' element={<SingleProductPage />} />
                <Route path='cart' element={
-                    <ProtectedRoute>
+                    // <ProtectedRoute>
                          <Cart />
+                    // </ProtectedRoute>
+               } />
+               <Route path='wishlist' element={
+                    <ProtectedRoute>
+                         <Wishlist />
                     </ProtectedRoute>
                } />
-               <Route path='wishlist' element={<Wishlist />} />
                <Route path='login' element={<Login />} />
                <Route path='login/reset-password' element={<NewPassword />} />
                <Route path='admin/*' element={<Admin />} />

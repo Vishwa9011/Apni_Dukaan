@@ -1,5 +1,7 @@
 import { Box, Button, Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import MainSlider from "../../Components/Slider/MainSlider/MainSlider";
+import SingleCard from "../../Components/Slider/CardSlider/SingleCard"
+import ProductSlider from "../../Components/Slider/CardSlider/CardSlider";
 
 function Home() {
  return (
@@ -47,7 +49,6 @@ function Home() {
 
                     </Box>
                     </Flex>
-
 
                </Center>
                <Box>
@@ -108,6 +109,18 @@ function Home() {
                <Box pl="20" pr="20" pt="10">
                     <Image src="https://images-static.nykaa.com/uploads/7eba43ac-b3fa-441b-9e33-b2fb2bdd9e84.gif?tr=w-2400,cm-pad_resize"/>
                </Box>
+
+           
+
+               {/* card */}
+             
+               <ProductSlider/>
+                   {/* gif part */}
+                   <Box pl="20" pr="20" pt="10">
+                    <Image src="https://images-static.nykaa.com/uploads/7eba43ac-b3fa-441b-9e33-b2fb2bdd9e84.gif?tr=w-2400,cm-pad_resize"/>
+               </Box>
+
+
                
                
           </Box>
@@ -115,3 +128,4 @@ function Home() {
 }
 
 export default Home;
+

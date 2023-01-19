@@ -58,6 +58,8 @@ export interface IAuthDetailLogin {
      email: string
      password: string
      Toast: Function
+     navigate: Function
+     location: any
 }
 
 export interface IToastProps {
