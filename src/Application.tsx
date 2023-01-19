@@ -8,7 +8,7 @@ import NewPassword from './Pages/Login/NewPassword'
 import PageNotFound from './Pages/Page404/PageNotFound'
 import Shop from './Pages/Shop/Shop'
 import Wishlist from './Pages/Wishlist/Wishlist'
-import ProtectedRoute from './ProtectedRoute'
+// import ProtectedRoute from './ProtectedRoute'
 
 const Application = () => {
      return (
@@ -17,9 +17,9 @@ const Application = () => {
                <Route path='shop' element={<Shop />} />
                <Route path='shop/:id' element={<Shop />} />
                <Route path='cart' element={
-                    <ProtectedRoute>
+                    // <ProtectedRoute>
                          <Cart />
-                    </ProtectedRoute>
+                    // </ProtectedRoute>
                } />
                <Route path='wishlist' element={<Wishlist />} />
                <Route path='login' element={<Login />} />
