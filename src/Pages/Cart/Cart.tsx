@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import React, { useEffect, Dispatch } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IProduct, IUser } from '../../Constants/Constant';
@@ -51,9 +51,9 @@ const Cart = () => {
 
 
      return (
-          <div>Cart
-               <Button onClick={() => UpdateQtyOfProduct(-1, product)}>Add Product</Button>
-          </div>
+          <Box>
+
+          </Box>
      )
 }
 

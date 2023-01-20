@@ -33,7 +33,7 @@ export const AddProductToCart = (product: IProduct, email: string, Toast: Functi
           const cartRef = doc(db, `cart/${email}/cartData`, product.id)
           await setDoc(cartRef, product)
           dispatch({ type: Types.CART_SUCCESS })
-          Toast("Product added into cart", ToastType.success);
+          Toast("Product successfully added into cart", ToastType.success);
      } catch (error) {
           console.log('error: ', error);
           dispatch({ type: Types.CART_ERROR })
@@ -62,6 +62,7 @@ export const DeleteProductCart = (id: string, email: string, Toast: Function) =>
      try {
           const cartRef = doc(db, `cart/${email}/cartData`, id)
           await deleteDoc(cartRef)
+          Toast("Product has been removed successfully.")
      } catch (error) {
           console.log('error: ', error);
           dispatch({ type: Types.CART_ERROR })
@@ -78,5 +79,20 @@ export const Checkout = (Toast: Function) => async (dispatch: Dispatch) => {
           console.log('error: ', error);
           dispatch({ type: Types.CART_ERROR })
           Toast("Failed to Checkout.", ToastType.error)
+     }
+}
+
+// todo: move product into wishlist
+export const moveProductToWishlist = (product: IProduct, email: string, Toast: Function) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.CART_LOADING });
+     try {
+          const cartRef = doc(db, `wishlist/${email}/wishlistData`, product.id)
+          await setDoc(cartRef, product)
+          dispatch({ type: Types.CART_SUCCESS })
+          Toast("Product successfully added into wishlist", ToastType.success);
+     } catch (error) {
+          console.log('error: ', error);
+          dispatch({ type: Types.CART_ERROR })
+          Toast("Failed to move product into wishlist.", ToastType.error)
      }
 }

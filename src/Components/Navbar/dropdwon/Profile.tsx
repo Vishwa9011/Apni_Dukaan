@@ -19,7 +19,7 @@ const Profile = () => {
 
   return (
     <Box>
-      <Box minW="200px" m={"auto"} pt="4" px='2'>
+      <Box minW="200px" m={"auto"} pt="4" px='4'>
         {userCredential?.email ?
           <Box fontSize='.8em'>
             <Text fontWeight={'bold'} fontSize='1em' textTransform='capitalize'>Hello {userCredential?.username ? userCredential?.username : userCredential?.email?.split("@")[0]}</Text>

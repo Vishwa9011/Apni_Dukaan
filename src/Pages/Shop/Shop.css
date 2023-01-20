@@ -1,3 +1,7 @@
+.show-Product::-webkit-scrollbar {
+     display: none;
+}
+
 .sorting-drop-down {
      cursor: pointer;
 }
