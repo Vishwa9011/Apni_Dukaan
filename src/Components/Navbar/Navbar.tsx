@@ -34,7 +34,6 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
     const dispatch: Dispatch<any> = useDispatch()
     const { userCredential }: { userCredential: IUser } = useSelector((store: RootState) => store.auth)
     const { cart } = useSelector((store: RootState) => store.cart)
-    console.log('cart: ', cart);
     const [isOpen, ToggleMenu]: any = UseToggle(false);
 
     // todo: logout function
@@ -201,4 +200,4 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
     )
 }
 
-export default Navbar
+export default React.memo(Navbar)

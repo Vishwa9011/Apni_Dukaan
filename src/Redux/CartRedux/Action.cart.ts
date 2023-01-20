@@ -10,7 +10,6 @@ import { RootState } from "../store";
 
 // todo: get products from cart and listening to the changes
 export const getCartProduct = (email: string, Toast: Function) => async (dispatch: Dispatch) => {
-     console.log('email: get data', email);
      dispatch({ type: Types.CART_LOADING });
      const cartRef = collection(db, `cart/${email}/cartData`)
      const unsub = onSnapshot(cartRef, (snapShot) => {

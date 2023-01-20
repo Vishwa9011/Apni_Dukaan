@@ -34,7 +34,7 @@ const Wishlist = () => {
                          </Box>
                          <Grid gridTemplateColumns={'repeat(5,1fr)'} gridTemplateRows='repeat(2,auto)' mt='30px' gap='30px'>
                               {wishlist.map((product: IProduct) => (
-                                   <WishlistCard {...product} />
+                                   <WishlistCard {...product} key={product.id} />
                               ))}
                          </Grid>
                     </>
