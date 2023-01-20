@@ -10,7 +10,6 @@ const Profile = () => {
   const { Toast } = UseToastMsg()
   const dispatch: Dispatch<any> = useDispatch()
   const { userCredential }: any = useSelector((store: RootState) => store.auth)
-  console.log('userCredential: ', userCredential);
 
   // todo: logout btn
   const Logout = () => {
@@ -19,7 +18,7 @@ const Profile = () => {
 
   return (
     <Box>
-      <Box minW="200px" m={"auto"} pt="4" px='2'>
+      <Box minW="200px" m={"auto"} pt="4" px='4'>
         {userCredential?.email ?
           <Box fontSize='.8em'>
             <Text fontWeight={'bold'} fontSize='1em' textTransform='capitalize'>Hello {userCredential?.username ? userCredential?.username : userCredential?.email?.split("@")[0]}</Text>
@@ -63,4 +62,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default React.memo(Profile)

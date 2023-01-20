@@ -1,16 +1,20 @@
-import { Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import React, { useEffect, Dispatch } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { IProduct } from '../../Constants/Constant';
+import { IProduct, IUser } from '../../Constants/Constant';
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
 import { AddProductToCart, DeleteProductCart, getCartProduct, UpdateQty } from '../../Redux/CartRedux/Action.cart';
 import { RootState } from '../../Redux/store';
+
+interface IUserCred {
+     userCredential: IUser
+}
 
 const Cart = () => {
      const dispatch: Dispatch<any> = useDispatch();
      const { Toast } = UseToastMsg();
      const { cart } = useSelector((store: RootState) => store.cart)
-     const { userCredential } = useSelector((store: RootState) => store.auth)
+     const { userCredential }: IUserCred = useSelector((store: RootState) => store.auth)
      console.log('cart: ', cart);
 
      // todo: updateQtyOfProduct
@@ -47,9 +51,9 @@ const Cart = () => {
 
 
      return (
-          <div>Cart
-               <Button onClick={() => UpdateQtyOfProduct(-1, product)}>Add Product</Button>
-          </div>
+          <Box>
+
+          </Box>
      )
 }
 

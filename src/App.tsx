@@ -5,6 +5,7 @@ import React, { useEffect, Dispatch } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Application from './Application';
+import Address from './Components/Address/Address';
 
 import Navbar from './Components/Navbar/Navbar';
 import SearchBar from './Components/SearchBar/SearchBar';
@@ -17,18 +18,18 @@ import { searchInDatabase } from './Redux/ShopRedux/Action.shop';
 import { RootState } from './Redux/store';
 
 function App() {
-  const { Toast, Type } = UseToastMsg();
+  // const { Toast, Type } = UseToastMsg();
   const dispatch: Dispatch<any> = useDispatch()
-  const { searchData } = useSelector((store: RootState) => store.shop)
+  // const { searchData } = useSelector((store: RootState) => store.shop)
   const [isOpen, toggleSearchBar]: any = UseToggle(false)
-  const [IsNav, setIsNav] = UseToggle(true)
+  // const [IsNav, setIsNav] = UseToggle(true)
 
   useEffect(() => {
     const unsubsribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         getDoc(doc(db, 'users', user.uid))
           .then((res) => {
-            console.log('res: ', res.data());
+            // console.log('res: ', res.data());
             dispatch({ type: SIGNIN_SUCCESS, payload: res.data() })
           }).catch((err) => {
             dispatch({ type: AUTH_ERROR, payload: err })
@@ -43,9 +44,13 @@ function App() {
 
   return (
     <Box position={'relative'}>
+
       {isOpen && <SearchBar toggle={toggleSearchBar} />}
       {IsNav && <Navbar ToggleSearchBar={toggleSearchBar} />}
-      <Application />
+      <Application /> 
+
+
+ 
     </Box>
   )
 }

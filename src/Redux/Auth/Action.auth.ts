@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWith
 import { Dispatch } from "redux"
 import { auth, db, provider } from "../../Firebase/FirebaseConfig"
 import { IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 import * as Types from './Types.auth'
 import { ToastType } from './../../Custom-hooks/UseToastMsg';
 
@@ -128,6 +128,7 @@ export const DeleteUserFromServer = (user: any, Toast: Function) => async (dispa
      dispatch({ type: Types.AUTH_LOADING });
      try {
           await deleteUser(user)
+          await deleteDoc(db, 'users', user.uid)
           dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
           Toast("User has been Deleted", ToastType.success)
      } catch (error) {

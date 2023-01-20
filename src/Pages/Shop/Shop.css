@@ -1,0 +1,37 @@
+.show-Product::-webkit-scrollbar {
+     display: none;
+}
+
+.sorting-drop-down {
+     cursor: pointer;
+}
+
+.sorting-list-drop-down {
+     left: 0;
+     top: 100%;
+     z-index: 10;
+     width: 100%;
+     position: absolute;
+     background: rgb(255, 255, 255);
+     border: 1px solid rgba(199, 190, 190, 0.737);
+     display: none;
+}
+
+.sorting-list-drop-down li {
+     cursor: pointer;
+     padding: 8px 15px;
+     border-top: 1px solid rgba(236, 231, 231, 0.737);
+}
+
+.sorting-list-drop-down li:hover {
+     background: #E53E3E;
+     color: white;
+}
+
+.sorting-drop-down:hover .sorting-list-drop-down {
+     display: block;
+}
+
+.sorting-drop-down:hover .down-arrow {
+     rotate: -180deg;
+}
