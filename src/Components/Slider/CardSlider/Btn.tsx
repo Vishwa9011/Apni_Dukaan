@@ -1,16 +1,12 @@
 // import axios from "axios";
 
-export const PrevBtn = (sliderContainer:any)=> {
-     if (sliderContainer !== null) {
-          const width = sliderContainer.current.clientWidth;
-          sliderContainer.current.scrollLeft = sliderContainer.current.scrollLeft - width
-          console.log('width: ', width);
+export const PrevBtn = (sliderContainer: any, cardRef: any) => {
+     if (sliderContainer && cardRef) {
+          sliderContainer.current.scrollLeft = sliderContainer.current.scrollLeft - cardRef.current.clientWidth
      }
 }
-export const NextBtn = (sliderContainer:any) => {
-     if (sliderContainer !== null) {
-          const width = sliderContainer.current.clientWidth;
-          sliderContainer.current.scrollLeft = sliderContainer.current.scrollLeft + width
-          console.log('width: ', width);
+export const NextBtn = (sliderContainer: any, cardRef: any) => {
+     if (sliderContainer && cardRef) {
+          sliderContainer.current.scrollLeft = sliderContainer.current.scrollLeft + cardRef.current.clientWidth
      }
 }

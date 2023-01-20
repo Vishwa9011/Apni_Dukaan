@@ -26,7 +26,7 @@
 }
 
 .productContainer>div {
-    min-width: calc(100% / 4);
+    min-width: calc(100% / 5);
 }
 
 .sliderBtn {
@@ -68,27 +68,28 @@
 
 @media only screen and (width<=1024px) {
     .productContainer>div {
-         min-width: calc(100% / 3);
+        min-width: calc(100% / 4);
     }
 
 }
 
 @media only screen and (width<=768px) {
     .productContainer>div {
-         min-width: calc(100% / 3);
+        min-width: calc(100% / 3);
     }
 
 }
 
 @media only screen and (width<=420px) {
     .productContainer>div {
-         min-width: 100%;
+        min-width: 100%;
     }
 }
 
 
-.box-card-mou{
+.box-card-mou .card-images {
+    height: 370px;
     /* padding: 5px; */
-    border-radius: 10px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    /* border-radius: 10px; */
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
 }

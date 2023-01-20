@@ -23,13 +23,10 @@ const Shop = () => {
      const dispatch: Dispatch<any> = useDispatch();
      const [FilterValues, setFilterValues] = useState<Object>()
      const [FilterValuesP, setFilterValuesP] = useState({})
-     console.log('FilterValuesP: ', FilterValuesP);
      const [FilterValueD, setFilterValueD] = useState<string>('')
-     console.log('FilterValueD: ', FilterValueD);
 
      const { data, loading, error, FilteredBrand, FilteredCategory, FilteredData } = useSelector((store: RootState) => store.shop)
-
-
+     console.log('data: ', data);
 
      // todo: fitler the data onchange of categories and brands
      const FilterChangeBrandAndCat = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +49,7 @@ const Shop = () => {
      }, [id])
 
 
-     useMemo(() => {
+     useEffect(() => {
           if (FilterValues) {
                const values: string[] = [];
                for (let [key, value] of Object.entries(FilterValues)) {
@@ -64,7 +61,7 @@ const Shop = () => {
           }
      }, [FilterValues])
 
-     useMemo(() => {
+     useEffect(() => {
           const priceValues: string[] = [];
           for (let [key, value] of Object.entries(FilterValuesP)) {
                if (value) {
