@@ -22,7 +22,7 @@ function App() {
   const dispatch: Dispatch<any> = useDispatch()
   // const { searchData } = useSelector((store: RootState) => store.shop)
   const [isOpen, toggleSearchBar]: any = UseToggle(false)
-  // const [IsNav, setIsNav] = UseToggle(true)
+  const [IsNav, setIsNav] = UseToggle(true)
 
   useEffect(() => {
     const unsubsribe = onAuthStateChanged(auth, (user) => {
