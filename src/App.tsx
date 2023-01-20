@@ -5,6 +5,7 @@ import React, { useEffect, Dispatch } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import Application from './Application';
+import Address from './Components/Address/Address';
 
 import Navbar from './Components/Navbar/Navbar';
 import SearchBar from './Components/SearchBar/SearchBar';
@@ -43,9 +44,10 @@ function App() {
 
   return (
     <Box position={'relative'}>
-      {isOpen && <SearchBar toggle={toggleSearchBar} />}
+      {/* {isOpen && <SearchBar toggle={toggleSearchBar} />}
       {IsNav && <Navbar ToggleSearchBar={toggleSearchBar} />}
-      <Application />
+      <Application /> */}
+      <Address/>
     </Box>
   )
 }
