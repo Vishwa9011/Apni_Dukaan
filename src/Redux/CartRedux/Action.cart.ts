@@ -27,6 +27,7 @@ export const getCartProduct = (email: string, Toast: Function) => async (dispatc
 
 // todo: Add product into cart
 export const AddProductToCart = (product: IProduct, email: string, Toast: Function) => async (dispatch: Dispatch) => {
+     if (email) return;
      dispatch({ type: Types.CART_LOADING });
      try {
           const cartRef = doc(db, `cart/${email}/cartData`, product.id)

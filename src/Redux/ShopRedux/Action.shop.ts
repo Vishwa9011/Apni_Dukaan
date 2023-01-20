@@ -25,7 +25,7 @@ export const getDataShop = (id: string | undefined, Toast: Function) => async (d
 
 // todo: querry for searching document inside the firebase server
 export const searchInDatabase = (category: string, Toast: Function) => async (dispatch: Dispatch) => {
-     dispatch({ type: Types.SHOP_LOADING });
+     // dispatch({ type: Types.SHOP_LOADING });
      try {
           const searchRef = collection(db, `shop/${category}/${category}Data`)
           const Result = await getDocs(searchRef)
@@ -34,7 +34,7 @@ export const searchInDatabase = (category: string, Toast: Function) => async (di
           // Toast('Product updated successfully.', ToastType.success)
      } catch (error) {
           console.log('error: ', error);
-          dispatch({ type: Types.SHOP_ERROR })
+          // dispatch({ type: Types.SHOP_ERROR })
           Toast("Failed to fetch products.", ToastType.error)
      }
 }

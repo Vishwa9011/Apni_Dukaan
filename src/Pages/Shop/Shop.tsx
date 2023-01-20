@@ -4,14 +4,14 @@ import ProductCard from '../../Components/Cards/ProductCard/ProductCard';
 import React, { useEffect, Dispatch, useState, useMemo } from 'react'
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
 import { useDispatch, useSelector } from 'react-redux';
+import Footer from '../../Components/Footer/Footer';
+import Navbar from '../../Components/Navbar/Navbar';
 import PageNotFound from '../Page404/PageNotFound';
 import { IProduct } from '../../Constants/Constant';
 import { Link, useParams } from 'react-router-dom'
 import { RootState } from '../../Redux/store';
 import { BsChevronDown } from 'react-icons/bs'
 import './Shop.css'
-import Footer from '../../Components/Footer/Footer';
-import Navbar from '../../Components/Navbar/Navbar';
 
 const menu = ['men', 'women', 'kids', 'home&living', 'beauty']
 const priceRange = [{ min: 149, max: 399 }, { min: 400, max: 849 }, { min: 850, max: 1399 }]
@@ -71,6 +71,7 @@ const Shop = () => {
           <>
                {/* {Navabar} */}
                <Navbar />
+
                <Box w='98%' m='auto'>
                     <Flex gap='5px' fontWeight={'semibold'} my='4'>
                          <Link to='/'>
@@ -87,7 +88,7 @@ const Shop = () => {
                     </Flex>
                     <Box>
                          <Flex mt='5' h='100vh'>
-                              <Box w='16%' border={'0px'} pl='2' overflow={'scroll'} className='show-Product'>
+                              <Box w='17%' border={'0px'} pl='2' overflow={'scroll'} className='show-Product'>
                                    <Flex borderBottom={'1px'} borderColor={'gray.200'} fontSize={'1.5em'} h='55px' align={'center'}>
                                         <Text fontWeight='semibold'>FILTERS</Text>
                                    </Flex>
@@ -103,7 +104,7 @@ const Shop = () => {
                                         <hr />
                                         <Box >
                                              <Text my='2' fontWeight={'semibold'}>BRAND</Text>
-                                             <Flex flexDir={'column'} color='gray.600'>
+                                             <Flex flexDir={'column'} color='gray.600' >
                                                   {FilteredBrand.map((Filterbrand: string, i: number) => (
                                                        <Checkbox key={i} colorScheme='red' onChange={FilterChangeBrandAndCat} value={Filterbrand} textTransform={'uppercase'}>{Filterbrand}</Checkbox>
                                                   ))}
@@ -136,7 +137,7 @@ const Shop = () => {
                                         </Box>
                                    </Flex>
                               </Box>
-                              <Box w='84%' h='100%' overflow={'scroll'} className='show-Product'>
+                              <Box w='83%' h='100%' overflow={'scroll'} className='show-Product'>
                                    <Flex borderBottom={'1px'} borderColor={'gray.200'} justify={'flex-end'} h='55px' align={'center'}>
                                         <Box className='sorting-drop-down' pos='relative' border={'1px'} w='270px' borderColor={'gray.400'} p='3' borderRadius={'2px'}>
                                              <Flex gap='10px' justify={'space-between'} align={'center'}>

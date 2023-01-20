@@ -91,8 +91,7 @@ function Home() {
                {/* bannerpart */}
                <Box w='100%'>
                     <Flex w='100%' align={'center'} justify='center'>
-                         <Image src="https://images.bewakoof.com/uploads/grid/app/DOTW-Split-banner-Desktop-men-1674030025.jpg" />
-                         <Image src="https://images.bewakoof.com/uploads/grid/app/DOTW-Split-banner-Desktop-Women-1674030025.jpg" />
+                         <Image src='/Images/landing_page_image.png' />
                     </Flex>
                </Box>
 

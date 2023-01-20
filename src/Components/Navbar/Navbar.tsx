@@ -14,8 +14,8 @@ import SearchBar from '../SearchBar/SearchBar';
 import { RootState } from '../../Redux/store';
 import { BsSearch } from "react-icons/bs";
 import Profile from './dropdwon/Profile';
+import apnidukan from "./apnidukan.png";
 import Studio from './dropdwon/Studio';
-import apnidukan from "./apnidukan.png"
 import "./navbar.css"
 
 const menu = [
@@ -32,6 +32,7 @@ const Navbar = () => {
     const { cart } = useSelector((store: RootState) => store.cart)
     const [isOpen, ToggleMenu]: any = UseToggle(false);
     const [isOpenSearchbar, toggleSearchBar]: any = UseToggle(false)
+    console.log({ isOpenSearchbar });
 
 
     // todo: logout function
@@ -59,35 +60,35 @@ const Navbar = () => {
                                 </Link>
                                 <Flex w="35%" justifyContent={"space-between"} >
                                     <Box className='nav-link' >
-                                        <Link to="shop/men" id="navmen">MEN</Link>
+                                        <Link to="/shop/men" id="navmen">MEN</Link>
                                         <Box className='mega-menu'>
                                             <Box className='mega-menu-container'> <Dropmen /> </Box>
                                         </Box>
                                     </Box>
 
                                     <Box className='nav-link'>
-                                        <Link to="shop/women" id="navwomen">WOMEN</Link>
+                                        <Link to="/shop/women" id="navwomen">WOMEN</Link>
                                         <Box className='mega-menu'>
                                             <Box className='mega-menu-container'><Dropwomen /></Box>
                                         </Box>
                                     </Box>
 
                                     <Box className='nav-link'>
-                                        <Link to="shop/kids" id="navkid">KIDS</Link>
+                                        <Link to="/shop/kids" id="navkid">KIDS</Link>
                                         <Box className='mega-menu'>
                                             <Box className='mega-menu-container'><Dropkid /></Box>
                                         </Box>
                                     </Box>
 
                                     <Box className='nav-link'>
-                                        <Link to="shop/home&living" id="navhome">HOME & LIVING</Link>
+                                        <Link to="/shop/home&living" id="navhome">HOME & LIVING</Link>
                                         <Box className='mega-menu'>
                                             <Box className='mega-menu-container'><Drophome /></Box>
                                         </Box>
                                     </Box>
 
                                     <Box className='nav-link'>
-                                        <Link to="shop/beauty" id="navbeauty">BEAUTY</Link>
+                                        <Link to="/shop/beauty" id="navbeauty">BEAUTY</Link>
                                         <Box className='mega-menu'>
                                             <Box className='mega-menu-container'><Dropbeauty /></Box>
                                         </Box>
@@ -136,7 +137,13 @@ const Navbar = () => {
                                             <SlHandbag />
                                             <Text fontSize={"12px"} fontWeight="bold">Bag</Text>
                                         </Flex>
-                                        <Flex align={'center'} fontSize='.7em' justify='center' pos='absolute' top='13px' right={'11px'} bg='#E53E3E' color='white' p='1' borderRadius={'50%'} w='18px' h='18px'>{cart.length}</Flex>
+                                        {cart.length ?
+                                            <Flex align={'center'} fontSize='.7em' justify='center' pos='absolute' top='13px' right={'11px'} bg='#E53E3E' color='white' p='1' borderRadius={'50%'} w='18px' h='18px'>
+                                                <Text>{cart.length}</Text>
+                                            </Flex>
+                                            :
+                                            null
+                                        }
                                     </Link>
                                 </Flex>
                             </Flex>
@@ -168,8 +175,7 @@ const Navbar = () => {
                                             </Flex>
                                         </Link>
                                     ))}
-                                    {
-                                        userCredential?.email ?
+                                    {userCredential?.email ?
                                             <Flex justify="flex-start" align={"center"} gap='10px' p='2' color={"gray.600"} onClick={() => {
                                                 Logout();
                                                 ToggleMenu();

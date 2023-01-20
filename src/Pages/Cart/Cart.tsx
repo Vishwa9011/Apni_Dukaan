@@ -47,7 +47,6 @@ const Cart = () => {
           dispatch(DeleteProductCart(id, userCredential?.email, Toast))
      }
 
-
      useEffect(() => {
           dispatch(getCartProduct(userCredential?.email, Toast))
      }, [userCredential])

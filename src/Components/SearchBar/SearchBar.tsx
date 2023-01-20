@@ -17,17 +17,18 @@ interface IProps {
 }
 
 const SearchBar = ({ toggle }: IProps) => {
-     const { Toast } = UseToastMsg()
+     const { Toast } = UseToastMsg();
      const dispatch: Dispatch<any> = useDispatch();
      const [category, setCategory] = useState('Men');
-     const [isOpen, ToggleCategory]: any = UseToggle(false)
-     const [filteredData, setFilteredData] = useState<IProduct[]>([])
-     const { searchData } = useSelector((store: RootState) => store.shop)
+     const [searchText, setSearchText] = useState('');
+     const [isOpen, ToggleCategory]: any = UseToggle(false);
+     const [filteredData, setFilteredData] = useState<IProduct[]>([]);
+     const { searchData } = useSelector((store: RootState) => store.shop);
 
      // todo: FilterData
      const FilterData = (e: React.ChangeEvent<HTMLInputElement>) => {
-          if (isOpen) ToggleCategory()
-
+          if (isOpen) ToggleCategory(); //todo: to close the category list;
+          setSearchText((e.target.value).toLowerCase())
           const searchText = (e.target.value).toLowerCase();
           const filteredDataFromSearchData = searchData.filter((item: IProduct) => (
                item.brand.toLowerCase().includes(searchText) ||
@@ -68,13 +69,13 @@ const SearchBar = ({ toggle }: IProps) => {
                                         </Box>
                                    </Box>
                                    <Box w='100%'>
-                                        <Input placeholder='Search for products, brand and more' variant='unstyled' onChange={FilterData} />
+                                        <Input placeholder='Search for products, brand and more' variant='unstyled' onChange={FilterData} value={searchText} />
                                    </Box>
                               </Box>
                               <Box>
-                                   {filteredData.length ?
+                                   {filteredData.length && searchText ?
                                         <Box maxH='50vh' overflowY={'scroll'}>
-                                             <SearchTable searchedData={filteredData} />
+                                             <SearchTable searchedData={filteredData} category={category.toLowerCase()} />
                                         </Box>
                                         : null
                                    }
