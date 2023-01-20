@@ -10,7 +10,6 @@ const Profile = () => {
   const { Toast } = UseToastMsg()
   const dispatch: Dispatch<any> = useDispatch()
   const { userCredential }: any = useSelector((store: RootState) => store.auth)
-  console.log('userCredential: ', userCredential);
 
   // todo: logout btn
   const Logout = () => {
@@ -19,11 +18,11 @@ const Profile = () => {
 
   return (
     <Box>
-      <Box minW="90%" m={"auto"} pt="4" px='2'>
+      <Box minW="200px" m={"auto"} pt="4" px='4'>
         {userCredential?.email ?
           <Box fontSize='.8em'>
-            <Text fontWeight={'bold'} fontSize='.9em' textTransform='capitalize'>Hello {userCredential?.username ? userCredential?.username : userCredential?.email?.split("@")[0]}</Text>
-            <Text>{userCredential?.username ? userCredential?.username : userCredential?.email}</Text>
+            <Text fontWeight={'bold'} fontSize='1em' textTransform='capitalize'>Hello {userCredential?.username ? userCredential?.username : userCredential?.email?.split("@")[0]}</Text>
+            <Text>{userCredential?.email}</Text>
           </Box>
           :
           <Box>
@@ -49,14 +48,18 @@ const Profile = () => {
           <Link to="#">Save Cards</Link>
           <Link to="#">Save Addess</Link>
         </Flex>
-        <hr style={{ margin: "10px 0px 10px 0px" }} />
-        {userCredential && <Flex flexDir={"column"} fontSize={"sm"}>
-          <Link to="/profile">Profile</Link>
-          <Text cursor={'pointer'} _hover={{ fontWeight: 'semibold' }} onClick={Logout}>Logout</Text>
-        </Flex>}
+        {userCredential?.email &&
+          <>
+            <hr style={{ margin: "10px 0px 10px 0px" }} />
+            <Flex flexDir={"column"} fontSize={"sm"}>
+              <Link to="/profile">Profile</Link>
+              <Text cursor={'pointer'} _hover={{ fontWeight: 'semibold' }} onClick={Logout}>Logout</Text>
+            </Flex>
+          </>
+        }
       </Box>
     </Box>
   )
 }
 
-export default Profile
+export default React.memo(Profile)

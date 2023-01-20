@@ -1,8 +1,10 @@
 import React, { useState, Dispatch } from 'react';
 import { Box, Button, Checkbox, FormControl, FormLabel, Heading, Image, Input, Stack, Text } from "@chakra-ui/react"
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signIn, signInWithGoogleAuth } from '../../Redux/Auth/Action.auth';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { RootState } from '../../Redux/store';
 
 interface IProps {
      scrollPage(value: number): void
@@ -11,7 +13,11 @@ interface IProps {
 
 const SignIn = ({ scrollPage, toggle }: IProps) => {
      const { Toast, Type } = UseToastMsg()
+     const navigate = useNavigate();
+     const location = useLocation()
+     console.log('location: ', location);
      const dispatch: Dispatch<any> = useDispatch()
+     const { authenticated } = useSelector((store: RootState) => store.auth)
      const [email, setEmail] = useState<string>('')
      const [password, setPassword] = useState<string>("")
 
@@ -22,14 +28,14 @@ const SignIn = ({ scrollPage, toggle }: IProps) => {
                return
           }
           // todo: call the signfunc
-          dispatch(signIn({ email, password, Toast }));
+          dispatch(signIn({ email, password, Toast, navigate, location }))
           setEmail('')
           setPassword('')
      }
 
      // todo:signInWithGoogle
      const signInWithGoogle = () => {
-          dispatch(signInWithGoogleAuth(Toast));
+          dispatch(signInWithGoogleAuth(Toast, navigate, location));
      }
 
      return (

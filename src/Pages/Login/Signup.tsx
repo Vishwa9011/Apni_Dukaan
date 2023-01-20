@@ -3,6 +3,7 @@ import { Box, Text, Image, Input, Button, FormControl, FormLabel, Heading } from
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
 import { signInWithGoogleAuth, signUp } from '../../Redux/Auth/Action.auth';
 import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface IProps {
      scrollPage(value: number): void
@@ -10,6 +11,8 @@ interface IProps {
 
 const SignUp = ({ scrollPage }: IProps) => {
      const { Toast, Type } = UseToastMsg()
+     const location = useLocation();
+     const navigate = useNavigate()
      const dispatch: Dispatch<any> = useDispatch()
      const [email, setEmail] = useState<string>('')
      const [password, setPassword] = useState<string>("")
@@ -26,7 +29,7 @@ const SignUp = ({ scrollPage }: IProps) => {
                Toast("Password doesn't match.", Type.info)
                return
           }
-          dispatch(signUp({ email, password, Toast }))
+          dispatch(signUp({ email, password, Toast, navigate, location }))
           setEmail('')
           setPassword('')
           setConfirmPassword('')
@@ -34,7 +37,7 @@ const SignUp = ({ scrollPage }: IProps) => {
 
      // todo:signInWithGoogle
      const signInWithGoogle = () => {
-          dispatch(signInWithGoogleAuth(Toast));
+          dispatch(signInWithGoogleAuth(Toast, navigate, location));
      }
 
 

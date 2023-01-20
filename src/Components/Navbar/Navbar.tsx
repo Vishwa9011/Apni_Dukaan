@@ -7,13 +7,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import apnidukan from "./apnidukan.png"
 import Profile from './dropdwon/Profile';
 import Studio from './dropdwon/Studio';
-import React, { Dispatch } from 'react'
-import "./navbar.css"
+import React, { Dispatch, useEffect } from 'react'
 import UseToggle from '../../Custom-hooks/UseToggle';
 import { useDispatch, useSelector } from 'react-redux';
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
 import { logout } from '../../Redux/Auth/Action.auth';
 import { RootState } from '../../Redux/store';
+import "./navbar.css"
+import { getCartProduct } from '../../Redux/CartRedux/Action.cart';
+import { IUser } from '../../Constants/Constant';
 
 
 interface IProps {
@@ -30,17 +32,18 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
     const navigate = useNavigate()
     const { Toast } = UseToastMsg();
     const dispatch: Dispatch<any> = useDispatch()
-    const { userCredential }: any = useSelector((store: RootState) => store.auth)
+    const { userCredential }: { userCredential: IUser } = useSelector((store: RootState) => store.auth)
+    const { cart } = useSelector((store: RootState) => store.cart)
     const [isOpen, ToggleMenu]: any = UseToggle(false);
 
+    // todo: logout function
     const Logout = () => {
         dispatch(logout(Toast))
     }
 
-    const LogIn = () => {
-
-    }
-
+    useEffect(() => {
+        dispatch(getCartProduct(userCredential?.email, Toast));
+    }, [userCredential])
 
     return (
         <Box position={'sticky'} top='0' zIndex={99} bg='whiteAlpha.900' w='100%'>
@@ -76,7 +79,7 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
                                 </Box>
 
                                 <Box className='nav-link'>
-                                    <Link to="shop/home" id="navhome">HOME & LIVING</Link>
+                                    <Link to="shop/home&living" id="navhome">HOME & LIVING</Link>
                                     <Box className='mega-menu'>
                                         <Box className='mega-menu-container'><Drophome /></Box>
                                     </Box>
@@ -90,7 +93,8 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
                                 </Box>
 
                                 <Box className='nav-link-studio'>
-                                    <Text cursor={'pointer'} id="navstudio">STUDIO</Text>
+                                    <Text fontSize={'14px'} cursor={'pointer'} id="navstudio" pos='relative'>STUDIO</Text>
+                                    <Text pos='absolute' fontSize={'.6em'} top='22px' right={'-13px'} fontWeight='semibold' color='#E53E3E'>NEW</Text>
                                     <Box className='mega-menu-studio'>
                                         <Box className='mega-menu-container-studio'><Studio /></Box>
                                     </Box>
@@ -100,7 +104,7 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
                         </Flex>
 
 
-                        <Flex w='100%' flex={'1'} pr='20px' align="center" justify="flex-end" gap={{ base: '5%', sm: '5%', md: '5%', lg: '10%' }} >
+                        <Flex w='100%' h='100%' flex={'1'} pr='20px' align="center" justify="flex-end" gap={{ base: '5%', sm: '5%', md: '5%', lg: '10%' }} >
                             <Box id="navsearchbox" onClick={ToggleSearchBar}>
                                 <Box id='navsearch'>
                                     <BsSearch />
@@ -127,10 +131,11 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
                             </Flex>
                             <Flex color={"gray.600"}>
                                 <Link to='/cart'>
-                                    <Flex flexDir={"column"} justify="center" align={"center"}>
+                                    <Flex flexDir={"column"} justify="center" align={"center"} pos='relative'>
                                         <SlHandbag />
                                         <Text fontSize={"12px"} fontWeight="bold">Bag</Text>
                                     </Flex>
+                                    <Flex align={'center'} fontSize='.7em' justify='center' pos='absolute' top='13px' right={'11px'} bg='#E53E3E' color='white' p='1' borderRadius={'50%'} w='18px' h='18px'>{cart.length}</Flex>
                                 </Link>
                             </Flex>
                         </Flex>
@@ -195,4 +200,4 @@ const Navbar = ({ ToggleSearchBar }: IProps) => {
     )
 }
 
-export default Navbar
+export default React.memo(Navbar)
