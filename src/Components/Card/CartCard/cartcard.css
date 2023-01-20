@@ -1,0 +1,10 @@
+
+@media only screen and (width>=800px) {
+    /* For tablets: */
+    .cartcard{
+        display: flex;
+   }
+  .cartcartdetail{
+    padding: 0px;
+  }
+  }

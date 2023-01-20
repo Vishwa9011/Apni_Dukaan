@@ -1,0 +1,26 @@
+
+@media only screen and (width>=800px) {
+    /* For tablets: */
+    .cart{
+        display: flex;
+   }
+   .cartlogo{
+    display: flex;
+    justify-content: space-between;
+    
+   }
+   .cartlogoss{
+    display: flex;
+    justify-content: space-between;
+   }
+   .cartitem{
+    width: 60%;
+   }
+   .cartbill{
+    width: 35%;
+   }
+   .cartitemscount{
+    display: flex;
+    align-items: center;
+   }
+  }
