@@ -44,7 +44,6 @@ const SingleProductPage = () => {
         dispatch(addProductToWishlist(product, userCredential?.email, Toast))
     }
 
-
     useEffect(() => {
         setLoading(true)
         if (prCategory && productId) {
