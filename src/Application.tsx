@@ -17,7 +17,7 @@ const Application = () => {
                <Route path='/' element={<Home />} />
                <Route path='shop' element={<Shop />} />
                <Route path='shop/:id' element={<Shop />} />
-               <Route path='product-detail' element={<SingleProductPage />} />
+               <Route path='product-detail/:id' element={<SingleProductPage />} />
                <Route path='cart' element={
                     <ProtectedRoute>
                          <Cart />

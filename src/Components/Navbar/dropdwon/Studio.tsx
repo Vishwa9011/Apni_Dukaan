@@ -3,7 +3,7 @@ import React from 'react'
 import apnidukan from '../apnidukan.png'
 const Studio = () => {
   return (
-    <Flex flexDir={"column"} alignItems="center" justifyContent={"center"}>
+    <Flex flexDir={"column"} alignItems="center" justifyContent={"center"} boxShadow='lg' p='20px'>
         <Flex alignItems="center" justifyContent={"center"} py="10">
             <Image w={"100px"} src={apnidukan} alt='apnidukan'/>
             <Heading fontFamily={"sans-serif"} color={"black"} size={"xl"}>Studio</Heading>

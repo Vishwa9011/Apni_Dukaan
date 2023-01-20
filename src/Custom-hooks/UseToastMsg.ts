@@ -25,9 +25,9 @@ const UseToastMsg = () => {
                {
                     title: `${msg}`,
                     position: 'top-right',
+                    variant: 'left-accent',
                     isClosable: true,
                     status,
-                    variant: 'left-accent'
                }
           )
      }
