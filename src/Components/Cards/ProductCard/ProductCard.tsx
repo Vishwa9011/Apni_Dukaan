@@ -41,7 +41,7 @@ const ProductCard = ({ product, type }: IProps) => {
      }
 
      return (
-          <Flex border={'0px'} flexDir='column' boxShadow={'lg'}>
+          <Flex border={'0px'} flexDir='column' boxShadow={'lg'} w='100%' h='100%'>
                <Box w='100%' h='fit-content' border={'0px'} pos='relative' className='card-image-container'>
                     <Box display={'flex'} alignItems='center' w='100%' h='320px' border={'0px'} className='card-images'>
                          <Flex className='card-image-front' w='100%' h='100%' minW='100%'>

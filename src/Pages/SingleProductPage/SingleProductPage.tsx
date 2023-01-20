@@ -82,20 +82,20 @@ const SingleProductPage = () => {
                     </Link>
                 </Flex>
             </Box>
-            <Box border={"0px solid yellow"} height={"fit-content"} display={"flex"}>
-                <Grid gridTemplateColumns={'repeat(2,1fr)'} border={"0px solid red"} width={"57%"} display={"flex"} justifyContent={"space-around"}>
-                    <Box border={"0px"} height={"500px"} marginTop={"5"}>
-                        <Image height={"100%"} src={product?.defaultImage} />
-                    </Box>
-                    <Box border={"0px"} height={"500px"} marginTop={"5"}>
-                        <Image height={"100%"} src={product?.images?.image1} />
-                    </Box>
-                    {product?.images?.image2 && <Box border={"0px"} height={"500px"} marginTop={"5"}>
-                        <Image height={"100%"} src={product?.images.image2} />
-                    </Box>}
-                    {product?.images?.image3 && <Box border={"0px"} height={"500px"} marginTop={"5"}>
-                        <Image height={"100%"} src={product?.images.image3} />
-                    </Box>}
+            <Box border={"0"} height={"fit-content"} display={"flex"}>
+                <Grid gridTemplateColumns={'repeat(2,1fr)'} gridTemplateRows='repeat(2,460px)' gap='20px' width={"57%"} justifyContent={"space-around"}>
+                    <Flex border={"0px"} w='100%' h='100%'>
+                        <Image height={"100%"} src={product?.defaultImage} w='100%' h='100%' />
+                    </Flex>
+                    <Flex border={"0px"} w='100%' h='100%'>
+                        <Image height={"100%"} src={product?.images?.image1} w='100%' h='100%' />
+                    </Flex>
+                    {product?.images?.image2 && <Flex border={"0px"} w='100%' h='100%'>
+                        <Image height={"100%"} src={product?.images.image2} w='100%' h='100%' />
+                    </Flex>}
+                    {product?.images?.image3 && <Flex border={"0px"} w='100%' h='100%'>
+                        <Image height={"100%"} src={product?.images.image3} w='100%' h='100%' />
+                    </Flex>}
 
                 </Grid>
                 <Box border={"0px solid red"} width={"43%"} height={"1200px"}>
