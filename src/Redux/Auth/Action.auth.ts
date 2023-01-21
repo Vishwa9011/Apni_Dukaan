@@ -128,7 +128,7 @@ export const DeleteUserFromServer = (user: any, Toast: Function) => async (dispa
      dispatch({ type: Types.AUTH_LOADING });
      try {
           await deleteUser(user)
-          await deleteDoc(db, 'users', user.uid)
+          await deleteDoc(doc(db, 'users', user.uid))
           dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
           Toast("User has been Deleted", ToastType.success)
      } catch (error) {

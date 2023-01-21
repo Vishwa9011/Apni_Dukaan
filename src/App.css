@@ -27,11 +27,13 @@ li {
 }
 
 .btn-clicked {
-  transition: all 200ms !important;
+  /* transition: all 200ms !important; */
 }
 
 .btn-clicked:active {
-  scale: 1.02
+  /* scale: 1.1; */
+  scale: .9;
+  box-shadow: rgba(54, 53, 53, 0.35) 0px 5px 15px;
 }
 
 .login-main-container * {

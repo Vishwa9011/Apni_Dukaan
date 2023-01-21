@@ -42,8 +42,8 @@ const SignUp = ({ scrollPage }: IProps) => {
 
 
      return (
-          <Box m='auto' my={"30px"} width={"100%"} >
-               <Box my='20px'>
+          <Box m='auto' width={"100%"} >
+               <Box my='10px'>
                     <Heading textAlign={'center'} fontSize='1.5em'>Signup</Heading>
                </Box >
                <Box display={'flex'} flexDir='column' gap='10px'>
@@ -60,7 +60,7 @@ const SignUp = ({ scrollPage }: IProps) => {
                          <Input type="password" placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     </FormControl>
                </Box>
-               <Box display={"flex"} my={"20px"} fontSize='.75em' whiteSpace={'nowrap'}>
+               <Box display={"flex"} my={"10px"} fontSize='.75em' whiteSpace={'nowrap'}>
                     <Text >By continuing, I agree to the</Text>
                     <Text _hover={{ textDecoration: 'underline', cursor: 'pointer' }} fontWeight='bold' mx='3px' color={"#E53E3E"}>Terms of Use</Text>
                     <Text >&</Text>

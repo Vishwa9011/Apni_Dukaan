@@ -30,7 +30,7 @@ const ForgotPassword = ({ toggle }: Props) => {
                     Forgot your password?
                </Heading>
                <Flex w='100%' h='100%' align={'center'} justify={'center'} >
-                    <Stack spacing={4} w={'full'} maxW={'md'} bg={useColorModeValue('white', 'gray.700')} rounded={'xl'} p={6} my={12}>
+                    <Stack spacing={4} w={'full'} maxW={'md'} bg={useColorModeValue('white', 'gray.700')} rounded={'xl'} p={3} my={0}>
                          <FormControl id="email" isRequired>
                               <FormLabel>Email address</FormLabel>
                               <Input type="email" value={email} placeholder="your-email@example.com" _placeholder={{ color: 'gray.500' }} onChange={(e) => setEmail(e.target.value)} />
