@@ -29,13 +29,32 @@ export const SliderData = [
           id: "40dx3Wo4tMR45Q1BzXMF",
           images: {
                image3: "",
-               image1: "https://adn-static1.nykaa.com/nykdesignstudio-imag…/tr:w-960,/c1d8393T20082_3.jpg?rnd=20200526195200",
+               image1: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/2/a/2aff338DFS1191B_1.jpg",
                image2: "https://adn-static1.nykaa.com/nykdesignstudio-imag…/tr:w-960,/c1d8393T20082_2.jpg?rnd=20200526195200",
           },
           mrp: 2295,
           price: 1951,
           rating: 3.4,
           totalReview: "23k",
+     },
+     {
+          type: 'kids',
+          brand: "BestProduct",
+          category: "Frock",
+          defaultImage:
+               "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/5/c/5cf5b19PCF25_1.jpg",
+          description: "Layers Party Dress -navy Multi",
+          discount: 50,
+          id: "kAaa68LqfFPYgEz1dDNk",
+          images: {
+               image3: "",
+               image2: "",
+               image1: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/4/4/44e60eeLP20221272_1.jpg",
+          },
+          mrp: 999,
+          price: 359,
+          rating: 4,
+          totalReview: "56k",
      },
      {
           type: 'women',
@@ -49,7 +68,7 @@ export const SliderData = [
           images: {
                image2: "https://adn-static1.nykaa.com/nykdesignstudio-imag…0,/f7a6c12NYKFF_LEAC0072_2.jpg?rnd=20200526195200",
                image3: "",
-               image1: "https://adn-static1.nykaa.com/nykdesignstudio-imag…0,/f7a6c12NYKFF_LEAC0072_3.jpg?rnd=20200526195200",
+               image1: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/i/n/indi-inside-leh104-ylw_fs_1_1916c911.jpg",
           },
           mrp: 2990,
           price: 2980,
@@ -87,13 +106,14 @@ export const SliderData = [
           images: {
                image3: "",
                image2: "https://adn-static1.nykaa.com/nykdesignstudio-imag…-960,/a8cd93aACHNGJUL27_10.jpg?rnd=20200526195200",
-               image1: "https://adn-static1.nykaa.com/nykdesignstudio-imag…w-960,/a8cd93aACHNGJUL27_6.jpg?rnd=20200526195200",
+               image1: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/f/5/f5607dcNFTD_TWDR1018_1.jpg",
           },
           mrp: 5750,
           price: 5175,
           rating: 4.4,
           totalReview: "22k",
      },
+    
      {
           type: 'women',
           brand: "Lavanya The Label",
@@ -107,11 +127,31 @@ export const SliderData = [
           images: {
                image3: "",
                image2: "https://adn-static1.nykaa.com/nykdesignstudio-imag…960,/cbce07bLBL101KS396_10.jpg?rnd=20200526195200",
-               image1: "https://adn-static1.nykaa.com/nykdesignstudio-imag…960,/cbce07bLBL101KS396_11.jpg?rnd=20200526195200",
+               image1: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/4/9/496fdd4N799_1.jpg",
           },
           mrp: 5699,
           price: 5130,
           rating: 3.4,
           totalReview: "23k",
      },
+     {
+          type: 'men',
+          brand: "Roadster",
+          category: "Shirts",
+          defaultImage:
+               "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/6/1/61ca84cD_FSAW16111PGRN_1.jpg",
+          description: "Men Grey Melange Longline T-shirt with Raw Edges",
+          discount: 50,
+          id: "kAaa68LqfFPYgEz1dDNk",
+          images: {
+               image3: "",
+               image2: "",
+               image1: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/5/0/502cf1fTBH-TONIC-RT_1.jpg",
+          },
+          mrp: 799,
+          price: 359,
+          rating: 4,
+          totalReview: "56k",
+     },
+    
 ];
