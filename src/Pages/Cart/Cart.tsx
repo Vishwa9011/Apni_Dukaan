@@ -22,8 +22,8 @@ interface IUserCred {
 const Cart = () => {
      const { Toast } = UseToastMsg();
      const dispatch: Dispatch<any> = useDispatch();
-     const couponRef = useRef<HTMLInputElement>(null)
-     const { isOpen, onOpen, onClose } = useDisclosure()
+     const couponRef = useRef<HTMLInputElement>(null);
+     const { isOpen, onOpen, onClose } = useDisclosure();
      const [couponDiscount, setCouponDiscount] = useState<number>()
      const { cart } = useSelector((store: RootState) => store.cart)
      const { userCredential }: IUserCred = useSelector((store: RootState) => store.auth)
@@ -39,17 +39,23 @@ const Cart = () => {
           dispatch(getCartProduct(userCredential?.email, Toast))
      }, [userCredential])
 
-
      return (
           <>
-               <Box m={"auto"}  className='cartlogo' boxShadow='base' rounded='md' p={"15px"} justifyContent="space-between" alignItems={"center"}>
+               <Box m={"auto"} className='cartlogo' boxShadow='base' rounded='md' p={"15px"} justifyContent="space-between" alignItems={"center"}>
                     <Box w="20%">
                          <Link to='/'>
                               <Image w={"30%"} src={apnidukan} alt='apnidukan' />
                          </Link>
                     </Box>
                     <Flex w={["100%", "100%", "100%", "60%"]} className='cartlogoss' justifyContent={"space-between"}>
-                         <Text fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest"> <Text as='span' borderBottom={'2px'} style={{ color: "#339933", }}>BAG</Text> -------- ADDRESS -------- PAYMENT</Text>
+                         <Flex gap='10px' align={'center'} fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">
+                              <Link to='/cart'>
+                                   <Text as='span' borderBottom={'2px'} style={{ color: "#339933", }}>
+                                        BAG
+                                   </Text>
+                              </Link>
+                              -------- <Link to='/cart/address'>ADDRESS</Link> -------- PAYMENT
+                         </Flex>
                          <Flex justifyContent={"center"} alignItems="center">
                               <Image w={["10px", "12%", "15%"]} src={secure} alt="secure" />
                               <Text fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">100% SECURE</Text>
@@ -181,7 +187,9 @@ const Cart = () => {
                               </Box>
                          </Box>
                          <Box bg={"red.500"} py="14px">
-                              <Heading color={"white"} size="xs" textAlign={"center"} letterSpacing="wide">PLACE ORDER</Heading>
+                              <Link to='/cart/address'>
+                                   <Heading color={"white"} size="xs" textAlign={"center"} letterSpacing="wide">PLACE ORDER</Heading>
+                              </Link>
                          </Box>
                     </Box>
                </Box>

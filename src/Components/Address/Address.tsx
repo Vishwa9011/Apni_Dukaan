@@ -1,7 +1,7 @@
 import { Box, Button, Checkbox, Flex, Image, Input, Text } from '@chakra-ui/react'
 import img from "../../../public/Images/apnidukan.png";
 import secure from '../../../public/Images/secure.png'
-import { IAddress } from '../../Constants/Constant';
+import { IAddress, IProduct } from '../../Constants/Constant';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import "./Address.css"
@@ -21,6 +21,7 @@ const initialAddress = {
 const Address = () => {
    const [address, setAddrees] = useState<IAddress>(initialAddress);
    const { cart } = useSelector((store: RootState) => store.cart);
+   console.log('cart: ', cart);
 
    const HandleOnChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
       setAddrees(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -36,7 +37,21 @@ const Address = () => {
                   </Link>
                </Box>
                <Flex w={["100%", "100%", "100%", "60%"]} className='cartlogoss' justifyContent={"space-between"}>
-                  <Flex align={'center'} fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest"> BAG -------- <Text as='span' borderBottom={'2px'} style={{ color: "#339933" }}>ADDRESS</Text> -------- PAYMENT</Flex>
+                  <Flex gap='10px' align={'center'} fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">
+                     <Link to='/cart'>
+                        BAG
+                     </Link>
+                     --------
+                     <Link to='/cart/address'>
+                        <Text as='span' borderBottom={'2px'} style={{ color: "#339933", }}>
+                           ADDRESS
+                        </Text>
+                     </Link>
+                     --------
+                     <Link to='/cart/payment'>
+                        PAYMENT
+                     </Link>
+                  </Flex>
                   <Flex justifyContent={"center"} alignItems="center">
                      <Image w={["10px", "12%", "15%"]} src={secure} alt="secure" />
                      <Text fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">100% SECURE</Text>
@@ -91,14 +106,21 @@ const Address = () => {
             </Box>
 
             {/* right part */}
-            <Box className='main_mou' w="100%" display={"flex"} justifyContent="center">
+            <Box className='main_mou' w="60%" display={"flex"} justifyContent="center">
                <Box className='main_boxx' w="80%" m="auto" p="5" h={"40%"} mt="8">
                   <Box>
                      <Text>DELIVERY ESTIMATES</Text>
-                     <Flex>
-                        <Image src='' boxSize={'40px'} />
-                        <Text>Estimated 13 January</Text>
-                     </Flex>
+                     <Box h='160px' mb='2' overflowY={'scroll'} className='address-cartitems-scroll'>
+                        {cart.map((item: IProduct) => (
+                           <Flex key={item.id} gap='20px' align={'center'} my='1' h='50px' border={'1px'} borderColor='gray.200' px='1'>
+                              <Image src={item.defaultImage} w='35px' h={'40px'} border='1px' borderColor='gray.200' />
+                              <Flex align={'center'} gap='5px'>
+                                 <Text fontSize={'.9em'}>Estimated delivery by </Text>
+                                 <Text as={'span'} fontWeight='semibold'>13 Jan 2023</Text>
+                              </Flex>
+                           </Flex>
+                        ))}
+                     </Box>
                   </Box>
                   <Box display={"flex"} justifyContent="center" flexDir={"column"} gap="5" >
                      <Text fontWeight={"bold"}>PRICE DETAILS(1 Item)</Text>
@@ -119,9 +141,7 @@ const Address = () => {
                         <Text fontWeight={"bold"}>Total Amount</Text>
                         <Text>1,174</Text>
                      </Flex>
-
                   </Box>
-
                </Box>
             </Box>
          </Box>
