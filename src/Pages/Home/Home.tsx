@@ -94,17 +94,35 @@ function Home() {
                          <Image src='/Images/landing_page_image.png' />
                     </Flex>
                </Box>
+<<<<<<< HEAD
+               {/* gif part */}
+               <Box pl="20" pr="20" pt="10">
+                    <Image src="https://images-static.nykaa.com/uploads/7eba43ac-b3fa-441b-9e33-b2fb2bdd9e84.gif?tr=w-2400,cm-pad_resize"/>
+               </Box>
+
+           
+=======
+>>>>>>> d4b43290bad39d6f86e3679aa0e16006155b64c1
 
                {/* card */}
                <ProductSlider />
 
+<<<<<<< HEAD
+
+               
+               
+=======
                {/* gif part */}
                <Flex w='100%'>
                     <Image src="https://images-static.nykaa.com/uploads/7eba43ac-b3fa-441b-9e33-b2fb2bdd9e84.gif?tr=w-2400,cm-pad_resize" />
                </Flex>
+<<<<<<< HEAD
+>>>>>>> d4b43290bad39d6f86e3679aa0e16006155b64c1
+=======
 
                {/* Footer */}
                <Footer />
+>>>>>>> b5e7bab92bddb8470a6a7fd03afd7c72ff535984
           </Box>
      )
 }
