@@ -43,3 +43,8 @@ li {
 .transition {
   transition: all 600ms;
 }
+
+.hide-scroll::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}

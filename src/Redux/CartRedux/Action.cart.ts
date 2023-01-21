@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Dispatch } from "redux"
 import { IProduct, IUser } from "../../Constants/Constant";
 import { ToastType } from "../../Custom-hooks/UseToastMsg";
-import { db } from "../../Firebase/FirebaseConfig";
+import { auth, db } from "../../Firebase/FirebaseConfig";
 import * as Types from './Types.cart'
 import { RootState } from "../store";
 
@@ -120,3 +120,5 @@ export const FindTotal = (cart: IProduct[]) => {
 
      return { TotalMRP, TotalDiscount, TotalPrice, TotalItems }
 }
+
+

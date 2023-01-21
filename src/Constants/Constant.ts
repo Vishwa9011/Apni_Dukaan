@@ -10,7 +10,7 @@ export interface IUser {
      isActive: boolean
      isAdmin: boolean
      gender: string
-     address: string
+     address?: IAddress 
      timeStamp: object
 }
 
@@ -74,6 +74,7 @@ export interface IAddress {
      phone: number
      pincode: number
      address: string
-     localiy: string
+     locality: string
      district: string
+     addressType: string
 }

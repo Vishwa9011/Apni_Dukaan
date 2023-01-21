@@ -7,70 +7,14 @@
   display: none;
 }
 
-/* .address_main_{
-
+.flex_mou {
+  display: flex;
 }
-
-@media screen and (max-width: 1080px){
- 
-}
- @media screen and (max-width: 700px){ 
-    .nav_moumita{
-     display: none;
-    }
-  .flex_mou{
-    flex-direction: column;
-    border: 3px solid rgb(21, 1, 1);
-    width: 200%;
-    height: 100vh;
-
-  }
-  .main_mou{
-    width: 100%;
-    border: 1px solid rgb(0, 255, 51);
-
-  }
-  .flexmain_mou{
-    width: 200%;
-    justify-content: center;
-    border: 1px solid red;
-    height: 150%;
-    margin-left: "0"
-
-  }
- 
-} 
-@media screen and (max-width: 400px){
-} */
 
 @media only screen and (width>=800px) {
-  .flex_mou {
-    display: flex;
-  }
+
 
   .main_mou {
-    height: 200vh;
+    height: fit-content;
   }
-
-  /* .nav_moumita{
-        display: none;
-       } */
-
-}
-
-@media only screen and (width<=700px) {
-  .nav_moumita {
-    display: none;
-  }
-
-  .box_mou {
-    display: none;
-    /* border: "1px solid red"; */
-
-  }
-
-  .main_mou {
-    height: 70vh;
-  }
-
 }
