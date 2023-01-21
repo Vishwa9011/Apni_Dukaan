@@ -6,12 +6,12 @@ import CartCard from '../../Components/Cards/CartCard/CartCard';
 import { IProduct, IUser } from '../../Constants/Constant';
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
 import { useDispatch, useSelector } from 'react-redux'
-import apnidukan from "/public/Images/apnidukan.png"
 import { BsTag, BsTruck } from "react-icons/bs";
-import giftbig from "/public/Images/giftbig.png"
-import secure from '/public/Images/secure.png'
 import { RootState } from '../../Redux/store';
+import apnidukan from "/Images/apnidukan.png"
 import { CiPercent } from "react-icons/ci";
+import giftbig from "/Images/giftbig.png";
+import secure from '/Images/secure.png';
 import { Link } from 'react-router-dom';
 import "./cart.css"
 
