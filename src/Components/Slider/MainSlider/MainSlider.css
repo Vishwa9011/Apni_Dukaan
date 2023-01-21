@@ -1,0 +1,32 @@
+@media screen and (max-width: 1080px){
+
+    .mainSlider{
+        display: flex;
+        justify-content: center;
+
+    }
+    .mainSliderimg{
+        height: 410px;
+    }
+}
+@media screen and (max-width: 600px){
+    .mainSlider{
+        display: flex;
+        justify-content: center;
+
+    }
+    .mainSliderimg{
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .mainSlider{
+        display: flex;
+        justify-content: center;
+
+    }
+    .mainSliderimg{
+        height: 250px;
+    }
+}
