@@ -88,18 +88,20 @@ const SingleProductPage = () => {
                     </Flex>
                 </Box>
                 <Box border={"0"} height={"fit-content"} display={"flex"}>
-                    <Grid gridTemplateColumns={'repeat(2,1fr)'} gridTemplateRows='repeat(2,460px)' gap='20px' width={"57%"} justifyContent={"space-around"}>
-                        <Flex border={"0px"} w='100%' h='100%'>
-                            <Image height={"100%"} src={product?.defaultImage} w='100%' h='100%' />
+                    <Grid gridTemplateColumns={'repeat(2,1fr)'} gridTemplateRows='repeat(2,500px)' gap='20px' width={"57%"} justifyContent={"space-around"}>
+                        <Flex align={'center'} justify='center' border={"0px"} w='100%' h=''>
+                            <Image src={product?.defaultImage} w='100%' maxH='100%' />
                         </Flex>
-                        <Flex border={"0px"} w='100%' h='100%'>
-                            <Image height={"100%"} src={product?.images?.image1} w='100%' h='100%' />
+                        <Flex align={'center'} justify='center' border={"0px"} w='100%' h=''>
+                            <Image src={product?.images?.image1} w='100%' maxH='100%' />
                         </Flex>
-                        {product?.images?.image2 && <Flex border={"0px"} w='100%' h='100%'>
-                            <Image height={"100%"} src={product?.images.image2} w='100%' h='100%' />
+                        {product?.images?.image2 &&
+                            <Flex border={"0px"} w='100%' align={'center'} justify='center'>
+                                <Image src={product?.images.image2} w='100%' maxH='100%' />
                         </Flex>}
-                        {product?.images?.image3 && <Flex border={"0px"} w='100%' h='100%'>
-                            <Image height={"100%"} src={product?.images.image3} w='100%' h='100%' />
+                        {product?.images?.image3 &&
+                            <Flex border={"0px"} w='100%' align={'center'} justify='center'>
+                                <Image src={product?.images.image3} w='100%' maxH='100%' />
                         </Flex>}
 
                     </Grid>

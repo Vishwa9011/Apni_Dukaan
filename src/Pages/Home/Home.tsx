@@ -95,6 +95,11 @@ function Home() {
                     </Flex>
                </Box>
 
+               {/* gif part */}
+               <Box pl="20" pr="20" pt="10">
+                    <Image src="https://images-static.nykaa.com/uploads/7eba43ac-b3fa-441b-9e33-b2fb2bdd9e84.gif?tr=w-2400,cm-pad_resize" />
+               </Box>
+
                {/* card */}
                <ProductSlider />
 
@@ -105,6 +110,7 @@ function Home() {
 
                {/* Footer */}
                <Footer />
+
           </Box>
      )
 }

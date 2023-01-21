@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { Dispatch } from "redux"
 import { auth, db, provider } from "../../Firebase/FirebaseConfig"
-import { IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
+import { IAddress, IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
 import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
 import * as Types from './Types.auth'
 import { ToastType } from './../../Custom-hooks/UseToastMsg';
@@ -134,5 +134,20 @@ export const DeleteUserFromServer = (user: any, Toast: Function) => async (dispa
      } catch (error) {
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
+     }
+}
+
+// todo: AddAddressUserProfile
+export const AddAddressUserProfile = (address: IAddress, userId: string, Toast: Function) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.AUTH_LOADING });
+     try {
+          const userRef = doc(db, `users`, userId)
+          await updateDoc(userRef, { address });
+          dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
+          Toast("Address successfully added.", ToastType.success);
+     } catch (error) {
+          console.log('error: ', error);
+          dispatch({ type: Types.AUTH_ERROR })
+          Toast("Failed to add address.", ToastType.error)
      }
 }

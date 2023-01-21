@@ -70,7 +70,7 @@ const CartCard = ({ product }: Props) => {
                                         <PopoverCloseButton />
                                         <Grid gap={"10px"} gridTemplateColumns='repeat(5,1fr)' p='20px'>
                                              {itemQty.map((el, i) => (
-                                                  <Box border="1px solid black" cursor={"pointer"} display={"flex"} _hover={{ color: "red", border: "2px solid red", fontWeight: "bold" }}
+                                                  <Box border="1px solid black" key={i} cursor={"pointer"} display={"flex"} _hover={{ color: "red", border: "2px solid red", fontWeight: "bold" }}
                                                        w="40px" h="40px" onClick={() => { onClose(); UpdateQtyOfProduct(i + 1) }} borderRadius={"50%"} alignItems="center" justifyContent={"center"}>
                                                        {i + 1}
                                                   </Box>

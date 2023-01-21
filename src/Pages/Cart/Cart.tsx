@@ -12,7 +12,7 @@ import apnidukan from "/Images/apnidukan.png"
 import { CiPercent } from "react-icons/ci";
 import giftbig from "/Images/giftbig.png";
 import secure from '/Images/secure.png';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, NavLink } from 'react-router-dom';
 import "./cart.css"
 
 interface IUserCred {
@@ -22,8 +22,8 @@ interface IUserCred {
 const Cart = () => {
      const { Toast } = UseToastMsg();
      const dispatch: Dispatch<any> = useDispatch();
-     const couponRef = useRef<HTMLInputElement>(null)
-     const { isOpen, onOpen, onClose } = useDisclosure()
+     const couponRef = useRef<HTMLInputElement>(null);
+     const { isOpen, onOpen, onClose } = useDisclosure();
      const [couponDiscount, setCouponDiscount] = useState<number>()
      const { cart } = useSelector((store: RootState) => store.cart)
      const { userCredential }: IUserCred = useSelector((store: RootState) => store.auth)
@@ -39,27 +39,35 @@ const Cart = () => {
           dispatch(getCartProduct(userCredential?.email, Toast))
      }, [userCredential])
 
-
      return (
           <>
-               <Box m={"auto"}  className='cartlogo' boxShadow='base' rounded='md' p={"15px"} justifyContent="space-between" alignItems={"center"}>
-                    <Box w="20%">
-                         <Link to='/'>
-                              <Image w={"30%"} src={apnidukan} alt='apnidukan' />
-                         </Link>
-                    </Box>
-                    <Flex w={["100%", "100%", "100%", "60%"]} className='cartlogoss' justifyContent={"space-between"}>
-                         <Text fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest"> <Text as='span' borderBottom={'2px'} style={{ color: "#339933", }}>BAG</Text> -------- ADDRESS -------- PAYMENT</Text>
-                         <Flex justifyContent={"center"} alignItems="center">
-                              <Image w={["10px", "12%", "15%"]} src={secure} alt="secure" />
+               <Flex m={"auto"} align='center' className='cartlogo' boxShadow='base' rounded='md' p={"15px"} alignItems={"center"}>
+                    <Flex w={["100%", "100%", "100%", "100%"]} className='cartlogoss' justifyContent={"space-between"}>
+                         <Flex flex={1}>
+                              <Link to='/'>
+                                   <Image w={"80px"} src={apnidukan} alt='apnidukan' />
+                              </Link>
+                         </Flex>
+                         <Flex gap='10px' align={'center'} fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">
+                              <Link to='/cart'>
+                                   <Text as='span' borderBottom={'2px'} style={{ color: "#339933", }}>
+                                        BAG
+                                   </Text>
+                              </Link>
+                              --------
+                              <Link to='/cart/address'>ADDRESS</Link>
+                              --------
+                              <Text>PAYMENT</Text>
+                         </Flex>
+                         <Flex flex={1} gap='2' justifyContent={"flex-end"} alignItems="center">
+                              <Image w={["10px", "20px", "30px"]} src={secure} alt="secure" />
                               <Text fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">100% SECURE</Text>
                          </Flex>
                     </Flex>
-               </Box>
+               </Flex>
                <Flex justifyContent={"center"} alignItems="center" boxShadow='base' p='6' rounded='md' h="50px">
                     <Text color={"gray.600"} fontSize={['12px', '12px', '12px', 'sm']} letterSpacing="wide">Sale End In <span style={{ color: "#ff4d4d", fontSize: "20px", fontWeight: "bold" }}>03</span><span style={{ fontSize: "13px" }}>Hrs:</span> <span style={{ color: "#ff4d4d", fontSize: "20px", fontWeight: "bold" }}>40</span><span style={{ fontSize: "13px" }}>Min:</span> <span style={{ color: "#ff4d4d", fontSize: "20px", fontWeight: "bold" }}>24</span><span style={{ fontSize: "13px" }}>Sec</span> </Text>
                </Flex>
-
                <Box className='cart' w="70%" m="auto">
                     <Box w={"55%"} className="cartitem" boxShadow='base' p='6' rounded='md' pr="20px">
                          <Box boxShadow='base' rounded='md' mt={"20px"}>
@@ -96,7 +104,7 @@ const Cart = () => {
                                    <Text fontSize={"12px"} fontWeight="bold" color="gray.600"> MOVE TO WISHLIST</Text>
                               </Flex>
                          </Flex>
-                         <Flex flexDir={'column'} gap='20px'>
+                         <Flex flexDir={'column'} gap='20px' h='70vh' overflowY={'scroll'} className='hide-scroll'>
                               {cart.map((product: IProduct) => (
                                    <CartCard product={product} key={product.id} />
                               ))}
@@ -181,7 +189,9 @@ const Cart = () => {
                               </Box>
                          </Box>
                          <Box bg={"red.500"} py="14px">
-                              <Heading color={"white"} size="xs" textAlign={"center"} letterSpacing="wide">PLACE ORDER</Heading>
+                              <NavLink to='/cart/address' state={{ coupon: couponDiscount }} replace={true}>
+                                   <Heading color={"white"} size="xs" textAlign={"center"} letterSpacing="wide">PLACE ORDER</Heading>
+                              </NavLink>
                          </Box>
                     </Box>
                </Box>
