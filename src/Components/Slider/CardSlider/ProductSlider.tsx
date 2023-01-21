@@ -18,7 +18,7 @@ const ProductSlider = () => {
 
    return (
       <Box w={["98%", "98%", "98%"]} m="auto" >
-         <Heading as={"p"} my={[2, 2, 3, 5]} fontSize={["1.3em", "1.3em", "1.8em"]} textAlign="center">
+         <Heading as={"p"} color="#E53E3E" letterSpacing={"2"} my={[2, 2, 3, 5]} fontSize={["1.3em", "1.3em", "1.8em"]} textAlign="center">
             Best Sellers
          </Heading>
          <Box className="productmain" py="4">

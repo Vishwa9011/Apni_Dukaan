@@ -1,0 +1,16 @@
+@media screen and (max-width: 600px){
+    .home_cate{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .home_cate{
+        display: none;
+        /* justify-content: center; */
+    }
+}
+/* .home_cate{
+    border: 2px solid red;
+} */
