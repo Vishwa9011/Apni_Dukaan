@@ -3,6 +3,7 @@ import { Box, Button, Center, Flex, Heading, Image, Input, SimpleGrid, Text, } f
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FcPhoneAndroid } from "react-icons/fc";
 import { BsFillSuitHeartFill } from "react-icons/bs";
+import "./Footer.css"
 const Footer = () => {
    return (
       <Box>
@@ -19,7 +20,7 @@ const Footer = () => {
                   <br />
                   <Flex alignItems={"center"} >
                      <Input width={"180px"} borderRadius={"none"} color={"white"} border={"none"} borderBottom={"1px solid white"} placeholder="Your Email" />
-                     <Button ml={"10px"} borderRadius={"none"} colorScheme="White" variant="outline">
+                     <Button ml={"10px"} borderRadius={"none"} colorScheme="White" variant="outline" className="footer_btn">
                         Send
                      </Button>
                   </Flex>
@@ -56,7 +57,7 @@ const Footer = () => {
 
          <Box width={"100%"} bg={"black"}>
             <SimpleGrid margin={"auto"} padding="40px" width={"80%"} columns={[2, 2, 4]} color={"white"} transition="all 600ms">
-               <Flex flexDir={"column"} gap="10px" transition="all 600ms">
+               <Flex flexDir={"column"} gap="10px" transition="all 600ms" cursor={"pointer"}>
                   <Text as="h4" fontStyle={"italic"} fontSize="xl" color={"red.500"}>
                      Apni Dukan
                   </Text>
@@ -79,7 +80,7 @@ const Footer = () => {
                      Investor Relation
                   </Text>
                </Flex>
-               <Flex flexDir={"column"} gap="14px">
+               <Flex flexDir={"column"} gap="14px" cursor={"pointer"}>
                   <Text as="h4" fontSize="xl" color={"red.500"}>
                      Help
                   </Text>
@@ -102,7 +103,7 @@ const Footer = () => {
                      Sell on Apni Dukan
                   </Text>
                </Flex>
-               <Flex flexDir={"column"} gap="14px" >
+               <Flex flexDir={"column"} gap="14px" cursor={"pointer"} >
                   <Text as="h4" fontSize="xl" color={"red.500"}>
                      Inspire me
                   </Text>
@@ -120,7 +121,7 @@ const Footer = () => {
                   </Text>
                </Flex>
 
-               <Flex flexDir={"column"} gap="14px">
+               <Flex flexDir={"column"} gap="14px" cursor={"pointer"}>
                   <Text as="h4" fontSize="xl" color={"red.500"}>
                      Top Categories
                   </Text>

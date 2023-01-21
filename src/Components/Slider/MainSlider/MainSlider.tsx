@@ -3,6 +3,8 @@
 
 import { useEffect, useState } from 'react'
 import { Box,Heading,Image} from '@chakra-ui/react';
+import "./MainSlider.css"
+
 function MainSlider() {
     const [image, setImage] = useState(0)
      let id:any;
@@ -32,9 +34,9 @@ function MainSlider() {
   
 
      return (
-          <Box w='100%' h='100%'  pos='relative' >
+          <Box w='100%' h='100%'  pos='relative' className='mainSlider' >
                <Box  >
-                    <Image h="410px" w="100%" src={slidesImages[image]?.url} />
+                    <Image className='mainSliderimg'  w="100%" src={slidesImages[image]?.url} />
                </Box>
           
             

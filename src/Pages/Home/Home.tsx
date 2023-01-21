@@ -4,8 +4,9 @@ import ProductSlider from "../../Components/Slider/CardSlider/ProductSlider";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import Loader from "../../Components/Loader/Loader";
-import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
+import { useSelector } from "react-redux";
+import "./Home.css"
 
 function Home() {
 
@@ -25,40 +26,42 @@ function Home() {
                     <Flex justify={'space-around'} w='100%'>
                          <Box alignItems={"center"} textAlign="center">
                               <Image src="https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-bestseller-1671624963.jpg" />
-                              <Text>Bestsellers</Text>
+                              <Text fontWeight={"bold"}>Bestsellers</Text>
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
                               <Image src="https://images.bewakoof.com/uploads/grid/app/Thumbnail-New-Arrivals-Common-1668508339.jpg" />
-                              <Text>Bestsellers</Text>
+                              <Text fontWeight={"bold"}>New Arrivals</Text>
 
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
                               <Image src="https://images.bewakoof.com/uploads/grid/app/hotdeals-2-1668491210.jpg" />
-                              <Text>Bestsellers</Text>
+                              <Text fontWeight={"bold"}>Hot Deals</Text>
 
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
                               <Image src="https://images.bewakoof.com/uploads/grid/app/Thumbnail-Collabs-Common-1668508338.jpg" />
-                              <Text>Bestsellers</Text>
+                              <Text fontWeight={"bold"}>Official Collaborations</Text>
 
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
                               <Image src="https://images.bewakoof.com/uploads/grid/app/last-size-new-thumbnaik-1668508337.jpg" />
-                              <Text>Bestsellers</Text>
+                              <Text fontWeight={"bold"}>Last Sizes Left</Text>
 
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
                               <Image src="https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-copy-1669723278.jpg" />
-                              <Text>Bestsellers</Text>
+                              <Text fontWeight={"bold"}>Plus Size</Text>
                          </Box>
                     </Flex>
                </Flex>
                <Flex w='100%'>
                     <Image src="https://images-static.nykaa.com/uploads/542701f0-1711-4dab-8238-5ad274a6cd95.gif?tr=w-2400,cm-pad_resize" w='100%' />
                </Flex>
+               <ProductSlider />
+
                <Box>
-                    <Heading textAlign={"center"} mt="10">SHOP BY CATEGORY</Heading>
-                    <Flex p="10">
+                    <Heading textAlign={"center"} mt="10" color="#E53E3E">SHOP BY CATEGORY</Heading>
+                    <Flex p="10" className="home_cate">
                          <Box w="80" p="5" textAlign="center">
                               <Image src="https://images-static.nykaa.com/uploads/93e7d2a0-743d-4a51-a11c-82def81351f3.jpg?tr=w-480,cm-pad_resize" />
                               <Text>Indianwear</Text>
@@ -108,9 +111,9 @@ function Home() {
                </Box>
 
                {/* gif part */}
-               <Box pl="20" pr="20" pt="10">
+               {/* <Box pl="20" pr="20" pt="10">
                     <Image src="https://images-static.nykaa.com/uploads/7eba43ac-b3fa-441b-9e33-b2fb2bdd9e84.gif?tr=w-2400,cm-pad_resize" />
-               </Box>
+               </Box> */}
 
                {/* card */}
                {/* <ProductSlider /> */}
