@@ -7,6 +7,7 @@ import { IProduct } from '../../Constants/Constant';
 
 // todo: getWishlistProducts
 export const getWishlistProducts = (email: string, Toast: Function) => async (dispatch: Dispatch) => {
+     if (!email) return
      dispatch({ type: Types.WISHLIST_LOADING });
      const wishlistRef = collection(db, `wishlist/${email}/wishlistData`)
      const unsub = onSnapshot(wishlistRef, (snapShot) => {
@@ -24,10 +25,11 @@ export const getWishlistProducts = (email: string, Toast: Function) => async (di
 
 // todo: getWishlistProducts
 export const addProductToWishlist = (product: IProduct, email: string, Toast: Function) => async (dispatch: Dispatch) => {
+     if (!email) return
      dispatch({ type: Types.WISHLIST_LOADING })
      try {
           const wishlistRef = doc(db, `wishlist/${email}/wishlistData`, product.id)
-          await setDoc(wishlistRef, product)
+          await setDoc(wishlistRef, { ...product, qty: 1 })
           dispatch({ type: Types.WISHLIST_SUCCESS })
           Toast("Product successfully added into wishlist", ToastType.success);
      } catch (error) {
@@ -40,6 +42,7 @@ export const addProductToWishlist = (product: IProduct, email: string, Toast: Fu
 
 // todo: RemoveFromWishlist
 export const RemoveFromWishlist = (email: string, id: string, Toast: Function) => async (dispatch: Dispatch) => {
+     if (!email) return
      dispatch({ type: Types.WISHLIST_LOADING })
      try {
           const wishlistRef = doc(db, `wishlist/${email}/wishlistData`, id)
@@ -54,6 +57,7 @@ export const RemoveFromWishlist = (email: string, id: string, Toast: Function) =
 
 // todo: moveProductTocart
 export const moveProductTocart = (product: IProduct, email: string, Toast: Function) => async (dispatch: Dispatch) => {
+     if (!email) return
      dispatch({ type: Types.WISHLIST_LOADING })
      try {
           const cartRef = doc(db, `cart/${email}/cartData`, product.id)

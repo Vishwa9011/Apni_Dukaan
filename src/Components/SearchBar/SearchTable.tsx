@@ -22,7 +22,7 @@ const SearchTable = ({ searchedData, category }: Props) => {
                     </Thead>
                     <Tbody>
                          {searchedData.map((item) => (
-                              <Tr>
+                              <Tr key={item.id}>
                                    <Td>
                                         <Link to={`/product-detail/${category}-${item.id}`} key={item.id} className='search-list'>
                                              <Image src={item.defaultImage} boxSize='40px' />

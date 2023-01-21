@@ -66,9 +66,6 @@ export const FilterValuesFromData = (values: string[], data: IProduct[]) => asyn
 
 // todo: filterData via price and discount along with previous filter
 export const FilterValuesFromDataWithPriceAndDiscount = (FilterDiscount: string, FilterPrice: string[], data: IProduct[]) => async (dispatch: Dispatch) => {
-     console.log('FilterDiscount: ', FilterDiscount);
-     // console.log('FilterPrice: ', FilterPrice);
-     // console.log("Filter with discount and price");
      dispatch({ type: Types.SHOP_LOADING });
 
      // todo: filter discount
@@ -113,4 +110,25 @@ const FilterDataWithDiscount = (FilterDiscount: string, data: IProduct[]): IProd
                return product?.discount ? product.discount >= +FD[1] : false;
           }
      })
+}
+
+
+// todo:sorting
+export const SortDataFromList = (value: string, data: IProduct[]) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.SHOP_LOADING });
+     if (value === '') {
+          dispatch({ type: Types.SHOP_DATA_FILTERING_DONE, payload: [] });
+     } else if (value == 'htl') {
+          data.sort((a, b) => b.price - a.price);
+          dispatch({ type: Types.SHOP_DATA_FILTERING_DONE, payload: data });
+     } else if (value == 'lth') {
+          data.sort((a, b) => a.price - b.price);
+          dispatch({ type: Types.SHOP_DATA_FILTERING_DONE, payload: data });
+     } else if (value == 'rating') {
+          data.sort((b, a) => a?.rating - b?.rating);
+          dispatch({ type: Types.SHOP_DATA_FILTERING_DONE, payload: data });
+     } else if (value == 'discount') {
+          data.sort((b, a) => (a.discount || 0) - (b.discount || 0));
+          dispatch({ type: Types.SHOP_DATA_FILTERING_DONE, payload: data });
+     }
 }

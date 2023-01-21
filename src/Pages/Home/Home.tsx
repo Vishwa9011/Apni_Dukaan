@@ -3,12 +3,24 @@ import MainSlider from "../../Components/Slider/MainSlider/MainSlider";
 import ProductSlider from "../../Components/Slider/CardSlider/ProductSlider";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
+import Loader from "../../Components/Loader/Loader";
+import { useSelector } from "react-redux";
+import { RootState } from "../../Redux/store";
 
 function Home() {
+
+     const { loading } = useSelector((store: RootState) => store.auth)
+
      return (
           <Box>
+               {/* loading */}
+               {loading && <Loader />}
+
+               {/* Navbar */}
                <Navbar />
+               {/* mainslider */}
                <MainSlider />
+
                <Flex mt="10" mb="5" justify={'space-around'} w='100%'>
                     <Flex justify={'space-around'} w='100%'>
                          <Box alignItems={"center"} textAlign="center">
@@ -101,7 +113,7 @@ function Home() {
                </Box>
 
                {/* card */}
-               <ProductSlider />
+               {/* <ProductSlider /> */}
 
                {/* gif part */}
                <Flex w='100%'>

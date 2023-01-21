@@ -20,6 +20,7 @@ import { RootState } from '../../Redux/store';
 import { addProductToWishlist } from '../../Redux/WishlistRedux/Action.wishlist';
 import Navbar from '../../Components/Navbar/Navbar';
 import Footer from '../../Components/Footer/Footer';
+import Loader from '../../Components/Loader/Loader';
 
 type Props = {}
 
@@ -32,7 +33,9 @@ const SingleProductPage = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const [product, setProduct] = useState<any>();
     const [loading, setLoading] = useState(false)
-    const { userCredential }: { userCredential: IUser } = useSelector((store: RootState) => store.auth);
+    const { userCredential }: { userCredential: IUser, loading: boolean } = useSelector((store: RootState) => store.auth);
+    const { loading: cartLoading } = useSelector((store: RootState) => store.cart);
+    const { loading: wishlistLoading } = useSelector((store: RootState) => store.wishlist);
     const [prCategory, productId]: any = id?.trim().split('-');
 
 
@@ -63,7 +66,11 @@ const SingleProductPage = () => {
     if (!product?.brand) return <PageNotFound />
 
     return (
+
         <>
+            {/* loading */}
+            {(loading || cartLoading || wishlistLoading) && <Loader />}
+
             {/* Navbar */}
             <Navbar />
 

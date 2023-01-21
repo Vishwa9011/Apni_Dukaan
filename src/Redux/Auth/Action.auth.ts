@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWith
 import { Dispatch } from "redux"
 import { auth, db, provider } from "../../Firebase/FirebaseConfig"
 import { IAddress, IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
-import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
+import { deleteDoc, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore"
 import * as Types from './Types.auth'
 import { ToastType } from './../../Custom-hooks/UseToastMsg';
 
@@ -36,7 +36,7 @@ export const signInWithGoogleAuth = (Toast: Function, navigate: Function, locati
                console.log('linkedCred: ', linkedCred);
           }
           Toast("Login Success", ToastType.success)
-          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail })
+          dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
           localStorage.setItem("IsAuthAD", 'true') //todo: setting authentication inside the user
           navigate(location?.state?.prevURL ? location.state.prevURL : '/') // todo: navigating to the previous page
      } catch (error) {
@@ -80,8 +80,9 @@ export const signIn = ({ email, password, Toast, navigate, location }: IAuthDeta
 
           // * getting the document from server 
           const userRef = doc(db, 'users', user.uid);
-          const userDetail = await getDoc(userRef);
-          dispatch({ type: Types.SIGNIN_SUCCESS, payload: userDetail.data() })
+          await updateDoc(userRef, { isActive: true });
+          getUserCredential(user, Toast) // todo: to get the details of user
+          dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
           Toast("Login Success", ToastType.success)
           navigate(location?.state?.prevURL ? location.state.prevURL : '/')
           localStorage.setItem("IsAuthAD", 'true')
@@ -92,20 +93,21 @@ export const signIn = ({ email, password, Toast, navigate, location }: IAuthDeta
 }
 
 // todo: to signOut
-export const logout = (Toast: Function) => async (dispatch: Dispatch) => {
+export const logout = (uid: string, Toast: Function) => async (dispatch: Dispatch) => {
+     console.log('uid: ', uid);
      dispatch({ type: Types.AUTH_LOADING });
      try {
+          console.log('logout')
           await signOut(auth)
-          if (auth.currentUser?.email) {
-               const userRef = doc(db, 'users', auth.currentUser?.uid)
-               await updateDoc(userRef, { IsActive: false })
-          }
+          const userRef = doc(db, 'users', uid)
+          await updateDoc(userRef, { isActive: false })
           dispatch({ type: Types.SIGNOUT_SUCCESS })
           Toast("Logout Success", ToastType.success)
           localStorage.setItem("IsAuthAD", 'false')
      } catch (error) {
+          console.log('error: ', error);
           dispatch({ type: Types.AUTH_ERROR, payload: error })
-          Toast(error, ToastType.error)
+          // Toast(error, ToastType.error)
      }
 }
 
@@ -121,6 +123,21 @@ export const ForgotPasswordSendEmail = (email: string, Toast: Function) => async
           dispatch({ type: Types.AUTH_ERROR, payload: error })
           Toast(error, ToastType.error)
      }
+}
+
+// todo: to get userCredentital
+export const getUserCredential = (user: any, Toast: Function) => async (dispatch: Dispatch) => {
+     const userRef = doc(db, 'users', user.uid);
+     const unsub = onSnapshot(userRef, (snapShot) => {
+          const data = snapShot.data()
+          dispatch({ type: Types.SIGNIN_SUCCESS, payload: data })
+     }, (err) => {
+          console.log('err: ', err);
+          Toast(err, ToastType.error)
+     })
+
+     // cleanup
+     return unsub;
 }
 
 // todo: DeleteUser
@@ -145,6 +162,21 @@ export const AddAddressUserProfile = (address: IAddress, userId: string, Toast: 
           await updateDoc(userRef, { address });
           dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
           Toast("Address successfully added.", ToastType.success);
+     } catch (error) {
+          console.log('error: ', error);
+          dispatch({ type: Types.AUTH_ERROR })
+          Toast("Failed to add address.", ToastType.error)
+     }
+}
+
+// todo: RemoveAddress from user profile
+export const RemoveAddressUserProfile = (address: IAddress, userId: string, Toast: Function) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.AUTH_LOADING });
+     try {
+          const userRef = doc(db, `users`, userId)
+          await updateDoc(userRef, { address: '' });
+          dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
+          Toast("Address successfully removed.", ToastType.success);
      } catch (error) {
           console.log('error: ', error);
           dispatch({ type: Types.AUTH_ERROR })
