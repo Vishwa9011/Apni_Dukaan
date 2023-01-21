@@ -113,7 +113,7 @@ const Address = () => {
 
             <Flex className='main_mou' w="100%" justifyContent="center" >
                <Box className='flexmain_mou' m="auto" w="80%" p="5" px='7' h={"fit-content"} mt="8">
-                  <Box>
+                  <Box >
                      <Text fontSize={'1.5em'} fontWeight='semibold'>Saved Address</Text>
                      <Flex gap='2' p='2' align={'center'}>
                         <Box h='100%' alignSelf={'stretch'} pt='1'>

@@ -9,6 +9,11 @@ const Payment = () => {
           <Box>
                <Flex m={"auto"} align='center' className='cartlogo' boxShadow='base' rounded='md' p={"15px"} alignItems={"center"}>
                     <Flex w={["100%", "100%", "100%", "100%"]} className='cartlogoss' justifyContent={"space-between"}>
+                         <Flex flex={1}>
+                              <Link to='/'>
+                                   <Image w={"80px"} src={img} alt='apnidukan' />
+                              </Link>
+                         </Flex>
                          <Flex gap='10px' align={'center'} fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">
                               <Link to='/cart'>
                                    BAG
