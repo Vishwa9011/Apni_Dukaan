@@ -80,3 +80,9 @@
 .hide-cat {
      display: none;
 }
+
+
+.search-list {
+     display: block;
+     width: 100%;
+}

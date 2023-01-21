@@ -53,7 +53,7 @@ export interface IProductUpdate {
      }
 }
 
-
+// todo: auth args interface for action.auth
 export interface IAuthDetailLogin {
      email: string
      password: string
@@ -62,6 +62,18 @@ export interface IAuthDetailLogin {
      location: any
 }
 
+// todo: taost interface
 export interface IToastProps {
      Toast: (msg: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined) => void
+}
+
+// todo: address interface
+export interface IAddress {
+     name: string
+     state: string
+     phone: number
+     pincode: number
+     address: string
+     localiy: string
+     district: string
 }

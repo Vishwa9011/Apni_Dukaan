@@ -28,7 +28,7 @@ export const Reducer = (state = initialState, { type, payload }: any) => {
           case Types.SHOP_ERROR:
                return ({ ...state, loading: false, error: true })
           case Types.GET_SHOP_DATA:
-               return ({ ...state, loading: false, error: false, data: payload.data, FilteredBrand: payload.FilteredBrand, FilteredCategory: payload.FilteredCategory })
+               return ({ ...state, loading: false, error: false, data: payload.data, FilteredBrand: payload.FilteredBrand, FilteredCategory: payload.FilteredCategory, FilteredData: [] })
           case Types.SHOP_SEARCH_SUCCESS:
                return ({ ...state, loading: false, error: false, searchData: payload })
           case Types.SHOP_DATA_FILTERING_DONE:
