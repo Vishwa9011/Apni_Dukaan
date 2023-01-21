@@ -27,11 +27,11 @@ export const getCartProduct = (email: string, Toast: Function) => async (dispatc
 
 // todo: Add product into cart
 export const AddProductToCart = (product: IProduct, email: string, Toast: Function) => async (dispatch: Dispatch) => {
-     if (email) return;
+     if (!email) return;
      dispatch({ type: Types.CART_LOADING });
      try {
           const cartRef = doc(db, `cart/${email}/cartData`, product.id)
-          await setDoc(cartRef, product)
+          await setDoc(cartRef, { ...product, qty: 1 })
           dispatch({ type: Types.CART_SUCCESS })
           Toast("Product successfully added into cart", ToastType.success);
      } catch (error) {
@@ -86,8 +86,10 @@ export const Checkout = (Toast: Function) => async (dispatch: Dispatch) => {
 export const moveProductToWishlist = (product: IProduct, email: string, Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.CART_LOADING });
      try {
-          const cartRef = doc(db, `wishlist/${email}/wishlistData`, product.id)
-          await setDoc(cartRef, product)
+          const wishlistRef = doc(db, `wishlist/${email}/wishlistData`, product.id)
+          const cartRef = doc(db, `cart/${email}/cartData`, product.id)
+          await setDoc(wishlistRef, product)
+          await deleteDoc(cartRef)
           dispatch({ type: Types.CART_SUCCESS })
           Toast("Product successfully added into wishlist", ToastType.success);
      } catch (error) {
@@ -95,4 +97,26 @@ export const moveProductToWishlist = (product: IProduct, email: string, Toast: F
           dispatch({ type: Types.CART_ERROR })
           Toast("Failed to move product into wishlist.", ToastType.error)
      }
+}
+
+
+
+// todo: total values
+export const FindTotal = (cart: IProduct[]) => {
+
+     const TotalPrice = cart.reduce((acc, product) => {
+          return acc + (product.price * (product?.qty || 1))
+     }, 0);
+
+     const TotalMRP = cart.reduce((acc, product) => {
+          return acc + (product.mrp * (product?.qty || 1))
+     }, 0)
+
+     const TotalDiscount = TotalMRP - TotalPrice;
+
+     const TotalItems = cart.reduce((acc, product) => {
+          return acc + (product?.qty || 1)
+     }, 0)
+
+     return { TotalMRP, TotalDiscount, TotalPrice, TotalItems }
 }

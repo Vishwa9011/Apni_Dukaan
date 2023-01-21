@@ -1,5 +1,5 @@
 import { Box, Button, Input, Select, Text } from '@chakra-ui/react'
-import React, { useState, useEffect, Dispatch } from 'react'
+import React, { useState, useEffect, Dispatch, useRef } from 'react'
 import { BsSearch } from "react-icons/bs"
 import { useDispatch, useSelector } from 'react-redux'
 import { IProduct } from '../../Constants/Constant'
@@ -19,6 +19,7 @@ interface IProps {
 const SearchBar = ({ toggle }: IProps) => {
      const { Toast } = UseToastMsg();
      const dispatch: Dispatch<any> = useDispatch();
+     const inputRef = useRef<HTMLInputElement>(null)
      const [category, setCategory] = useState('Men');
      const [searchText, setSearchText] = useState('');
      const [isOpen, ToggleCategory]: any = UseToggle(false);
@@ -42,6 +43,10 @@ const SearchBar = ({ toggle }: IProps) => {
           dispatch(searchInDatabase(category.toLowerCase(), Toast))
      }, [category])
 
+     useEffect(() => {
+          inputRef.current?.focus()
+     }, [])
+
      return (
           <Box pos='fixed' w='100%' height={'100vh'} zIndex={'999'} className='search-main-container'>
                <Box pos={'relative'} w='100%' h='100%' >
@@ -58,18 +63,20 @@ const SearchBar = ({ toggle }: IProps) => {
                                              <Box border={'1px'} color='white' alignSelf={'stretch'} ml='10px'></Box>
                                         </Box>
                                         <Box onBlur={ToggleCategory} tabIndex={0}>
-                                             {isOpen && <ul className='search-cat'>
-                                             {categoryList.map((cat, i) => (
-                                                  <li key={i} onClick={() => {
-                                                       setCategory(cat)
-                                                       ToggleCategory();
-                                                  }}>{cat}</li>
-                                             ))}
-                                        </ul>}
+                                             {isOpen &&
+                                                  <ul className='search-cat'>
+                                                       {categoryList.map((cat, i) => (
+                                                            <li key={i} onClick={() => {
+                                                                 setCategory(cat)
+                                                                 ToggleCategory();
+                                                            }}>{cat}</li>
+                                                       ))}
+                                                  </ul>
+                                             }
                                         </Box>
                                    </Box>
                                    <Box w='100%'>
-                                        <Input placeholder='Search for products, brand and more' variant='unstyled' onChange={FilterData} value={searchText} />
+                                        <Input placeholder='Search for products, brand and more' ref={inputRef} variant='unstyled' onChange={FilterData} value={searchText} />
                                    </Box>
                               </Box>
                               <Box>
