@@ -1,19 +1,19 @@
 import { AddProductToCart, DeleteProductCart, FindTotal, getCartProduct, UpdateQty } from '../../Redux/CartRedux/Action.cart';
 import { Popover, PopoverTrigger, PopoverContent, PopoverCloseButton, useDisclosure } from '@chakra-ui/react';
 import { Box, Button, Flex, Heading, Image, Input, Text } from '@chakra-ui/react';
+import React, { useEffect, Dispatch, useMemo, useState, useRef } from 'react'
 import CartCard from '../../Components/Cards/CartCard/CartCard';
 import { IProduct, IUser } from '../../Constants/Constant';
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
 import { useDispatch, useSelector } from 'react-redux'
-import React, { useEffect, Dispatch, useMemo, useState, useRef } from 'react'
+import apnidukan from "/public/Images/apnidukan.png"
+import { BsTag, BsTruck } from "react-icons/bs";
+import giftbig from "/public/Images/giftbig.png"
+import secure from '/public/Images/secure.png'
 import { RootState } from '../../Redux/store';
 import { CiPercent } from "react-icons/ci";
-import { BsTag, BsTruck } from "react-icons/bs";
-import apnidukan from "./apnidukan.png"
-import giftbig from "./giftbig.png"
-import secure from './secure.png'
-import "./cart.css"
 import { Link } from 'react-router-dom';
+import "./cart.css"
 
 interface IUserCred {
      userCredential: IUser
@@ -49,7 +49,7 @@ const Cart = () => {
                          </Link>
                     </Box>
                     <Flex w={["100%", "100%", "100%", "60%"]} className='cartlogoss' justifyContent={"space-between"}>
-                         <Text fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest"> <span style={{ color: "#339933", }}>BAG</span> -------- ADDRESS -------- PAYMENT</Text>
+                         <Text fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest"> <Text as='span' borderBottom={'2px'} style={{ color: "#339933", }}>BAG</Text> -------- ADDRESS -------- PAYMENT</Text>
                          <Flex justifyContent={"center"} alignItems="center">
                               <Image w={["10px", "12%", "15%"]} src={secure} alt="secure" />
                               <Text fontSize={['10px', '10px', '10px', 'xs']} fontWeight="bolder" color={"gray.600"} letterSpacing="widest">100% SECURE</Text>

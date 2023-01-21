@@ -63,7 +63,6 @@ const Shop = () => {
           dispatch(FilterValuesFromDataWithPriceAndDiscount(FilterValueD, priceValues, data))
      }, [FilterValueD, FilterValuesP])
 
-
      if (loading) return <h1>Loading....</h1>
      if (error) return <h1>Error....</h1>
      if (!menu.includes(id || '')) return <PageNotFound />
