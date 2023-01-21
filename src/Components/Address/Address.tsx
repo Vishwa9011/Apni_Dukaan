@@ -112,8 +112,8 @@ const Address = () => {
             {/* <AddressInput address={address} AddAddress={AddAddress} HandleOnChangeAddressNum={HandleOnChangeAddressNum} SetAddressType={SetAddressType} HandleOnChangeAddress={HandleOnChangeAddress} /> */}
 
             <Flex className='main_mou' w="100%" justifyContent="center" >
-               <Box className='flexmain_mou' m="auto" w="80%" p="5" px='7' h={"fit-content"} mt="8">
-                  <Box >
+               <Box w='100%'>
+                  <Box className='flexmain_mou' m="auto" w="80%" p="5" px='7' h={"fit-content"} mt="8">
                      <Text fontSize={'1.5em'} fontWeight='semibold'>Saved Address</Text>
                      <Flex gap='2' p='2' align={'center'}>
                         <Box h='100%' alignSelf={'stretch'} pt='1'>
@@ -137,14 +137,10 @@ const Address = () => {
                         </Flex>
                      </Flex>
                   </Box>
-
-                  <Text>
+                  <Text w='80%' m='auto'>
                      CONTINUE
                   </Text>
-
                </Box>
-
-
             </Flex>
 
             {/* right part */}
