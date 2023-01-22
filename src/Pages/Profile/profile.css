@@ -1,0 +1,12 @@
+
+@media only screen and (width>=800px) {
+    /* For tablets: */
+    .profile{
+        display: flex;
+   }
+   .pic{
+    width: 60%;
+   }
+  }
+
+  
