@@ -73,32 +73,33 @@ export const DeleteProductCart = (id: string, email: string, Toast: Function) =>
 
 // todo: checkout
 export const Checkout = (cart: IProduct[], user: IUser, limit: number, navigate: any, Toast: Function) => async (dispatch: Dispatch) => {
-     dispatch({ type: Types.CART_LOADING });
-     var count: number = 0;
-     const id = setInterval(() => {
-          const orderId = Date.now();
-          const ownerInfo = {
-               email: user.email,
-               ownerName: user.address?.name,
-               address: `${user.address}`
-          }
-          const deliveryStatus = 'Pending';
-          const newProduct = { ...cart[count], orderId, ownerInfo, deliveryStatus }
-          const orderRef = doc(db, `orders`, `@${orderId}`);
-          setDoc(orderRef, newProduct).then(() => {
+     dispatch({ type: Types.CART__CHECKOUT_LOADING });
+     try {
+          for (let item = 0; item < limit; item++) {
+               const orderedAt = Date.now();
+               const orderID = `@${orderedAt}`
+               const ownerInfo = {
+                    email: user.email,
+                    ownerName: user.address?.name,
+                    address: `${user.address}`
+               }
+               const deliveryStatus = 'Pending';
+               const newProduct = { ...cart[item], orderID, orderedAt, ownerInfo, deliveryStatus }
+               // todo: adding the order in the server
+               const orderRef = doc(db, `orders`, orderID);
+               await (setDoc(orderRef, newProduct))
+
                // todo: after setting the document removing item from cart
-               const productRef = doc(db, `cart/${user.email}/cartData`, cart[count].id)
-               deleteDoc(productRef).then(() => {
-                    count += 1
-                    if (count === limit) {
-                         clearInterval(id)
-                         dispatch({ type: Types.CART_SUCCESS })
-                         Toast('Order has been Placed.', ToastType.success)
-                         navigate('/')
-                    }
-               })
-          }).catch(err => Toast('Unable Place the Order.', ToastType.error))
-     }, 800)
+               const productRef = doc(db, `cart/${user.email}/cartData`, cart[item].id)
+               await (deleteDoc(productRef))
+          }
+          dispatch({ type: Types.CART_CHECKOUT })
+          Toast('Order has been Placed.', ToastType.success)
+          navigate('/')
+     } catch (error) {
+          console.log('error: ', error);
+          Toast('Unable Place the Order.', ToastType.error)
+     }
 }
 
 // todo: move product into wishlist

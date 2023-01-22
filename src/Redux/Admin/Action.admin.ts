@@ -1,7 +1,8 @@
-import { collection, deleteDoc, doc, updateDoc } from "firebase/firestore"
+import { collection, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore"
 import * as Types from './Types.admin'
 import { db } from "../../Firebase/FirebaseConfig"
 import { Dispatch } from "redux"
+import { ToastType } from "../../Custom-hooks/UseToastMsg"
 
 interface IAdminUpdateProducts {
      id: string
@@ -15,7 +16,7 @@ interface IAdminDeleteProduct {
 }
 
 // todo: to admin_products_update
-export const admin_products_update = ({ id, category, data }: IAdminUpdateProducts) => (dispatch: Dispatch<any>) => {
+export const admin_products_update = ({ id, category, data }: IAdminUpdateProducts) => (dispatch: Dispatch) => {
      const productRef = doc(db, `shop/${category}/${category}Data`, id);
      updateDoc(productRef, data)
           .then(() => {
@@ -26,7 +27,7 @@ export const admin_products_update = ({ id, category, data }: IAdminUpdateProduc
 }
 
 // todo: to admin_delete_products
-export const admin_delete_products = ({ id, category }: IAdminDeleteProduct) => (dispatch: Dispatch<any>) => {
+export const admin_delete_products = ({ id, category }: IAdminDeleteProduct) => (dispatch: Dispatch) => {
      dispatch({ type: Types.ADMIN_LOADING })
      const productRef = doc(db, `shop/${category}/${category}Data`, id);
      deleteDoc(productRef)
@@ -37,3 +38,45 @@ export const admin_delete_products = ({ id, category }: IAdminDeleteProduct) => 
           })
 }
 
+// todo: get all users
+export const get_All_users = (Toast: Function) => (dispatch: Dispatch) => {
+     dispatch({ type: Types.ADMIN_LOADING })
+     const userRef = collection(db, 'users',);
+     const unsub = onSnapshot(userRef, (snapShot) => {
+          const data = snapShot.docs.map((doc) => doc.data());
+          dispatch({ type: Types.ADMIN_SUCCESS_USERS, payload: data })
+     }, (err) => {
+          console.log('err: ', err);
+          Toast(err, ToastType.error)
+     })
+
+     // cleanup
+     return unsub;
+}
+
+// todo: get all order
+export const get_All_orders = (Toast: Function) => (dispatch: Dispatch) => {
+     dispatch({ type: Types.ADMIN_LOADING })
+     const userRef = collection(db, 'orders');
+     const unsub = onSnapshot(userRef, (snapShot) => {
+          const data = snapShot.docs.map((doc) => doc.data());
+          dispatch({ type: Types.ADMIN_SUCCESS_ORDERS, payload: data })
+     }, (err) => {
+          console.log('err: ', err);
+          Toast(err, ToastType.error)
+     })
+     // cleanup
+     return unsub;
+}
+
+
+// todo: get days of creating
+export const getDays = (createdAt: number) => {
+     const today = new Date()
+     const created = new Date(createdAt);
+     const diff = today.getTime() - created.getTime()
+     const days = Math.floor(diff / (1000 * 3600 * 24))
+     // todo:  relative time format 
+     const f = new Intl.RelativeTimeFormat('en-in', { style: 'long', numeric: 'auto' })
+     return f.format(-days, 'days')
+}

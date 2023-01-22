@@ -1,0 +1,19 @@
+.activelink {
+     background: #E53E3E;
+     color: white;
+     scale: 1.01;
+}
+
+.activelink>.links {
+     color: white;
+}
+
+.links {
+     transition: all 300ms;
+}
+
+.links:hover {
+     scale: 1.08;
+     background: #E53E3E;
+     color: white;
+}

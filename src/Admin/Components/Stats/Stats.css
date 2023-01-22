@@ -1,0 +1,9 @@
+.stats {
+     transition: all 400ms;
+}
+
+.stats:hover {
+
+     scale: .9;
+     cursor: pointer;
+}

@@ -204,9 +204,9 @@ const Cart = () => {
                                              </Box>
                                         </Box>
                                    </Box>
-                                   <Box bg={"red.500"} py="14px">
+                                   <Box >
                                         <NavLink to='/cart/address' state={{ coupon: couponDiscount }} replace={true}>
-                                             <Heading color={"white"} size="xs" textAlign={"center"} letterSpacing="wide">PLACE ORDER</Heading>
+                                             <Button w='100%' h='40px' borderRadius={0} colorScheme='red.600' className='btn-clicked' bg='red.500' color={"white"} fontSize='1.2em' textAlign={"center"} letterSpacing="wide">PLACE ORDER</Button>
                                         </NavLink>
                                    </Box>
                               </Box>

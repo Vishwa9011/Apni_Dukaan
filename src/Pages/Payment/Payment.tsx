@@ -1,11 +1,11 @@
 
 import { Box, Button, Flex, Heading, Image, Radio, Text } from '@chakra-ui/react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { json, Link, useLocation, useNavigate } from 'react-router-dom'
 import { Checkout, FindTotal } from '../../Redux/CartRedux/Action.cart'
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import React, { useState, useMemo, Dispatch } from 'react'
-import UseToastMsg from '../../Custom-hooks/UseToastMsg'
+import UseToastMsg, { ToastType } from '../../Custom-hooks/UseToastMsg'
 import { useDispatch, useSelector } from 'react-redux'
 import { IUser } from '../../Constants/Constant'
 import { RootState } from '../../Redux/store'
@@ -13,6 +13,7 @@ import { CiPercent } from "react-icons/ci";
 import img from "/Images/apnidukan.png"
 import secure from "/Images/secure.png"
 import "./payment.css"
+import Loader from '../../Components/Loader/Loader';
 
 
 
@@ -27,15 +28,22 @@ const Payment = () => {
      const { Toast } = UseToastMsg();
      const [toggle, setToggle] = useState(false)
      const dispatch: Dispatch<any> = useDispatch()
-     const { cart } = useSelector((store: RootState) => store.cart);
+     const { cart, loading } = useSelector((store: RootState) => store.cart);
      const { userCredential }: IAuth = useSelector((store: RootState) => store.auth)
      const { TotalMRP, TotalDiscount, TotalPrice, TotalItems } = useMemo(() => FindTotal(cart), [cart]);
      const couponDiscount = location?.state?.coupon || 0; //todo: getting coupon from location state
 
      // todo: to checkout from cart after getting the paymment
      const CheckoutCart = () => {
-          const limit = cart.length;
-          dispatch(Checkout(cart, userCredential, limit, navigate, Toast));
+
+          if (cart.length == 0) {
+               Toast("Please add some items into cart", ToastType.info)
+               return;
+          }
+          var copy = JSON.stringify(cart);
+          const cartData = JSON.parse(copy)
+          const limit = cartData.length;
+          dispatch(Checkout(cartData, userCredential, limit, navigate, Toast));
      }
 
      const getchange = () => {
@@ -44,6 +52,9 @@ const Payment = () => {
 
      return (
           <Box>
+               {/* loading */}
+               {loading && <Loader />}
+
                <Flex m={"auto"} align='center' className='cartlogo' boxShadow='base' rounded='md' p={"15px"} alignItems={"center"}>
                     <Flex w={["100%", "100%", "100%", "100%"]} className='cartlogoss' justifyContent={"space-between"}>
                          <Flex flex={1}>

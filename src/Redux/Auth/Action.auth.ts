@@ -24,7 +24,7 @@ export const signInWithGoogleAuth = (Toast: Function, navigate: Function, locati
           const userDetail = {
                uid: user.uid, username: user.displayName, email: user.email, photoURL: user.photoURL,
                phoneNumber: user.phoneNumber, googleAuth: true, isActive: true, isAdmin: false,
-               gender: '', address: '', password: resData?.password ? resData.password : user.uid, timeStamp: new Date()
+               gender: '', address: '', password: resData?.password ? resData.password : user.uid, timeStamp: Date.now()
           }
 
           if ((!resData || !resData?.googleAuth) && user?.email && auth?.currentUser) {
@@ -57,7 +57,7 @@ export const signUp = ({ email, password, Toast, navigate, location }: IAuthDeta
                uid: user.uid, email: user.email, password, username: '',
                photoURL: '', phoneNumber: null, googleAuth: false,
                isActive: true, isAdmin: false, gender: '', address: '',
-               timeStamp: new Date()
+               timeStamp: Date.now()
           }
           // * setting  the details into userscollection
           await setDoc(userRef, userDetail);
@@ -152,6 +152,7 @@ export const getUserCredential = (user: any, Toast: Function) => async (dispatch
           console.log('err: ', err);
           Toast(err, ToastType.error)
      })
+
      // cleanup
      return unsub;
 }

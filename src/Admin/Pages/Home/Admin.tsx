@@ -1,6 +1,7 @@
 import { Box, Heading, Input } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
+import Sidebar from '../../Components/Sidebar/Sidebar';
 import AdminRoutes from '../AdminRoutes';
 import AddProduct from './../Products/AddProduct/AddProduct';
 
@@ -12,12 +13,7 @@ const Admin = () => {
                <Heading>Admin</Heading>
                <Box display={'flex'} h='100%'>
                     <Box w='15%' border={'1px'}>
-                         <Box>
-                              <Link to='/admin/add-product'>Add Product</Link>
-                         </Box>
-                         <Box>
-                              <Link to='/admin/products'>Products</Link>
-                         </Box>
+                         <Sidebar />
                     </Box>
                     <Box w='85%' border={'1px'}>
                          <AdminRoutes />

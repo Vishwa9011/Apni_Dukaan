@@ -11,7 +11,7 @@ export interface IUser {
      isAdmin: boolean
      gender: string
      address?: IAddress 
-     timeStamp: object
+     timeStamp: number
 }
 
 //* Single Product
@@ -77,4 +77,18 @@ export interface IAddress {
      locality: string
      district: string
      addressType: string
+}
+
+
+
+// todo: Product order
+export interface IOrdersProduct extends IProduct {
+     orderedAt: number;
+     orderID: string;
+     ownerInfo: {
+          email: string,
+          ownerName: string,
+          address: IAddress
+     }
+     deliveryStatus: 'PENDING' | 'DELIVERED'
 }

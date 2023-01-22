@@ -31,7 +31,7 @@ const Login = () => {
     mainContainerRef.current.scrollLeft += (value * width)
   }
 
-  if (userCredential.email) {
+  if (userCredential?.email) {
     navigate('/')
   }
 

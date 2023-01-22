@@ -1,0 +1,35 @@
+/* view details */
+.admin-detail-container {
+     top: 50%;
+     left: 50%;
+     z-index: 10;
+     padding: 20px;
+     color: white;
+     border-radius: 10px;
+     background: #343434;
+     max-height: max-content;
+     transform: translate(-50%, -50%);
+}
+
+.admin-detail * {
+     font-weight: 600;
+}
+
+.admin-detail>div:first-child {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.admin-detail>div:not(:first-child) {
+     display: flex;
+     justify-content: space-between;
+}
+
+.admin-detail>div>p:first-child {
+     width: 40%;
+}
+
+.admin-detail>div>p:last-child {
+     width: 70%;
+}

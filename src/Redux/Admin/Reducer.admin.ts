@@ -3,6 +3,8 @@ import * as Types from './Types.admin'
 const inititalState = {
      loading: false,
      error: '',
+     users: [],
+     orders: []
 }
 
 export const Reducer = (state = inititalState, { type, payload }: any) => {
@@ -11,6 +13,12 @@ export const Reducer = (state = inititalState, { type, payload }: any) => {
                return { ...state, loading: true }
           case Types.ADMIN_ERROR:
                return { ...state, error: payload }
+          case Types.ADMIN_SUCCESS:
+               return { ...state, loading: false, error: '' }
+          case Types.ADMIN_SUCCESS_USERS:
+               return { ...state, loading: false, error: '', users: payload }
+          case Types.ADMIN_SUCCESS_ORDERS:
+               return { ...state, loading: false, error: '', orders: payload }
           case Types.ADMIN_UPDATE_PRODUCTS_SUCCESS:
                return { ...state, loading: false, error: '' }
           case Types.ADMIN_DELETE_PRODUCTS_SUCCESS:
