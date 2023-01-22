@@ -28,7 +28,6 @@ const Wishlist = () => {
           dispatch(getWishlistProducts(userCredential?.email, Toast))
      }, [userCredential])
 
-
      return (
           <>
                {/* loading */}
