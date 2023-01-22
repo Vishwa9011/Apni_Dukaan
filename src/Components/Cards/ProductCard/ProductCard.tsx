@@ -46,21 +46,21 @@ const ProductCard = ({ product, type }: IProps) => {
                <Box w='100%' h='fit-content' border={'0px'} pos='relative' className='card-image-container'>
                     <Box display={'flex'} alignItems='center' w='100%' h='320px' border={'0px'} className='card-images'>
                          <Flex className='card-image-front' w='100%' h='100%' minW='100%'>
-                              <Tooltip label="Image Title" aria-label='A tooltip'>
+                              <Tooltip label={description} aria-label='A tooltip'>
                                    <Link to={`/product-detail/${type}-${product.id}`}>
                                         <Image src={defaultImage} w='100%' h='100%' />
                                    </Link>
                               </Tooltip>
                          </Flex>
                          <Flex className='card-image-back' w='100%' h='100%' minW='100%'>
-                              <Tooltip label="Image Title" aria-label='A tooltip'>
+                              <Tooltip label={description} aria-label='A tooltip'>
                                    <Link to={`/product-detail/${type}-${product.id}`}>
                                         <Image src={images.image1} w='100%' h='100%' />
                                    </Link>
                               </Tooltip>
                          </Flex>
                     </Box>
-                    <Tooltip label="Rating & Review" aria-label='A tooltip'>
+                    <Tooltip label={`Rating: ${rating} & Review: ${totalReview}`} aria-label='A tooltip'>
                          <Flex px='2' py='1' pos={'absolute'} bottom='7px' left={'7px'} align='center' gap='4px' fontWeight={'bold'} fontSize={'.78em'} bg='whiteAlpha.700' borderRadius={'2px'}>
                               <Text>{rating}</Text>
                               <Text color={'cyan.500'}><AiFillStar /></Text>
@@ -81,20 +81,20 @@ const ProductCard = ({ product, type }: IProps) => {
                </Box>
                <Link to={`/product-detail/${type}-${product.id}`}>
                     <Flex flexDir={'column'} p='4' gap={'5px'}>
-                         <Tooltip label="Brand" aria-label='A tooltip'>
+                         <Tooltip label={brand} aria-label='A tooltip'>
                               <Text fontWeight={'bold'} fontSize='.9em' textTransform='uppercase'>{brand}</Text>
                          </Tooltip>
-                         <Tooltip label="description" aria-label='A tooltip'>
+                         <Tooltip label={description} aria-label='A tooltip'>
                               <Text fontSize={'.9em'}>{description.slice(0, 20)}...</Text>
                          </Tooltip>
                          <Flex fontSize={'.8em'} gap='5px'>
-                              <Tooltip label="price" aria-label='A tooltip'>
+                              <Tooltip label={`₹${price}`} aria-label='A tooltip'>
                                    <Text fontWeight={'bold'}>Rs.{price}</Text>
                               </Tooltip>
-                              <Tooltip label="mrp" aria-label='A tooltip'>
+                              <Tooltip label={`₹${mrp}`} aria-label='A tooltip'>
                                    <Text color={'gray.500'} textDecoration={'line-through'}>Rs.{mrp}</Text>
                               </Tooltip>
-                              {discount && <Tooltip label="70% oFF" aria-label='A tooltip'>
+                              {discount && <Tooltip label={discount + "% oFF"} aria-label='A tooltip'>
                                    <Text color={'#E53E3E'}>({discount} % OFF)</Text>
                               </Tooltip>}
                          </Flex>
