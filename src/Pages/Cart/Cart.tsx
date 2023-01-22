@@ -4,7 +4,7 @@ import { Box, Button, Flex, Heading, Image, Input, Text } from '@chakra-ui/react
 import React, { useEffect, Dispatch, useMemo, useState, useRef } from 'react'
 import CartCard from '../../Components/Cards/CartCard/CartCard';
 import { IProduct, IUser } from '../../Constants/Constant';
-import UseToastMsg from '../../Custom-hooks/UseToastMsg';
+import UseToastMsg, { ToastType } from '../../Custom-hooks/UseToastMsg';
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../Components/Loader/Loader';
 import { Link, NavLink } from 'react-router-dom';
@@ -114,11 +114,6 @@ const Cart = () => {
                                    </Box>
                                    <Flex className='cartitemscount' alignItems="center" justifyContent={"space-between"} rounded='md' p={"25px"} my="20px">
                                         <Heading size={"sm"} color="gray.600">{TotalItems} Items</Heading>
-                                        {/* <Flex alignItems={"center"} gap="10px" pt={"20px"}>
-                                   <Text fontSize={"12px"} fontWeight="bold" color="gray.600">  REMOVE </Text>
-                                   <Box>|</Box>
-                                   <Text fontSize={"12px"} fontWeight="bold" color="gray.600"> MOVE TO WISHLIST</Text>
-                              </Flex> */}
                                    </Flex>
                                    <Flex flexDir={'column'} gap='20px' h='70vh' overflowY={'scroll'} className='hide-scroll'>
                                         {cart.map((product: IProduct) => (
@@ -151,12 +146,17 @@ const Cart = () => {
                                                        <PopoverCloseButton />
                                                        <Box p="5" boxShadow={'md'}>
                                                             <Text mb='1' fontWeight={'semibold'}>Apply Coupon</Text>
-                                                            <Input type="text" placeholder='Enter Counon Code' _placeholder={{ textTransform: 'capitalize' }} ref={couponRef} textTransform='uppercase' />
+                                                            <Input type="text" placeholder='Enter Coupon Code' _placeholder={{ textTransform: 'capitalize' }} ref={couponRef} textTransform='uppercase' />
                                                             <Flex justify={'flex-end'} mt='3'>
                                                                  <Button display={'flex'} colorScheme='red.600' _hover={{ bg: 'red.600' }} className='btn-clicked' cursor={'pointer'} alignItems={'center'} justifyContent='center' bg={"red.500"} fontSize={'1rem'} p='0'
                                                                       px='4' h='35px' color="white" onClick={() => {
-                                                                           if (couponRef.current?.value.toUpperCase() === 'AD200') setCouponDiscount(200);
-                                                                           else setCouponDiscount(0)
+                                                                           if (couponRef.current?.value.toUpperCase() === 'AD200') {
+                                                                                setCouponDiscount(200);
+                                                                                Toast('Coupon applied successfully', ToastType.success)
+                                                                           } else {
+                                                                                setCouponDiscount(0)
+                                                                                Toast('Wrong coupon, Please try again.', ToastType.error)
+                                                                           }
                                                                            onClose();
                                                                       }}>
                                                                       Apply

@@ -5,6 +5,7 @@ import React, { useEffect, Dispatch, useState, useMemo } from 'react'
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../../Components/Footer/Footer';
+import Loader from '../../Components/Loader/Loader';
 import Navbar from '../../Components/Navbar/Navbar';
 import PageNotFound from '../Page404/PageNotFound';
 import { IProduct } from '../../Constants/Constant';
@@ -12,10 +13,17 @@ import { Link, useParams } from 'react-router-dom'
 import { RootState } from '../../Redux/store';
 import { BsChevronDown } from 'react-icons/bs'
 import './Shop.css'
-import Loader from '../../Components/Loader/Loader';
 
 const menu = ['men', 'women', 'kids', 'home&living', 'beauty']
 const priceRange = [{ min: 149, max: 399 }, { min: 400, max: 849 }, { min: 850, max: 1399 }]
+
+const sortingType = {
+     htl: 'Price: High to Low',
+     lth: 'Price: Low to High',
+     rating: 'Customer Rating',
+     discount: 'Better Discount'
+
+}
 
 const Shop = () => {
 
@@ -24,6 +32,7 @@ const Shop = () => {
      const dispatch: Dispatch<any> = useDispatch();
      const [FilterValuesP, setFilterValuesP] = useState({})
      const [FilterValues, setFilterValues] = useState<Object>()
+     const [sortingType, setSortingType] = useState<string>('')
      const [FilterValueD, setFilterValueD] = useState<string>('')
      const { data, loading, FilteredBrand, FilteredCategory, FilteredData } = useSelector((store: RootState) => store.shop)
      const { loading: cartLoading } = useSelector((store: RootState) => store.cart)
@@ -46,11 +55,9 @@ const Shop = () => {
 
      // todo: sort the data
      const SortData = (value: string) => {
-          if (FilteredData.length) {
-               dispatch(SortDataFromList(value, FilteredData))
-          } else {
-               dispatch(SortDataFromList(value, data))
-          }
+
+          setSortingType(value)
+          dispatch(SortDataFromList(value, FilteredData))
      }
 
 
@@ -158,12 +165,12 @@ const Shop = () => {
                                              <Flex gap='10px' justify={'space-between'} align={'center'}>
                                                   <Flex gap={'10px'}>
                                                        Sort by:
-                                                       <Text as='span' fontWeight={'semibold'}>Recommended</Text>
+                                                       <Text as='span' fontWeight={'semibold'}>{sortingType}</Text>
                                                   </Flex>
                                                   <Text className='down-arrow'><BsChevronDown /></Text>
                                              </Flex>
                                              <ul className='sorting-list-drop-down'>
-                                                  <li onClick={() => SortData('')}>Recommended</li>
+                                                  <li onClick={() => SortData('rec')}>Recommended</li>
                                                   <li onClick={() => SortData('discount')}>Better Discount</li>
                                                   <li onClick={() => SortData('htl')}>Price: High to Low</li>
                                                   <li onClick={() => SortData('lth')}>Price: Low to High</li>

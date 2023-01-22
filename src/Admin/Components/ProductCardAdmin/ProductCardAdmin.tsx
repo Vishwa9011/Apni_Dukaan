@@ -30,19 +30,6 @@ const ProductCardAdmin = ({ product, type, deleteProduct, updateProductFunc }: I
      const { userCredential }: IUserCred = useSelector((store: RootState) => store.auth)
      const { id, brand, description, defaultImage, images, rating, price, mrp, discount, totalReview, category } = product;
 
-     // todo: add the product into cart
-     const AddToCartProduct = () => {
-          if (!userCredential?.email) return navigate('/login')
-          dispatch(AddProductToCart(product, userCredential?.email, Toast))
-     }
-
-
-     // todo: add the product into cart
-     const AddToWishlistProduct = () => {
-          if (!userCredential?.email) return navigate('/login')
-          dispatch(addProductToWishlist(product, userCredential?.email, Toast))
-     }
-
      return (
           <Flex border={'0px'} flexDir='column' boxShadow={'lg'} w='100%' h='100%'>
                <Box w='100%' h='fit-content' border={'0px'} pos='relative' className='card-image-container'>
