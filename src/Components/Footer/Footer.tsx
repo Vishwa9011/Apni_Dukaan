@@ -11,9 +11,9 @@ const Footer = () => {
          <Box mt={"25px"} width={"100%"} h="40px" bg={"gray.100"}></Box>
 
          <Box width={"100%"} bg={"gray.700"}>
-            <SimpleGrid margin={"auto"} padding="30px" width={"80%"} columns={[2, 2, 3]} spacing="50px" color={"white"}>
+            <SimpleGrid margin={"auto"} padding="30px" width={"80%"} columns={[2, 2, 3]} color={"white"}>
                <Box>
-                  <Text as="h5" size="sm" fontWeight={"500"}>
+                  <Text as="h5" fontSize={["sm","md","lg"]} fontWeight={"500"}>
                      <i style={{ fontSize: "23px" }} className="fa fa-envelope" aria-hidden="true"></i>
                      Get special discount on your inbox
                   </Text>
@@ -30,7 +30,7 @@ const Footer = () => {
                      <Text fontSize={"4xl"}>
                         <FcPhoneAndroid />
                      </Text>
-                     <Text as="h5" size="sm" fontWeight={"500"}>
+                     <Text as="h5" fontSize={["sm","md","lg"]} fontWeight={"500"}>
                         EXPERIENCE THE APNI DUKAN MOBILE APP
                      </Text>
                   </Flex >
@@ -41,14 +41,14 @@ const Footer = () => {
                </Box>
                <Box className="footerdown">
                   <Flex alignItems={"center"} gap="10px">
-                     <Text fontSize={"3xl"} >
+                     <Text fontSize={["md","lg","3xl"]} >
                         <BsFillTelephoneFill />
                      </Text>
-                     <Text as="h5" size="sm" fontWeight={"500"}>
+                     <Text as="h5" fontSize={["sm","md","lg"]} fontWeight={"500"}>
                         FOR ANY HELP, YOU MAY CALL US AT 1800-267-4444
                      </Text>
                   </Flex>
-                  <Text ml={"40px"} as="h5" size="sm">
+                  <Text ml={"40px"} as="h5" fontSize={["sm","md","lg"]}>
                      (Monday to Saturday, 8AM to 10PM and Sunday, 10AM to 7PM)
                   </Text>
                </Box>
