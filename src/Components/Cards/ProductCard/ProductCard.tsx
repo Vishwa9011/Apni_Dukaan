@@ -34,6 +34,7 @@ const ProductCard = ({ product, type }: IProps) => {
           dispatch(AddProductToCart(product, userCredential?.email, Toast))
      }
 
+   
      // todo: add the product into cart
      const AddToWishlistProduct = () => {
           if (!userCredential?.email) return navigate('/login')
@@ -51,7 +52,7 @@ const ProductCard = ({ product, type }: IProps) => {
                                    </Link>
                               </Tooltip>
                          </Flex>
-                         <Flex className='card-image-back' minW='100%'>
+                         <Flex className='card-image-back' w='100%' h='100%' minW='100%'>
                               <Tooltip label="Image Title" aria-label='A tooltip'>
                                    <Link to={`/product-detail/${type}-${product.id}`}>
                                         <Image src={images.image1} w='100%' h='100%' />
@@ -81,10 +82,10 @@ const ProductCard = ({ product, type }: IProps) => {
                <Link to={`/product-detail/${type}-${product.id}`}>
                     <Flex flexDir={'column'} p='4' gap={'5px'}>
                          <Tooltip label="Brand" aria-label='A tooltip'>
-                              <Text fontWeight={'bold'} textTransform='uppercase'>{brand}</Text>
+                              <Text fontWeight={'bold'} fontSize='.9em' textTransform='uppercase'>{brand}</Text>
                          </Tooltip>
                          <Tooltip label="description" aria-label='A tooltip'>
-                              <Text fontSize={'.9em'}>{description.slice(0, 30)}...</Text>
+                              <Text fontSize={'.9em'}>{description.slice(0, 20)}...</Text>
                          </Tooltip>
                          <Flex fontSize={'.8em'} gap='5px'>
                               <Tooltip label="price" aria-label='A tooltip'>

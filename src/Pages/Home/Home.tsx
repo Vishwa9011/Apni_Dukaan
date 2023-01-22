@@ -3,13 +3,25 @@ import MainSlider from "../../Components/Slider/MainSlider/MainSlider";
 import ProductSlider from "../../Components/Slider/CardSlider/ProductSlider";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
+import Loader from "../../Components/Loader/Loader";
+import { RootState } from "../../Redux/store";
+import { useSelector } from "react-redux";
 import "./Home.css"
 
 function Home() {
+
+     const { loading } = useSelector((store: RootState) => store.auth)
+
      return (
           <Box>
+               {/* loading */}
+               {loading && <Loader />}
+
+               {/* Navbar */}
                <Navbar />
+               {/* mainslider */}
                <MainSlider />
+
                <Flex mt="10" mb="5" justify={'space-around'} w='100%'>
                     <Flex justify={'space-around'} w='100%'>
                          <Box alignItems={"center"} textAlign="center">
@@ -45,6 +57,7 @@ function Home() {
                <Flex w='100%'>
                     <Image src="https://images-static.nykaa.com/uploads/542701f0-1711-4dab-8238-5ad274a6cd95.gif?tr=w-2400,cm-pad_resize" w='100%' />
                </Flex>
+
                <ProductSlider />
 
                <Box>

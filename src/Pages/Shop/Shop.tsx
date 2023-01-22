@@ -1,4 +1,4 @@
-import { FilterValuesFromData, FilterValuesFromDataWithPriceAndDiscount, getDataShop } from '../../Redux/ShopRedux/Action.shop';
+import { FilterValuesFromData, FilterValuesFromDataWithPriceAndDiscount, getDataShop, SortDataFromList } from '../../Redux/ShopRedux/Action.shop';
 import { Box, Checkbox, Flex, Grid, Radio, RadioGroup, Stack, Text } from '@chakra-ui/react'
 import ProductCard from '../../Components/Cards/ProductCard/ProductCard';
 import React, { useEffect, Dispatch, useState, useMemo } from 'react'
@@ -12,6 +12,7 @@ import { Link, useParams } from 'react-router-dom'
 import { RootState } from '../../Redux/store';
 import { BsChevronDown } from 'react-icons/bs'
 import './Shop.css'
+import Loader from '../../Components/Loader/Loader';
 
 const menu = ['men', 'women', 'kids', 'home&living', 'beauty']
 const priceRange = [{ min: 149, max: 399 }, { min: 400, max: 849 }, { min: 850, max: 1399 }]
@@ -24,7 +25,10 @@ const Shop = () => {
      const [FilterValuesP, setFilterValuesP] = useState({})
      const [FilterValues, setFilterValues] = useState<Object>()
      const [FilterValueD, setFilterValueD] = useState<string>('')
-     const { data, loading, error, FilteredBrand, FilteredCategory, FilteredData } = useSelector((store: RootState) => store.shop)
+     const { data, loading, FilteredBrand, FilteredCategory, FilteredData } = useSelector((store: RootState) => store.shop)
+     const { loading: cartLoading } = useSelector((store: RootState) => store.cart)
+     const { loading: wishlistLoding } = useSelector((store: RootState) => store.wishlist)
+
 
      // todo: fitler the data onchange of categories and brands
      const FilterChangeBrandAndCat = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +43,16 @@ const Shop = () => {
                setFilterValueD(e.target.value)
           }
      }
+
+     // todo: sort the data
+     const SortData = (value: string) => {
+          if (FilteredData.length) {
+               dispatch(SortDataFromList(value, FilteredData))
+          } else {
+               dispatch(SortDataFromList(value, data))
+          }
+     }
+
 
      useEffect(() => {
           if (menu.includes(id || "")) dispatch(getDataShop(id, Toast))
@@ -63,11 +77,13 @@ const Shop = () => {
           dispatch(FilterValuesFromDataWithPriceAndDiscount(FilterValueD, priceValues, data))
      }, [FilterValueD, FilterValuesP])
 
-     if (loading) return <h1>Loading....</h1>
-     if (error) return <h1>Error....</h1>
+     // todo: to redirect 404 for unreachable url
      if (!menu.includes(id || '')) return <PageNotFound />
      return (
           <>
+               {/* loading */}
+               {(loading || cartLoading || wishlistLoding) && <Loader />}
+
                {/* {Navabar} */}
                <Navbar />
 
@@ -147,11 +163,11 @@ const Shop = () => {
                                                   <Text className='down-arrow'><BsChevronDown /></Text>
                                              </Flex>
                                              <ul className='sorting-list-drop-down'>
-                                                  <li>Recommended</li>
-                                                  <li>Better Discount</li>
-                                                  <li>Price: High to Low</li>
-                                                  <li>Price: Low to High</li>
-                                                  <li>Customer Rating</li>
+                                                  <li onClick={() => SortData('')}>Recommended</li>
+                                                  <li onClick={() => SortData('discount')}>Better Discount</li>
+                                                  <li onClick={() => SortData('htl')}>Price: High to Low</li>
+                                                  <li onClick={() => SortData('lth')}>Price: Low to High</li>
+                                                  <li onClick={() => SortData('rating')}>Customer Rating</li>
                                              </ul>
                                         </Box>
                                    </Flex>

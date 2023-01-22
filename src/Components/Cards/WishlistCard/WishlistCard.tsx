@@ -50,7 +50,7 @@ const WishlistCard = (props: IProduct) => {
                </Flex>
                <Flex flexDir={'column'} p='4' gap={'5px'}>
                     <Tooltip label={description} aria-label='A tooltip'>
-                         <Text fontSize={'1em'}>{description.slice(0, 20)}...</Text>
+                         <Text fontSize={'1em'}>{description?.slice(0, 20)}...</Text>
                     </Tooltip>
                     <Flex fontSize={'.9em'} gap='5px'>
                          <Tooltip label={`price: ${price}`} aria-label='A tooltip'>

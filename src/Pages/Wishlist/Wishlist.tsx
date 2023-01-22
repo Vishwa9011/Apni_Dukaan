@@ -1,26 +1,28 @@
-import { Box, Flex, Grid, Image, Text, } from '@chakra-ui/react'
-import React, { Dispatch, useEffect } from 'react'
-import { AiOutlineClose } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { getWishlistProducts } from '../../Redux/WishlistRedux/Action.wishlist';
 import WishlistCard from '../../Components/Cards/WishlistCard/WishlistCard';
-import Footer from '../../Components/Footer/Footer';
-import Navbar from '../../Components/Navbar/Navbar';
+import { Box, Flex, Grid, Image, Text, } from '@chakra-ui/react'
 import { IProduct, IUser } from '../../Constants/Constant';
 import UseToastMsg from '../../Custom-hooks/UseToastMsg';
+import { useDispatch, useSelector } from 'react-redux'
+import Footer from '../../Components/Footer/Footer';
+import Loader from '../../Components/Loader/Loader';
+import Navbar from '../../Components/Navbar/Navbar';
+import React, { Dispatch, useEffect } from 'react'
 import { RootState } from '../../Redux/store';
-import { getWishlistProducts } from '../../Redux/WishlistRedux/Action.wishlist';
+import { Link } from 'react-router-dom';
 
 interface IUserCred {
      userCredential: IUser
+     loading: boolean
 }
 
 
 const Wishlist = () => {
      const { Toast } = UseToastMsg()
      const dispatch: Dispatch<any> = useDispatch();
-     const { wishlist } = useSelector((store: RootState) => store.wishlist)
-     const { userCredential }: IUserCred = useSelector((store: RootState) => store.auth)
+     const { wishlist, loading: wishlistLoading } = useSelector((store: RootState) => store.wishlist)
+     const { loading: cartLoading } = useSelector((store: RootState) => store.cart)
+     const { userCredential, loading }: IUserCred = useSelector((store: RootState) => store.auth)
 
      useEffect(() => {
           dispatch(getWishlistProducts(userCredential?.email, Toast))
@@ -29,6 +31,10 @@ const Wishlist = () => {
 
      return (
           <>
+               {/* loading */}
+               {(loading || cartLoading || wishlistLoading) && <Loader />}
+
+
                {/* Navbar */}
                <Navbar />
 

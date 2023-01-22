@@ -2,6 +2,7 @@ import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import React, { Dispatch } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { IUser } from '../../../Constants/Constant'
 import UseToastMsg from '../../../Custom-hooks/UseToastMsg'
 import { logout } from '../../../Redux/Auth/Action.auth'
 import { RootState } from '../../../Redux/store'
@@ -9,11 +10,11 @@ import { RootState } from '../../../Redux/store'
 const Profile = () => {
   const { Toast } = UseToastMsg()
   const dispatch: Dispatch<any> = useDispatch()
-  const { userCredential }: any = useSelector((store: RootState) => store.auth)
+  const { userCredential }: { userCredential: IUser } = useSelector((store: RootState) => store.auth)
 
   // todo: logout btn
   const Logout = () => {
-    dispatch(logout(Toast))
+    dispatch(logout(userCredential?.uid, Toast))
   }
 
   return (

@@ -14,7 +14,7 @@ const Products = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const [category, setCategory] = useState('men');
   const [UpdateProduct, setUpdateProduct] = useState<IProduct>(initialStateAddProduct)
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<any>([]);
 
 
   const updateProductFunc = (productItem: IProduct) => {
@@ -29,7 +29,7 @@ const Products = () => {
   useEffect(() => {
     const productsCollectionRef = collection(db, `shop/${category}/${category}Data`);
     const unsub = onSnapshot(productsCollectionRef, (snapShot) => {
-      const data: IProduct[] = snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id.toString() }));
+      const data = snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id.toString() }));
       console.log('data: ', data);
       setProducts(data)
     }, (err) => {
@@ -76,7 +76,7 @@ const Products = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {products?.map((product, i) => (
+            {products?.map((product: any, i:number) => (
               <Tr key={product.id}>
                 <Td>{i + 1}</Td>
                 <Td>{product.id}</Td>

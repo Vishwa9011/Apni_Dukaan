@@ -6,11 +6,24 @@ import SignIn from './SignIn'
 import Signup from './Signup'
 import React from 'react'
 import './Login.css'
-const Login = () => {
+import { useSelector } from 'react-redux'
+import { RootState } from '../../Redux/store'
+import Loader from '../../Components/Loader/Loader'
+import { IUser } from '../../Constants/Constant'
+import { useNavigate } from 'react-router-dom'
 
-  const containerRef = React.useRef<HTMLDivElement>(null)
-  const mainContainerRef = React.useRef<HTMLDivElement>(null)
-  const [isOpen, ToggleSignIn]: any = UseToggle(true)
+
+interface IUserCred {
+  userCredential: IUser;
+  loading: boolean
+}
+
+const Login = () => {
+  const navigate = useNavigate()
+  const [isOpen, ToggleSignIn]: any = UseToggle(true);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const mainContainerRef = React.useRef<HTMLDivElement>(null);
+  const { userCredential, loading }: IUserCred = useSelector((store: RootState) => store.auth)
 
   const scrollPage = (value: number) => {
     if (!containerRef.current || !mainContainerRef.current) return
@@ -18,9 +31,14 @@ const Login = () => {
     mainContainerRef.current.scrollLeft += (value * width)
   }
 
-  return (
+  if (userCredential.email) {
+    navigate('/')
+  }
 
+  return (
     <Box>
+      {/* loading */}
+      {loading && <Loader />}
       <Navbar />
       <Flex align={'center'} justify='center' border={"1px solid #fceeeb"} backgroundColor={"#fceeeb"} h={'full'} className='login'>
         <Box maxW={{ base: "100%", sm: "70%", md: "50%", lg: '35%' }} margin='auto' backgroundColor={"white"} h='max-content'>

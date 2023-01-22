@@ -72,15 +72,33 @@ export const DeleteProductCart = (id: string, email: string, Toast: Function) =>
 }
 
 // todo: checkout
-export const Checkout = (Toast: Function) => async (dispatch: Dispatch) => {
+export const Checkout = (cart: IProduct[], user: IUser, limit: number, navigate: any, Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.CART_LOADING });
-     try {
-
-     } catch (error) {
-          console.log('error: ', error);
-          dispatch({ type: Types.CART_ERROR })
-          Toast("Failed to Checkout.", ToastType.error)
-     }
+     var count: number = 0;
+     const id = setInterval(() => {
+          const orderId = Date.now();
+          const ownerInfo = {
+               email: user.email,
+               ownerName: user.address?.name,
+               address: `${user.address}`
+          }
+          const deliveryStatus = 'Pending';
+          const newProduct = { ...cart[count], orderId, ownerInfo, deliveryStatus }
+          const orderRef = doc(db, `orders`, `@${orderId}`);
+          setDoc(orderRef, newProduct).then(() => {
+               // todo: after setting the document removing item from cart
+               const productRef = doc(db, `cart/${user.email}/cartData`, cart[count].id)
+               deleteDoc(productRef).then(() => {
+                    count += 1
+                    if (count === limit) {
+                         clearInterval(id)
+                         dispatch({ type: Types.CART_SUCCESS })
+                         Toast('Order has been Placed.', ToastType.success)
+                         navigate('/')
+                    }
+               })
+          }).catch(err => Toast('Unable Place the Order.', ToastType.error))
+     }, 800)
 }
 
 // todo: move product into wishlist

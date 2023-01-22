@@ -37,7 +37,9 @@ const Navbar = () => {
 
     // todo: logout function
     const Logout = () => {
-        dispatch(logout(Toast))
+        console.log("sdfadsf", userCredential?.uid)
+        if (!userCredential?.uid) return
+        dispatch(logout(userCredential?.uid, Toast))
     }
 
     // todo: to get the UserCredential
