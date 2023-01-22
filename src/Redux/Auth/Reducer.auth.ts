@@ -12,7 +12,7 @@ const initialState = {
      isActive: false,
      isAdmin: false,
      gender: '',
-     timeStamp: {}
+     timeStamp: 0
 }
 
 export interface IAuthInitialState {

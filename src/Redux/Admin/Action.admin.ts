@@ -3,6 +3,7 @@ import * as Types from './Types.admin'
 import { db } from "../../Firebase/FirebaseConfig"
 import { Dispatch } from "redux"
 import { ToastType } from "../../Custom-hooks/UseToastMsg"
+import { IOrdersProduct, IUser } from "../../Constants/Constant"
 
 interface IAdminUpdateProducts {
      id: string
@@ -15,16 +16,16 @@ interface IAdminDeleteProduct {
      category: string
 }
 
-// todo: to admin_products_update
-export const admin_products_update = ({ id, category, data }: IAdminUpdateProducts) => (dispatch: Dispatch) => {
-     const productRef = doc(db, `shop/${category}/${category}Data`, id);
-     updateDoc(productRef, data)
-          .then(() => {
+// // todo: to admin_products_update
+// export const admin_products_update = ({ id, category, data }: IAdminUpdateProducts) => (dispatch: Dispatch) => {
+//      const productRef = doc(db, `shop/${category}/${category}Data`, id);
+//      updateDoc(productRef, data)
+//           .then(() => {
 
-          }).catch(() => {
+//           }).catch(() => {
 
-          })
-}
+//           })
+// }
 
 // todo: to admin_delete_products
 export const admin_delete_products = ({ id, category }: IAdminDeleteProduct) => (dispatch: Dispatch) => {
@@ -94,4 +95,20 @@ export const getDays = (createdAt: number) => {
      // todo:  relative time format 
      const f = new Intl.RelativeTimeFormat('en-in', { style: 'long', numeric: 'auto' })
      return f.format(-days, 'days')
+}
+
+// todo: find active and passive user
+export const FilterActiveAndPassiveUsers = (type: string, data: IUser[]) => {
+     const activeUser = data.filter((user) => user.isActive);
+     const passiveUser = data.filter((user) => !user.isActive);
+     return { activeUser, passiveUser }
+}
+
+
+// todo: find the total revenue
+export const FindTotalRevenue = (Orders: IOrdersProduct[]) => {
+     const TotalRevenue = Orders.reduce((acc, order) => {
+          return acc + (order.price * (order.qty || 1))
+     }, 0)
+     return TotalRevenue
 }

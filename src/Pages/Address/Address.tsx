@@ -30,12 +30,11 @@ const Address = () => {
    const { Toast } = UseToastMsg();
    const dispatch: Dispatch<any> = useDispatch()
    const couponDiscount = location?.state?.coupon || 0; //todo: getting coupon from location state
-   const [isAddressInputOpen, ToggleAddressInput]: any = UseToggle(false)
+   const [isAddressInputOpen, ToggleAddressInput]: any = UseToggle(false);
    const { cart, loading: cartLoading } = useSelector((store: RootState) => store.cart);
    const { loading: wishlistLoading } = useSelector((store: RootState) => store.wishlist);
    const { userCredential, loading }: IAuth = useSelector((store: RootState) => store.auth)
-   console.log('userCredential: ', userCredential);
-   const [address, setAddress] = useState<IAddress>(userCredential?.address || initialAddress);
+   const [address, setAddress] = useState<IAddress>(initialAddress);
    const { TotalMRP, TotalDiscount, TotalPrice, TotalItems } = useMemo(() => FindTotal(cart), [cart]);
 
    // todo: handle state of User with string type
@@ -69,13 +68,11 @@ const Address = () => {
             return
          }
       }
-
       setAddress(initialAddress);
       dispatch(AddAddressUserProfile(address, userCredential?.uid, Toast))
       dispatch(getUserCredential(userCredential, Toast))
-      ToggleAddressInput()
+      // ToggleAddressInput(false)
    }
-
 
    const RemoveAddress = () => {
       dispatch(RemoveAddressUserProfile(address, userCredential?.uid, Toast))
@@ -87,7 +84,8 @@ const Address = () => {
 
    useEffect(() => {
       if (userCredential) {
-         dispatch(getCartProduct(userCredential?.email, Toast))
+         if (userCredential?.address) setAddress(userCredential?.address)
+         dispatch(getCartProduct(userCredential?.email, Toast));
       }
    }, [userCredential]);
 
@@ -128,48 +126,51 @@ const Address = () => {
          </Box>
          <Box className='flex_mou' w="100%" m="auto" >
             {/* Left part */}
-            {!userCredential.address || isAddressInputOpen ?
+            {!userCredential.address ?
                <AddressInput address={address} AddAddress={AddAddress} HandleOnChangeAddressNum={HandleOnChangeAddressNum} SetAddressType={SetAddressType} HandleOnChangeAddress={HandleOnChangeAddress} />
                :
-               <Flex className='main_mou' w="100%" justifyContent="center" >
-                  <Box w='100%'>
-                     <Box className='flexmain_mou' m="auto" w="80%" p="5" px='7' h={"fit-content"} mt="8" >
-                        <Text fontSize={'1.5em'} fontWeight='semibold'>Saved Address</Text>
-                        <Flex gap='2' p='2' align={'center'} pos='relative'>
-                           <Flex pos='absolute' top={'0'} right='0' align={'center'} gap='10px'>
-                              <Flex align={'center'} gap='5px' border={'1px'} _hover={{ color: 'red.500', }} fontWeight='semibold' cursor='pointer' px='2' fontSize={'.7em'} onClick={() => ToggleAddressInput(true)}>EDIT <FiEdit /> </Flex>
-                              <Flex align={'center'} gap='5px' border={'1px'} _hover={{ color: 'red.500', }} fontWeight='semibold' cursor='pointer' px='2' fontSize={'.7em'} onClick={RemoveAddress}>REMOVE <AiOutlineClose /> </Flex>
-                           </Flex>
-                           <Box h='100%' alignSelf={'stretch'} pt='1'>
-                              <Text border={'2px'} borderRadius='50%' color='red.500' fontSize={'1.2em'} h='fit-content'><GoPrimitiveDot /></Text>
-                           </Box>
-                           <Flex flexDir={'column'}>
-                              <Flex fontSize={'1.2em'} fontWeight='semibold' gap='10px' align={'center'}>
-                                 <Text>{userCredential?.address.name}</Text>
-                                 <Text border={'2px'} borderRadius='2px' color='green' px='2' fontSize={'.6em'} textTransform='capitalize'>{userCredential?.address.addressType}</Text>
+               isAddressInputOpen ?
+                  <AddressInput address={address} AddAddress={AddAddress} HandleOnChangeAddressNum={HandleOnChangeAddressNum} SetAddressType={SetAddressType} HandleOnChangeAddress={HandleOnChangeAddress} />
+                  :
+                  <Flex className='main_mou' w="100%" justifyContent="center" >
+                     <Box w='100%'>
+                        <Box className='flexmain_mou' m="auto" w="80%" p="5" px='7' h={"fit-content"} mt="8" >
+                           <Text fontSize={'1.5em'} fontWeight='semibold'>Saved Address</Text>
+                           <Flex gap='2' p='2' align={'center'} pos='relative'>
+                              <Flex pos='absolute' top={'0'} right='0' align={'center'} gap='10px'>
+                                 <Flex align={'center'} gap='5px' border={'1px'} _hover={{ color: 'red.500', }} fontWeight='semibold' cursor='pointer' px='2' fontSize={'.7em'} onClick={() => ToggleAddressInput(true)}>EDIT <FiEdit /> </Flex>
+                                 <Flex align={'center'} gap='5px' border={'1px'} _hover={{ color: 'red.500', }} fontWeight='semibold' cursor='pointer' px='2' fontSize={'.7em'} onClick={() => { RemoveAddress(), setAddress(initialAddress) }}>REMOVE <AiOutlineClose /> </Flex>
                               </Flex>
-                              <Box color={'gray.600'} fontSize={'.9em'} my='1'>
-                                 <Text textTransform={'capitalize'}>{userCredential?.address.address}</Text>
-                                 <Text textTransform={'capitalize'}>{userCredential?.address.district + "," + userCredential?.address.state}-{userCredential?.address.pincode}</Text>
+                              <Box h='100%' alignSelf={'stretch'} pt='1'>
+                                 <Text border={'2px'} borderRadius='50%' color='red.500' fontSize={'1.2em'} h='fit-content'><GoPrimitiveDot /></Text>
                               </Box>
-                              <Box color={'gray.600'} fontSize={'.9em'} my='1'>
-                                 <Flex gap='5px'>Mobile:<Text color={'black'} fontWeight='semibold'>{userCredential?.address.phone}</Text></Flex>
-                              </Box>
-                              <Box fontSize={'.9em'} my='1'>
-                                 <Flex color={'gray.600'}>&#x2022; Pay on Delivery available</Flex>
-                              </Box>
+                              <Flex flexDir={'column'}>
+                                 <Flex fontSize={'1.2em'} fontWeight='semibold' gap='10px' align={'center'}>
+                                    <Text>{userCredential?.address.name}</Text>
+                                    <Text border={'2px'} borderRadius='2px' color='green' px='2' fontSize={'.6em'} textTransform='capitalize'>{userCredential?.address.addressType}</Text>
+                                 </Flex>
+                                 <Box color={'gray.600'} fontSize={'.9em'} my='1'>
+                                    <Text textTransform={'capitalize'}>{userCredential?.address.address}</Text>
+                                    <Text textTransform={'capitalize'}>{userCredential?.address.district + "," + userCredential?.address.state}-{userCredential?.address.pincode}</Text>
+                                 </Box>
+                                 <Box color={'gray.600'} fontSize={'.9em'} my='1'>
+                                    <Flex gap='5px'>Mobile:<Text color={'black'} fontWeight='semibold'>{userCredential?.address.phone}</Text></Flex>
+                                 </Box>
+                                 <Box fontSize={'.9em'} my='1'>
+                                    <Flex color={'gray.600'}>&#x2022; Pay on Delivery available</Flex>
+                                 </Box>
+                              </Flex>
                            </Flex>
-                        </Flex>
+                        </Box>
+                        <Box w='80%' m='auto' pt='10'>
+                           <NavLink to='/cart/payment' state={{ coupon: couponDiscount }} replace={true}>
+                              <Text bg='red.500' className='btn-clicked' color={'white'} p='2' fontWeight={'semibold'} textAlign={'center'}>
+                                 CONTINUE
+                              </Text>
+                           </NavLink>
+                        </Box>
                      </Box>
-                     <Box w='80%' m='auto' pt='10'>
-                        <NavLink to='/cart/payment' state={{ coupon: couponDiscount }} replace={true}>
-                           <Text bg='red.500' className='btn-clicked' color={'white'} p='2' fontWeight={'semibold'} textAlign={'center'}>
-                              CONTINUE
-                           </Text>
-                        </NavLink>
-                     </Box>
-                  </Box>
-               </Flex>
+                  </Flex>
             }
 
             {/* right part */}
@@ -236,21 +237,21 @@ interface IAddressInput {
 }
 
 const AddressInput = ({ address, AddAddress, HandleOnChangeAddress, SetAddressType, HandleOnChangeAddressNum }: IAddressInput) => {
-
+   console.log("address.addressType", address.addressType);
    return (
       <Box className='main_mou' w="100%" display={"flex"} justifyContent="center">
          <Box className='flexmain_mou' m="auto" w="80%" p="5" px='7' h={"fit-content"} mt="8">
             <Box display={"flex"} justifyContent="center" flexDir={"column"} gap="5">
                <Text fontWeight={"bold"} fontSize='1.2em'>CONTACT DETAILS</Text>
-               <Input value={address.name} placeholder='Name*' name='name' onChange={HandleOnChangeAddress} />
-               <Input maxLength={10} value={address.phone || ''} placeholder='Mobile No*' name='phone' onChange={HandleOnChangeAddressNum} />
+               <Input textTransform={'capitalize'} color='blackAlpha.800' fontWeight='semibold' value={address.name} placeholder='Name*' name='name' onChange={HandleOnChangeAddress} />
+               <Input textTransform={'capitalize'} color='blackAlpha.800' fontWeight='semibold' maxLength={10} value={address.phone || ''} placeholder='Mobile No*' name='phone' onChange={HandleOnChangeAddressNum} />
                <Text fontWeight={"bold"} fontSize='1.2em'>ADDRESS</Text>
-               <Input maxLength={6} value={address.pincode || ''} placeholder='Pin Code*' name='pincode' onChange={HandleOnChangeAddressNum} />
-               <Input value={address.address} placeholder='Address*' name='address' onChange={HandleOnChangeAddress} />
-               <Input value={address.locality} placeholder='Locality/Town*' name='locality' onChange={HandleOnChangeAddress} />
+               <Input textTransform={'capitalize'} color='blackAlpha.800' fontWeight='semibold' maxLength={6} value={address.pincode || ''} placeholder='Pin Code*' name='pincode' onChange={HandleOnChangeAddressNum} />
+               <Input textTransform={'capitalize'} color='blackAlpha.800' fontWeight='semibold' value={address.address} placeholder='Address*' name='address' onChange={HandleOnChangeAddress} />
+               <Input textTransform={'capitalize'} color='blackAlpha.800' fontWeight='semibold' value={address.locality} placeholder='Locality/Town*' name='locality' onChange={HandleOnChangeAddress} />
                <Flex gap={"3"}>
-                  <Input value={address.district} placeholder='City/District*' name='district' onChange={HandleOnChangeAddress} />
-                  <Input value={address.state} placeholder='State*' name='state' onChange={HandleOnChangeAddress} />
+                  <Input textTransform={'capitalize'} color='blackAlpha.800' fontWeight='semibold' value={address.district} placeholder='City/District*' name='district' onChange={HandleOnChangeAddress} />
+                  <Input textTransform={'capitalize'} color='blackAlpha.800' fontWeight='semibold' value={address.state} placeholder='State*' name='state' onChange={HandleOnChangeAddress} />
                </Flex>
                <Text fontWeight={"bold"}>SAVE ADDRESS AS</Text>
                <Flex gap="3">

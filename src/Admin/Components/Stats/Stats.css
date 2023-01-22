@@ -1,9 +1,9 @@
 .stats {
+     background: #E53E3E !important;
      transition: all 400ms;
 }
 
 .stats:hover {
-
      scale: .9;
      cursor: pointer;
 }

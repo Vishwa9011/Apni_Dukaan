@@ -10,12 +10,12 @@ const Admin = () => {
 
      return (
           <Box m='auto'>
-               <Heading>Admin</Heading>
-               <Box display={'flex'} h='100vh'>
+               <Heading textAlign={'center'} py='4'>Admin</Heading>
+               <Box display={'flex'} h='100vh' borderTop={'1px'} borderColor='green.200'>
                     <Box w='17%' borderRight={'2px'} borderColor='gray.200'>
                          <Sidebar />
                     </Box>
-                    <Box w='83%' border={'1px'}>
+                    <Box w='83%' border={'px'}>
                          <AdminRoutes />
                     </Box>
                </Box>

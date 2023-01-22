@@ -77,10 +77,14 @@ const Orders = (props: Props) => {
                                                        {order.ownerInfo.email}
                                                   </Tooltip>
                                              </Td>
-                                             <Td fontWeight={'semibold'} color={order.deliveryStatus == 'DELIVERED' ? "green.500" : 'red.500'}>{order.deliveryStatus}</Td>
+                                             <Tooltip hasArrow label={order.deliveryStatus == 'PENDING' ? 'Order on the way' : 'Order Placed'}>
+                                                  <Td fontWeight={'semibold'} color={order.deliveryStatus == 'DELIVERED' ? "green.500" : 'red.500'}>
+                                                       {order.deliveryStatus}
+                                                  </Td>
+                                             </Tooltip>
                                              <Td>
-                                                  <Tooltip hasArrow label={"Delete User"}>
-                                                       <Button border={'2px'} borderRadius='0' fontWeight={'semibold'} color={'red.500'} onClick={() => ToggleDeliveryStatus(order.deliveryStatus, order.orderID,)}>TOGGLE STATUS</Button>
+                                                  <Tooltip hasArrow label={"Toggle Delivery Status"}>
+                                                       <Button className='btn-clicked' border={'2px'} borderRadius='0' fontWeight={'semibold'} color={'red.500'} onClick={() => ToggleDeliveryStatus(order.deliveryStatus, order.orderID,)}>TOGGLE STATUS</Button>
                                                   </Tooltip>
                                              </Td>
                                         </Tr>

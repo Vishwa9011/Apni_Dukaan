@@ -48,14 +48,14 @@ const ProductCard = ({ product, type }: IProps) => {
                          <Flex className='card-image-front' w='100%' h='100%' minW='100%'>
                               <Tooltip label={description} aria-label='A tooltip'>
                                    <Link to={`/product-detail/${type}-${product.id}`}>
-                                        <Image src={defaultImage} w='100%' h='100%' />
+                                        <Image src={defaultImage} h='fit-content' />
                                    </Link>
                               </Tooltip>
                          </Flex>
                          <Flex className='card-image-back' w='100%' h='100%' minW='100%'>
                               <Tooltip label={description} aria-label='A tooltip'>
                                    <Link to={`/product-detail/${type}-${product.id}`}>
-                                        <Image src={images.image1} w='100%' h='100%' />
+                                        <Image src={images.image1} h='fit-content' />
                                    </Link>
                               </Tooltip>
                          </Flex>

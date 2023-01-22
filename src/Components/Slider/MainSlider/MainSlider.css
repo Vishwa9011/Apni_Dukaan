@@ -6,7 +6,7 @@
 
     }
     .mainSliderimg{
-        height: 410px;
+        /* height: 410px; */
     }
 }
 @media screen and (max-width: 600px){
@@ -16,7 +16,7 @@
 
     }
     .mainSliderimg{
-        height: 250px;
+        /* height: 250px; */
     }
 }
 
@@ -27,6 +27,6 @@
 
     }
     .mainSliderimg{
-        height: 250px;
+        /* height: 250px; */
     }
 }

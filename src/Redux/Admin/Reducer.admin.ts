@@ -1,6 +1,15 @@
+import { IOrdersProduct, IUser } from '../../Constants/Constant'
 import * as Types from './Types.admin'
 
-const inititalState = {
+interface IInitialState {
+     loading: boolean
+     error: string
+     users: IUser[]
+     orders: IOrdersProduct[]
+}
+
+
+const inititalState: IInitialState = {
      loading: false,
      error: '',
      users: [],

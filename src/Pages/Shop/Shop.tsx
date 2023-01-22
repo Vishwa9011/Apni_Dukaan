@@ -32,7 +32,8 @@ const Shop = () => {
      const dispatch: Dispatch<any> = useDispatch();
      const [FilterValuesP, setFilterValuesP] = useState({})
      const [FilterValues, setFilterValues] = useState<Object>({})
-     const [sortingType, setSortingType] = useState<any>('Recommended')
+     const [sortingType, setSortingType] = useState<string>('rec')
+     console.log('sortingType: ', sortingType);
      const [FilterValueD, setFilterValueD] = useState<string>('')
      const { data, loading, FilteredBrand, FilteredCategory, FilteredData } = useSelector((store: RootState) => store.shop)
      const { loading: cartLoading } = useSelector((store: RootState) => store.cart)
@@ -54,17 +55,15 @@ const Shop = () => {
      }
 
      // todo: sort the data
-     const SortData = (value: string) => {
-          setSortingType(sortingTypeObj.value)
-          dispatch(SortDataFromList(value, FilteredData))
-     }
+     useEffect(() => {
+          dispatch(SortDataFromList(sortingType, FilteredData.length ? FilteredData : [...data]))
+     }, [sortingType])
 
      useEffect(() => {
           setFilterValues({})
           setFilterValuesP({})
           if (menu.includes(id || "")) dispatch(getDataShop(id, Toast))
      }, [id])
-
 
      useEffect(() => {
           if (FilterValues) {
@@ -165,16 +164,16 @@ const Shop = () => {
                                              <Flex gap='10px' justify={'space-between'} align={'center'}>
                                                   <Flex gap={'10px'}>
                                                        Sort by:
-                                                       <Text as='span' fontWeight={'semibold'}>{sortingType}</Text>
+                                                       <Text as='span' fontWeight={'semibold'}>{sortingTypeObj[sortingType]}</Text>
                                                   </Flex>
                                                   <Text className='down-arrow'><BsChevronDown /></Text>
                                              </Flex>
                                              <ul className='sorting-list-drop-down'>
-                                                  <li onClick={() => SortData('rec')}>Recommended</li>
-                                                  <li onClick={() => SortData('discount')}>Better Discount</li>
-                                                  <li onClick={() => SortData('htl')}>Price: High to Low</li>
-                                                  <li onClick={() => SortData('lth')}>Price: Low to High</li>
-                                                  <li onClick={() => SortData('rating')}>Customer Rating</li>
+                                                  <li onClick={() => setSortingType('rec')}>Recommended</li>
+                                                  <li onClick={() => setSortingType('discount')}>Better Discount</li>
+                                                  <li onClick={() => setSortingType('htl')}>Price: High to Low</li>
+                                                  <li onClick={() => setSortingType('lth')}>Price: Low to High</li>
+                                                  <li onClick={() => setSortingType('rating')}>Customer Rating</li>
                                              </ul>
                                         </Box>
                                    </Flex>

@@ -61,7 +61,7 @@ const SingleProductPage = () => {
         }
     }, [])
 
-    if (!product?.brand) return <PageNotFound />
+    // if (!product?.brand) return <PageNotFound />
 
     return (
 
@@ -139,8 +139,8 @@ const SingleProductPage = () => {
                                 ))}
                             </Flex>
                             <Box height={"70px"} mb='3' display={"flex"} width={"auto"} alignItems={"center"} marginTop={"10px"}>
-                                <Button onClick={AddToCart} _hover={{ bg: 'red.600' }} width={"250px"} height={"50px"} backgroundColor={"red.500"} color={"white"}><Text marginRight={"10px"}><BsHandbagFill /></Text>ADD TO BAG</Button>
-                                <Button onClick={AddToWishlist} width={"150px"} height={"50px"} marginLeft={"10px"} border={"1px solid #e9eaec"} backgroundColor={"white"} color={"black"}><Text marginRight={"10px"}><BsHeart /></Text>WISHLIST</Button>
+                                <Button onClick={AddToCart} _hover={{ bg: 'red.600' }} px='7' height={"50px"} backgroundColor={"red.500"} color={"white"}><Text marginRight={"10px"}><BsHandbagFill /></Text>ADD TO BAG</Button>
+                                <Button onClick={AddToWishlist} height={"50px"} px='3' marginLeft={"10px"} border={"1px solid #e9eaec"} backgroundColor={"white"} color={"black"}><Text marginRight={"10px"}><BsHeart /></Text>ADD TO WISHLIST</Button>
                             </Box>
 
                             <hr />

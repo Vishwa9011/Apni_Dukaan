@@ -73,7 +73,7 @@ export const FilterValuesFromDataWithPriceAndDiscount = (FilterDiscount: string,
           const FilteredDataWithDiscount = FilterDataWithDiscount(FilterDiscount, data)
           const FilterDataWithPrice = FilteredDataWithDiscount.filter((product) => {
                return FilterPrice.every((price) => {
-                    const FP: string[] = price.trim().split("-");
+                    const FP: string[] = price.split("-");
                     return (product.price > +FP[1] && product.price < +FP[2])
                })
           })
@@ -87,7 +87,7 @@ export const FilterValuesFromDataWithPriceAndDiscount = (FilterDiscount: string,
      } else if (FilterPrice.length) {
           const FilterDataWithPrice = data.filter((product) => {
                return FilterPrice.every((price) => {
-                    const FP = price.trim().split("-");
+                    const FP = price.split("-");
                     console.log('FP: ', FP);
                     return ((product.price >= +FP[1]) && (product.price < +FP[2]))
                })
@@ -102,7 +102,7 @@ export const FilterValuesFromDataWithPriceAndDiscount = (FilterDiscount: string,
 
 // todo: filter Data with discount 
 const FilterDataWithDiscount = (FilterDiscount: string, data: IProduct[]): IProduct[] => {
-     const FD: string[] = FilterDiscount.trim().split("-");
+     const FD: string[] = FilterDiscount.split("-");
      return data.filter((product) => {
           if (FD[2] === 'below') {
                return product?.discount ? product.discount < +FD[1] : false;
@@ -131,4 +131,5 @@ export const SortDataFromList = (value: string, data: IProduct[]) => async (disp
           data.sort((b, a) => (a.discount || 0) - (b.discount || 0));
           dispatch({ type: Types.SHOP_DATA_FILTERING_DONE, payload: data });
      }
+     
 }
