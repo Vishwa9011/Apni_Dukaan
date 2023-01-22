@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Grid, Heading, Image, Text } from "@chakra-ui/react";
 import MainSlider from "../../Components/Slider/MainSlider/MainSlider";
 import ProductSlider from "../../Components/Slider/CardSlider/ProductSlider";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -41,7 +41,6 @@ function Home() {
                          <Box alignItems={"center"} textAlign="center">
                               <Image src="https://images.bewakoof.com/uploads/grid/app/Thumbnail-Collabs-Common-1668508338.jpg" />
                               <Text fontWeight={"bold"}>Official Collaborations</Text>
-
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
                               <Image src="https://images.bewakoof.com/uploads/grid/app/last-size-new-thumbnaik-1668508337.jpg" />
@@ -62,46 +61,46 @@ function Home() {
 
                <Box>
                     <Heading textAlign={"center"} mt="10" color="#E53E3E">SHOP BY CATEGORY</Heading>
-                    <Flex p="10" className="home_cate">
-                         <Box w="80" p="5" textAlign="center">
-                              <Image src="https://images-static.nykaa.com/uploads/93e7d2a0-743d-4a51-a11c-82def81351f3.jpg?tr=w-480,cm-pad_resize" />
+                    <Grid gridTemplateColumns={'repeat(5,1fr)'} gridTemplateRows='' p="10" className="home_cate">
+                         <Flex align={'center'} justify='center' flexDir={'column'} w="80%" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/93e7d2a0-743d-4a51-a11c-82def81351f3.jpg?tr=w-480,cm-pad_resize" w='100%' />
                               <Text>Indianwear</Text>
-                         </Box>
-                         <Box w="80" p="5" textAlign="center">
-                              <Image src="https://images-static.nykaa.com/uploads/d1f60b37-4c14-45d5-aaa9-0030367cacc4.jpg?tr=w-480,cm-pad_resize" />
+                         </Flex>
+                         <Flex align={'center'} justify='center' flexDir={'column'} w="80%" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/d1f60b37-4c14-45d5-aaa9-0030367cacc4.jpg?tr=w-480,cm-pad_resize" w='100%' />
                               <Text>Westernwear</Text>
-                         </Box>
-                         <Box w="80" p="5" textAlign="center">
-                              <Image src="https://images-static.nykaa.com/uploads/85fbcd49-e8e8-415b-9257-73432c453cbf.jpg?tr=w-480,cm-pad_resize" />
+                         </Flex>
+                         <Flex align={'center'} justify='center' flexDir={'column'} w="80%" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/85fbcd49-e8e8-415b-9257-73432c453cbf.jpg?tr=w-480,cm-pad_resize" w='100%' />
                               <Text>Menswear</Text>
-                         </Box>
-                         <Box w="80" p="5" textAlign="center">
-                              <Image src="https://images-static.nykaa.com/uploads/f22438be-c923-4438-824e-5794b164abc6.jpg?tr=w-480,cm-pad_resize" />
+                         </Flex>
+                         <Flex align={'center'} justify='center' flexDir={'column'} w="80%" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/f22438be-c923-4438-824e-5794b164abc6.jpg?tr=w-480,cm-pad_resize" w='100%' />
                               <Text>Kidswear</Text>
-                         </Box>
-                         <Box w="80" p="5" textAlign="center">
-                              <Image src="https://images-static.nykaa.com/uploads/8951a9aa-a110-43a1-aeaf-c8f17853701b.jpg?tr=w-480,cm-pad_resize" />
+                         </Flex>
+                         <Flex align={'center'} justify='center' flexDir={'column'} w="80%" p="5" textAlign="center">
+                              <Image src="https://images-static.nykaa.com/uploads/8951a9aa-a110-43a1-aeaf-c8f17853701b.jpg?tr=w-480,cm-pad_resize" w='100%' />
                               <Text>Heels & Flates</Text>
-                         </Box>
-                    </Flex>
+                         </Flex>
+                    </Grid>
                     {/* second */}
-                    <Flex ml="30" mr="30" alignItems="center" justifyContent={"center"}>
-                         <Box w="60" p="5" textAlign="center">
+                    <Flex gap='' alignItems="center" justifyContent={"center"}>
+                         <Flex flexDir={'column'} align='center' w="30%" p="5" >
                               <Image src="https://images-static.nykaa.com/uploads/3f3ab163-a0a2-4076-823e-72dcbce05662.jpg?tr=w-480,cm-pad_resize" />
                               <Text>Sneaker</Text>
-                         </Box>
-                         <Box w="60" p="5" textAlign="center">
+                         </Flex>
+                         <Flex flexDir={'column'} align='center' w="30%" p="5" >
                               <Image src="https://images-static.nykaa.com/uploads/c25621b3-6932-4290-9f58-9b02d9ce7548.jpg?tr=w-480,cm-pad_resize" />
                               <Text>Denims</Text>
-                         </Box>
-                         <Box w="60" p="5" textAlign="center">
+                         </Flex>
+                         <Flex flexDir={'column'} align='center' w="30%" p="5" >
                               <Image src="https://images-static.nykaa.com/uploads/28cfdec3-27bf-438a-a156-0781b67e2299.jpg?tr=w-480,cm-pad_resize" />
                               <Text>Home</Text>
-                         </Box>
-                         <Box w="60" p="5" textAlign="center">
+                         </Flex>
+                         <Flex flexDir={'column'} align='center' w="30%" p="5" >
                               <Image src="https://images-static.nykaa.com/uploads/8a459a25-6e0d-4a91-8377-5da0c08f6a38.jpg?tr=w-480,cm-pad_resize" />
                               <Text>Tech</Text>
-                         </Box>
+                         </Flex>
                     </Flex>
                </Box>
                {/* bannerpart */}

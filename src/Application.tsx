@@ -17,40 +17,29 @@ const Application = () => {
      return (
           <Routes>
                <Route path='/' element={<Home />} />
-               <Route path='shop' element={<Shop />} />
-               <Route path='shop/:id' element={<Shop />} />
-               <Route path='product-detail/:id' element={<SingleProductPage />} />
-               <Route path='cart' element={
-                    <ProtectedRoute>
-                         <Cart />
-                    </ProtectedRoute>
-               } />
-               <Route path='wishlist' element={
-                    <ProtectedRoute>
-                         <Wishlist />
-                    </ProtectedRoute>
-               } />
-               <Route path='cart/address' element={
-                    <ProtectedRoute>
-                         <Address />
-                    </ProtectedRoute>
-               } />
-               <Route path='cart/payment' element={
-                    <ProtectedRoute>
-                         <Payment />
-                    </ProtectedRoute>
-               } />
-               <Route path='cart/payment' element={
-                    <ProtectedRoute>
-                         <Payment />
-                    </ProtectedRoute>
-               } />
-               <Route path='login' element={<Login />} />
-               <Route path='login/reset-password' element={<NewPassword />} />
-               <Route path='admin/*' element={<Admin />} />
+               <Route path='/shop' element={<Shop />} />
+               <Route path='/shop/:id' element={<Shop />} />
+               <Route path='/product-detail/:id' element={<SingleProductPage />} />
+               <Route path='/cart/*' element={<ProtectedRoute><CartRoute /></ProtectedRoute>} />
+               <Route path='/wishlist' element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
+               <Route path='/login' element={<Login />} />
+               <Route path='/login/reset-password' element={<NewPassword />} />
+               <Route path='/admin/*' element={<Admin />} />
                <Route path='*' element={<PageNotFound />} />
           </Routes>
      )
 }
 
 export default Application
+
+
+const CartRoute = () => {
+     return (
+          <Routes>
+               <Route index element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+               <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+               <Route path='/address' element={<ProtectedRoute><Address /></ProtectedRoute>} />
+               <Route path='/payment' element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+          </Routes>
+     )
+}
