@@ -34,12 +34,12 @@ const Footer = () => {
                         EXPERIENCE THE APNI DUKAN MOBILE APP
                      </Text>
                   </Flex >
-                  <Flex alignItems={"center"}>
+                  <Flex alignItems={"center"} className="payStoreBtn">
                      <Image width={"150px"} src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png?hl=fr" alt="avtar" />
                      <Image borderRadius={"6px"} width={"120px"} src="https://e7.pngegg.com/pngimages/2/670/png-clipart-logo-app-store-font-brand-product-app-store-play-store-text-logo.png" alt="avtar" />
                   </Flex>
                </Box>
-               <Box>
+               <Box className="footerdown">
                   <Flex alignItems={"center"} gap="10px">
                      <Text fontSize={"3xl"} >
                         <BsFillTelephoneFill />
