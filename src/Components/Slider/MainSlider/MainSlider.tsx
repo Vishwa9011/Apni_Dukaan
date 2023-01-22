@@ -34,7 +34,7 @@ function MainSlider() {
   
 
      return (
-          <Box w='100%' h='100%'  pos='relative' className='mainSlider' >
+          <Box w="100%" pos='relative' className='mainSlider'  >
                <Box  >
                     <Image className='mainSliderimg'  w="100%" src={slidesImages[image]?.url} />
                </Box>
