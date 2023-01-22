@@ -68,10 +68,25 @@ export const get_All_orders = (Toast: Function) => (dispatch: Dispatch) => {
      // cleanup
      return unsub;
 }
+// todo: to admin_delete_products
+export const admin_update_Delivery_status = (id: string, deliveryStatus: string, Toast: Function) => (dispatch: Dispatch) => {
+     dispatch({ type: Types.ADMIN_LOADING })
+     const productRef = doc(db, `orders`, id);
+     updateDoc(productRef, { deliveryStatus })
+          .then(() => {
+               dispatch({ type: Types.ADMIN_SUCCESS })
+               Toast("Delivery Status has been changed.")
+          }).catch((err) => {
+               console.log('err: ', err);
+               dispatch({ type: Types.ADMIN_ERROR, payload: '' })
+          })
+}
+
 
 
 // todo: get days of creating
 export const getDays = (createdAt: number) => {
+     console.log('createdAt: ', createdAt);
      const today = new Date()
      const created = new Date(createdAt);
      const diff = today.getTime() - created.getTime()

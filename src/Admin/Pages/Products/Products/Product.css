@@ -1,21 +1,22 @@
 .product-update-container {
-     width: 90%;
      top: 50%;
+     width: 40%;
      left: 50%;
-     background: white;
-     padding: 30px;
-     border: 1px solid black;
      z-index: 99;
-     transform: translate(-50%, -50%);
+     padding: 30px;
+     background: white;
      border-radius: 10px;
+     border: 1px solid black;
+     transform: translate(-50%, -50%);
 }
 
 .update-product-input-container {
-     width: 100%;
-     display: grid;
-     grid-template-columns: repeat(3, 1fr);
      gap: 10px;
+     width: 100%;
+     margin: auto;
      padding: 10px;
+     display: grid;
+     grid-template-columns: repeat(1, 1fr);
 }
 
 .update-product-input-container input {

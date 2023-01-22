@@ -63,7 +63,7 @@ const Users = (props: Props) => {
                                              <Td fontWeight={'semibold'} opacity='.8'>
                                                   <Tooltip hasArrow label={`UID: ${user.uid}`}>
                                                        <Flex flexDir={'column'}>
-                                                            {user.username}
+                                                            {user.username ? user.username : user.uid}
                                                             <Text fontSize={'.7em'} color='cyan.500' style={{ fontStyle: 'italic' }}>createdAt: {getDays(user.timeStamp)}</Text>
                                                        </Flex>
                                                   </Tooltip>
@@ -73,7 +73,7 @@ const Users = (props: Props) => {
                                                        {user.email}
                                                   </Tooltip>
                                              </Td>
-                                             <Td fontWeight={'semibold'} color={user.isActive ? "green.500" : 'red.500'}>{user.isActive ? "Active" : 'Passive'}</Td>
+                                             <Td fontWeight={'semibold'} color={user.isActive ? "green.500" : 'red.500'}>{user.isActive ? "ACTIVE" : 'PASSIVE'}</Td>
                                              <Td>
                                                   <Tooltip hasArrow label={"View User Details"}>
                                                        <Button border={'2px'} borderRadius='0' fontWeight={'semibold'} color={'blue.500'} onClick={() => { ToggleProfile(); setUserProfile(user) }}>VIEW USER</Button>

@@ -127,7 +127,6 @@ export const ForgotPasswordSendEmail = (email: string, Toast: Function) => async
      }
 }
 
-
 // todo: forgetPasswordSend the Email
 export const SetNewPassword = (obbCode: any, newPassword: string, Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.AUTH_LOADING });

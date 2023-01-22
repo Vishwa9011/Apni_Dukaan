@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IOrdersProduct } from '../../../Constants/Constant'
 import UseToastMsg from '../../../Custom-hooks/UseToastMsg'
 import UseToggle from '../../../Custom-hooks/UseToggle'
-import { getDays, get_All_orders } from '../../../Redux/Admin/Action.admin'
+import { admin_update_Delivery_status, getDays, get_All_orders } from '../../../Redux/Admin/Action.admin'
 import { RootState } from '../../../Redux/store'
 import Stats from '../../Components/Stats/Stats'
 
@@ -19,9 +19,15 @@ const Orders = (props: Props) => {
 
      const { Toast } = UseToastMsg();
      const dispatch: Dispatch<any> = useDispatch();
-     const [showProfile, ToggleProfile]: any = UseToggle(false)
      const { orders, loading }: IUsersProp = useSelector((store: RootState) => store.admin);
      console.log('orders: ', orders);
+
+
+     const ToggleDeliveryStatus = (status: string, orderID: string) => {
+          if (status === 'PENDING') status = 'DELIVERED'
+          else status = 'PENDING'
+          dispatch(admin_update_Delivery_status(orderID, status, Toast))
+     }
 
      useEffect(() => {
           dispatch(get_All_orders(Toast))
@@ -38,7 +44,7 @@ const Orders = (props: Props) => {
                               <Thead>
                                    <Tr>
                                         <Th>S.no</Th>
-                                        <Th>OrderId</Th>
+                                        <Th>Order Id</Th>
                                         <Th>Email</Th>
                                         <Th>
                                              <Select cursor={'pointer'}>
@@ -47,7 +53,7 @@ const Orders = (props: Props) => {
                                                   <option value="passive">Passive</option>
                                              </Select>
                                         </Th>
-                                        <Th>Delivery Status</Th>
+                                        {/* <Th>Delivery Status</Th> */}
                                         <Th>Toggle Status</Th>
                                    </Tr>
                               </Thead>
@@ -74,7 +80,7 @@ const Orders = (props: Props) => {
                                              <Td fontWeight={'semibold'} color={order.deliveryStatus == 'DELIVERED' ? "green.500" : 'red.500'}>{order.deliveryStatus}</Td>
                                              <Td>
                                                   <Tooltip hasArrow label={"Delete User"}>
-                                                       <Button border={'2px'} borderRadius='0' fontWeight={'semibold'} color={'red.500'}>TOGGLE STATUS</Button>
+                                                       <Button border={'2px'} borderRadius='0' fontWeight={'semibold'} color={'red.500'} onClick={() => ToggleDeliveryStatus(order.deliveryStatus, order.orderID,)}>TOGGLE STATUS</Button>
                                                   </Tooltip>
                                              </Td>
                                         </Tr>

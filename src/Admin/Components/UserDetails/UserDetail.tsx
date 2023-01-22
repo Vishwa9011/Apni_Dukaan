@@ -16,13 +16,12 @@ const UserDetail = ({ userProfile, ToggleProfile }: Props) => {
      return (
           <Box pos={'fixed'} w='450px' className='admin-detail-container'>
                <Box className='admin-detail'>
-                    <Flex mb='5'>
-                         {
-                              photoURL || gender ? < Image src={photoURL || (gender === 'male' ? `/Admin-images/man.png` : gender == 'female' ? '/Admin/woman.png' : "")} alt='' boxSize={'150px'} borderRadius='50%' />
+                    <Box mb='5'>
+                         {photoURL || gender ? < Image src={photoURL || (gender === 'male' ? `/Admin-images/man.png` : gender == 'female' ? '/Admin/woman.png' : "")} alt='' boxSize={'150px'} borderRadius='50%' />
                                    :
-                                   <Image src='/Admin-images/unknown.png' alt='' filter={'invert(70%)'} />
+                              <Image src='/Admin-images/unknown.png' alt='' filter={'invert(70%)'} boxSize={'150px'} borderRadius='50%' />
                          }
-                    </Flex>
+                    </Box>
                     <Flex align={'center'}>
                          <Text>UID : </Text>
                          <Text color={'whiteAlpha.700'} fontSize='.9em'>{uid || "not updated"}</Text>

@@ -59,7 +59,7 @@ const Dashboard = (props: Props) => {
                                                   </Flex>
                                              </Td>
                                              <Td>{user.email}</Td>
-                                             <Td fontWeight={'semibold'} color={user.isActive ? "green.500" : 'red.500'}>{user.isActive ? "Active" : 'Passive'}</Td>
+                                             <Td fontWeight={'semibold'} color={user.isActive ? "green.500" : 'red.500'}>{user.isActive ? "ACTIVE" : 'PASSIVE'}</Td>
                                         </Tr>
                                    ))}
                               </Tbody>

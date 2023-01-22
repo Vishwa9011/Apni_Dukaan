@@ -83,7 +83,7 @@ export const Checkout = (cart: IProduct[], user: IUser, limit: number, navigate:
                     ownerName: user.address?.name,
                     address: `${user.address}`
                }
-               const deliveryStatus = 'Pending';
+               const deliveryStatus = 'PENDING';
                const newProduct = { ...cart[item], orderID, orderedAt, ownerInfo, deliveryStatus }
                // todo: adding the order in the server
                const orderRef = doc(db, `orders`, orderID);

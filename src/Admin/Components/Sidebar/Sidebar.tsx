@@ -6,7 +6,7 @@ import './Sidebar.css'
 
 const navigation = [
      { path: '/admin/dashboard', title: 'Dashboard', img: '/Admin-images/dashboard.png' },
-     { path: '/admin/users', title: 'Users', img: '/Admin-images/team.png' },
+     { path: '/admin/users', title: 'Users', img: '/Admin-images/user-profile.png' },
      { path: '/admin/orders', title: 'Orders', img: '/Admin-images/order.png' },
      { path: '/admin/messages', title: 'Messages', img: '/Admin-images/message.png' },
      { path: '/admin/products', title: 'Products', img: '/Admin-images/cubes.png' },

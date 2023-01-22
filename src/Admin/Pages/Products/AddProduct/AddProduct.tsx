@@ -2,6 +2,7 @@ import { Box, Button, Heading, Input, Text } from '@chakra-ui/react'
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { IProduct } from '../../../../Constants/Constant';
+import UseToastMsg, { ToastType } from '../../../../Custom-hooks/UseToastMsg';
 import { db } from '../../../../Firebase/FirebaseConfig';
 import './Add-product.css'
 
@@ -24,6 +25,7 @@ export const initialStateAddProduct: IProduct = {
 }
 
 const AddProduct = () => {
+     const { Toast } = UseToastMsg()
      const [category, setCategory] = useState<string>('men');
      const [product, setProduct] = useState<IProduct>(initialStateAddProduct);
 
@@ -43,7 +45,7 @@ const AddProduct = () => {
      // todo: add product into the database in specific path
      const AddProductIntoDb = () => {
           if (!product.brand || !product.category || !product.defaultImage || !product.description || !product.price || !product.images.image1 || !product.mrp) {
-               alert("please fill required feilds");
+               Toast('Please fill all fields.', ToastType.warning)
                return;
           }
           // * collection ref of product;
@@ -51,7 +53,7 @@ const AddProduct = () => {
           addDoc(productRef, product)
                .then(() => {
                     setProduct(initialStateAddProduct)
-                    alert('product added')
+                    Toast('Product has been added', ToastType.success)
                })
                .catch(err => console.log(err))
      }
@@ -59,13 +61,13 @@ const AddProduct = () => {
      return (
           <Box>
                <Heading textAlign={'center'} my='4'> Add Product in <Text color={'red.500'} as='span' textTransform={'uppercase'}>{category}</Text></Heading>
-               <Box display={'flex'} border='1px'>
+               <Box display={'flex'} >
                     <Box w='20%' className='category-link'>
-                         <Text onClick={() => setCategory('men')}>MEN</Text>
-                         <Text onClick={() => setCategory('women')}>WOMEN</Text>
-                         <Text onClick={() => setCategory('kids')}>KIDS</Text>
-                         <Text onClick={() => setCategory('home&living')}>HOME & LIVING</Text>
-                         <Text onClick={() => setCategory('beauty')}>BEAUTY</Text>
+                         <Text bg={category == 'men' ? 'gray.200' : ''} onClick={() => setCategory('men')}>MEN</Text>
+                         <Text bg={category == 'women' ? 'gray.200' : ''} onClick={() => setCategory('women')}>WOMEN</Text>
+                         <Text bg={category == 'kids' ? 'gray.200' : ''} onClick={() => setCategory('kids')}>KIDS</Text>
+                         <Text bg={category == 'home&living' ? 'gray.200' : ''} onClick={() => setCategory('home&living')}>HOME & LIVING</Text>
+                         <Text bg={category == 'beauty' ? 'gray.200' : ''} onClick={() => setCategory('beauty')}>BEAUTY</Text>
                     </Box>
                     <Box w='80%' p='2'>
                          <Box className='add-product' w='100%'>
@@ -82,8 +84,8 @@ const AddProduct = () => {
                               <Input value={product?.images?.image2} name='image2' onChange={HandleChange} placeholder='image 3' />
                               <Input value={product?.images?.image3} name='image3' onChange={HandleChange} placeholder='image 4' />
                          </Box>
-                         <Button bg='blue.500' color={'white'} mr='10' onClick={AddProductIntoDb}>Add Product</Button>
-                         <Button bg='blue.500' color={'white'} onClick={() => setProduct(initialStateAddProduct)}>Reset</Button>
+                         <Button className='btn-clicked' borderRadius={'0'} colorScheme='' fontWeight={'semibold'} fontSize='1.2em' color='white' px='4' minH={'45px'} mx='2' bg='blue.500' onClick={AddProductIntoDb}>Add Product</Button>
+                         <Button className='btn-clicked' borderRadius={'0'} colorScheme='' fontWeight={'semibold'} fontSize='1.2em' color='white' px='4' minH={'45px'} mx='2' bg='red.500' onClick={() => setProduct(initialStateAddProduct)}>Reset</Button>
                     </Box>
                </Box>
 
