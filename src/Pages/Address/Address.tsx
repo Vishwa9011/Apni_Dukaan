@@ -1,20 +1,20 @@
+import { AddAddressUserProfile, RemoveAddressUserProfile } from '../../Redux/Auth/Action.auth';
 import { Box, Button, Checkbox, Flex, Heading, Image, Input, Text } from '@chakra-ui/react'
-import img from "../../../public/Images/apnidukan.png";
-import secure from '../../../public/Images/secure.png'
+import { FindTotal, getCartProduct } from '../../Redux/CartRedux/Action.cart';
+import UseToastMsg, { ToastType } from '../../Custom-hooks/UseToastMsg';
 import { IAddress, IProduct, IUser } from '../../Constants/Constant';
 import React, { Dispatch, useEffect, useMemo, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import "./Address.css"
-import { GoPrimitiveDot } from 'react-icons/go'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../Redux/store';
-import { FindTotal, getCartProduct } from '../../Redux/CartRedux/Action.cart';
-import UseToastMsg, { ToastType } from '../../Custom-hooks/UseToastMsg';
-import { AddAddressUserProfile, RemoveAddressUserProfile } from '../../Redux/Auth/Action.auth';
-import { FiEdit } from 'react-icons/fi';
-import { AiOutlineClose } from 'react-icons/ai';
 import UseToggle from '../../Custom-hooks/UseToggle';
 import Loader from '../../Components/Loader/Loader';
+import { AiOutlineClose } from 'react-icons/ai';
+import { GoPrimitiveDot } from 'react-icons/go'
+import { RootState } from '../../Redux/store';
+import { FiEdit } from 'react-icons/fi';
+import img from "/Images/apnidukan.png";
+import secure from '/Images/secure.png'
+import "./Address.css"
 
 const initialAddress = { name: '', state: '', phone: 0, pincode: 0, address: '', locality: '', district: '', addressType: 'home' }
 

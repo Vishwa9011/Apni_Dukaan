@@ -12,7 +12,7 @@ export const initialStateAddProduct: IProduct = {
      price: 0,
      mrp: 0,
      discount: 0,
-     rating: '',
+     rating: 0,
      totalReview: "",
      category: "",
      images: {

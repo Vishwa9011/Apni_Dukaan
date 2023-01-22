@@ -57,6 +57,7 @@ function Home() {
                <Flex w='100%'>
                     <Image src="https://images-static.nykaa.com/uploads/542701f0-1711-4dab-8238-5ad274a6cd95.gif?tr=w-2400,cm-pad_resize" w='100%' />
                </Flex>
+
                <ProductSlider />
 
                <Box>
@@ -116,7 +117,7 @@ function Home() {
                </Box> */}
 
                {/* card */}
-               {/* <ProductSlider /> */}
+               <ProductSlider />
 
                {/* gif part */}
                <Flex w='100%'>

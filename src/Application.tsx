@@ -40,6 +40,11 @@ const Application = () => {
                          <Payment />
                     </ProtectedRoute>
                } />
+               <Route path='cart/payment' element={
+                    <ProtectedRoute>
+                         <Payment />
+                    </ProtectedRoute>
+               } />
                <Route path='login' element={<Login />} />
                <Route path='login/reset-password' element={<NewPassword />} />
                <Route path='admin/*' element={<Admin />} />

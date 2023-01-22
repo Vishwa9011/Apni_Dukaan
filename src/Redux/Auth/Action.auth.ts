@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
+import { confirmPasswordReset, createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { Dispatch } from "redux"
 import { auth, db, provider } from "../../Firebase/FirebaseConfig"
 import { IAddress, IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
@@ -116,7 +116,9 @@ export const logout = (uid: string, Toast: Function) => async (dispatch: Dispatc
 export const ForgotPasswordSendEmail = (email: string, Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.AUTH_LOADING });
      try {
-          await sendPasswordResetEmail(auth, email)
+          await sendPasswordResetEmail(auth, email, {
+               url: 'https://apnidukaan-9a863.web.app/login'
+          })
           dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
           Toast("Reset password email has been sent", ToastType.success)
      } catch (error) {
@@ -124,6 +126,21 @@ export const ForgotPasswordSendEmail = (email: string, Toast: Function) => async
           Toast(error, ToastType.error)
      }
 }
+
+
+// todo: forgetPasswordSend the Email
+export const SetNewPassword = (obbCode: any, newPassword: string, Toast: Function) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.AUTH_LOADING });
+     try {
+          await confirmPasswordReset(auth, obbCode, newPassword)
+          dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
+          Toast("Password has been reset.", ToastType.success)
+     } catch (error) {
+          dispatch({ type: Types.AUTH_ERROR, payload: error })
+          Toast(error, ToastType.error)
+     }
+}
+
 
 // todo: to get userCredentital
 export const getUserCredential = (user: any, Toast: Function) => async (dispatch: Dispatch) => {
@@ -135,7 +152,6 @@ export const getUserCredential = (user: any, Toast: Function) => async (dispatch
           console.log('err: ', err);
           Toast(err, ToastType.error)
      })
-
      // cleanup
      return unsub;
 }
