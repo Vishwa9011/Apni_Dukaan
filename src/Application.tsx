@@ -12,6 +12,7 @@ import Shop from './Pages/Shop/Shop'
 import SingleProductPage from './Pages/SingleProductPage/SingleProductPage'
 import Wishlist from './Pages/Wishlist/Wishlist'
 import ProtectedRoute from './ProtectedRoute'
+import Profile from './Pages/Profile/Profile'
 
 const Application = () => {
      return (
@@ -23,6 +24,7 @@ const Application = () => {
                <Route path='/cart/*' element={<ProtectedRoute><CartRoute /></ProtectedRoute>} />
                <Route path='/wishlist' element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
                <Route path='/login' element={<Login />} />
+               <Route path='/profile' element={<Profile />} />
                <Route path='/login/reset-password' element={<NewPassword />} />
                <Route path='/admin/*' element={<Admin />} />
                <Route path='*' element={<PageNotFound />} />
