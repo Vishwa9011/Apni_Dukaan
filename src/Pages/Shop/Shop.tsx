@@ -17,12 +17,12 @@ import './Shop.css'
 const menu = ['men', 'women', 'kids', 'home&living', 'beauty']
 const priceRange = [{ min: 149, max: 399 }, { min: 400, max: 849 }, { min: 850, max: 1399 }]
 
-const sortingType = {
+const sortingTypeObj: any = {
      htl: 'Price: High to Low',
      lth: 'Price: Low to High',
      rating: 'Customer Rating',
-     discount: 'Better Discount'
-
+     discount: 'Better Discount',
+     rec: 'Recommended'
 }
 
 const Shop = () => {
@@ -31,8 +31,8 @@ const Shop = () => {
      const { Toast } = UseToastMsg();
      const dispatch: Dispatch<any> = useDispatch();
      const [FilterValuesP, setFilterValuesP] = useState({})
-     const [FilterValues, setFilterValues] = useState<Object>()
-     const [sortingType, setSortingType] = useState<string>('')
+     const [FilterValues, setFilterValues] = useState<Object>({})
+     const [sortingType, setSortingType] = useState<any>('Recommended')
      const [FilterValueD, setFilterValueD] = useState<string>('')
      const { data, loading, FilteredBrand, FilteredCategory, FilteredData } = useSelector((store: RootState) => store.shop)
      const { loading: cartLoading } = useSelector((store: RootState) => store.cart)
@@ -55,13 +55,13 @@ const Shop = () => {
 
      // todo: sort the data
      const SortData = (value: string) => {
-
-          setSortingType(value)
+          setSortingType(sortingTypeObj.value)
           dispatch(SortDataFromList(value, FilteredData))
      }
 
-
      useEffect(() => {
+          setFilterValues({})
+          setFilterValuesP({})
           if (menu.includes(id || "")) dispatch(getDataShop(id, Toast))
      }, [id])
 

@@ -24,7 +24,6 @@ import Loader from '../../Components/Loader/Loader';
 
 type Props = {}
 
-
 const menSize = ['S', 'M', 'L', 'XL', 'XXL']
 
 const SingleProductPage = () => {
@@ -62,7 +61,6 @@ const SingleProductPage = () => {
         }
     }, [])
 
-    if (loading) return <h1>Loading...</h1>
     if (!product?.brand) return <PageNotFound />
 
     return (
@@ -135,7 +133,7 @@ const SingleProductPage = () => {
                             </Box>
                             <Flex height={"55px"} width={"280px"} alignItems={"center"} justifyContent={'space-between'}>
                                 {menSize.map((size, i) => (
-                                    <Flex align={'center'} fontWeight='semibold' cursor='pointer' justify='center' h={"50px"} w={"50px"} border='1px' _hover={{ color: 'red.500', borderColor: 'red.500' }} borderColor={'gray.300'} borderRadius={'50%'}>
+                                    <Flex align={'center'} key={i} fontWeight='semibold' cursor='pointer' justify='center' h={"50px"} w={"50px"} border='1px' _hover={{ color: 'red.500', borderColor: 'red.500' }} borderColor={'gray.300'} borderRadius={'50%'}>
                                         {size}
                                     </Flex>
                                 ))}

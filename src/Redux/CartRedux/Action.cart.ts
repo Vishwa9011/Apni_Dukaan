@@ -31,8 +31,8 @@ export const AddProductToCart = (product: IProduct, email: string, Toast: Functi
      if (!email) return;
      dispatch({ type: Types.CART_LOADING });
      try {
-          const cartRef = collection(db, `cart/${email}/cartData`, product.id)
-          await addDoc(cartRef, { ...product, qty: 1 })
+          const cartRef = doc(db, `cart/${email}/cartData`, product.id)
+          await setDoc(cartRef, { ...product, qty: 1 })
           dispatch({ type: Types.CART_SUCCESS })
           Toast("Product successfully added into cart", ToastType.success);
      } catch (error) {
@@ -106,9 +106,9 @@ export const Checkout = (cart: IProduct[], user: IUser, limit: number, navigate:
 export const moveProductToWishlist = (product: IProduct, email: string, Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.CART_LOADING });
      try {
-          const wishlistRef = collection(db, `wishlist/${email}/wishlistData`, product.id)
+          const wishlistRef = doc(db, `wishlist/${email}/wishlistData`, product.id)
           const cartRef = doc(db, `cart/${email}/cartData`, product.id)
-          await addDoc(wishlistRef, product)
+          await setDoc(wishlistRef, product)
           await deleteDoc(cartRef)
           dispatch({ type: Types.CART_SUCCESS })
           Toast("Product successfully added into wishlist", ToastType.success);

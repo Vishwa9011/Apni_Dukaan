@@ -115,7 +115,7 @@ const Payment = () => {
                     <Box w="100%">
                          <Box boxShadow='md' p='5' my="20px">
                               <Box className='cartprice' >
-                                   <Text fontWeight="bold" color={"gray.600"}>PRICE DETAILS ({cart.length} Items)</Text>
+                                   <Text fontWeight="bold" color={"gray.600"}>PRICE DETAILS ({TotalItems} Items)</Text>
                                    <Flex flexDir={"column"} gap="10px" py={"10px"} fontSize='15px' fontWeight={'semibold'} opacity='.9'>
                                         <Flex justifyContent={'space-between'} alignItems="center">
                                              <Text >Total MRP</Text>

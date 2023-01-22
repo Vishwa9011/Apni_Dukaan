@@ -116,7 +116,7 @@ const FilterDataWithDiscount = (FilterDiscount: string, data: IProduct[]): IProd
 // todo:sorting
 export const SortDataFromList = (value: string, data: IProduct[]) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.SHOP_LOADING });
-     if (value === '') {
+     if (value === 'rec') {
           dispatch({ type: Types.SHOP_DATA_FILTERING_DONE, payload: [] });
      } else if (value == 'htl') {
           data.sort((a, b) => b.price - a.price);

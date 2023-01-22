@@ -177,7 +177,7 @@ const Cart = () => {
                                    </Box>
                                    <Box boxShadow='base' rounded='md'>
                                         <Box className='cartprice' my="20px" p={"16px"}>
-                                             <Text fontSize={"12px"} fontWeight="bold" color={"gray.600"}>PRICE DETAILS (2 Items)</Text>
+                                             <Text fontSize={"12px"} fontWeight="bold" color={"gray.600"}>PRICE DETAILS ({TotalItems} Items)</Text>
                                              <Flex flexDir={"column"} gap="10px" py={"10px"} fontSize='15px' fontWeight={'semibold'} opacity='.9'>
                                                   <Flex justifyContent={'space-between'} alignItems="center">
                                                        <Text >Total MRP</Text>
