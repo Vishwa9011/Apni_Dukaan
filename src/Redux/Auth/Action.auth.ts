@@ -1,11 +1,11 @@
 import { confirmPasswordReset, createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { Dispatch } from "redux"
 import { auth, db, provider, storage } from "../../Firebase/FirebaseConfig"
-import { IAddress, IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
+import { IAddress, IAuthDetailLogin, IToastProps, IUser, IUserProfileUpdate } from "../../Constants/Constant"
 import { deleteDoc, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore"
 import * as Types from './Types.auth'
 import { ToastType } from './../../Custom-hooks/UseToastMsg';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage'
 
 // https://www.youtube.com/watch?v=MsDjbWUn3IE
 // https://firebase.google.com/docs/auth/web/account-linking
@@ -202,8 +202,8 @@ export const RemoveAddressUserProfile = (address: IAddress, userId: string, Toas
      }
 }
 
-
-export const updateProfileInfo = (info: IUser, user: IUser, Toast: Function) => async (dispatch: Dispatch) => {
+// todo:update userProfile Information
+export const updateProfileInfo = (info: IUserProfileUpdate, user: IUser, Toast: Function) => async (dispatch: Dispatch) => {
      dispatch({ type: Types.AUTH_LOADING });
      try {
           const userRef = doc(db, `users`, user.uid)
@@ -218,23 +218,37 @@ export const updateProfileInfo = (info: IUser, user: IUser, Toast: Function) => 
 }
 
 
+// todo: updateProfilePhoto
 export const updateProfilePhoto = (file: any, user: IUser, Toast: Function) => async (dispatch: Dispatch) => {
+     console.log("upload check")
      dispatch({ type: Types.AUTH_LOADING });
      try {
           const storageRef = ref(storage, `images/${Date.now() + user.email.split('@')[0]}`)
-          const uploadTask = uploadBytesResumable(storageRef, file);
-
           // todo: upload on storage;
-          uploadTask.on((error) => {
-               console.log('error: ', error);
-          }, () => {
-               getDownloadURL(uploadTask.snapshot.ref)
-                    .then((res) => {
-                         console.log('res: ', res);
-                    }).catch(err => console.log(err))
+          uploadBytes(storageRef, file).then((snapShot) => {
+               getDownloadURL(snapShot.ref).then((url) => {
+                    const userRef = doc(db, 'users', user.uid);
+                    updateDoc(userRef, { photoURL: url }).then(() => {
+                         dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
+                         Toast("Profile photo has been updated successfully", ToastType.success);
+                    })
+               })
           })
+     } catch (error) {
+          console.log('error: ', error);
+          dispatch({ type: Types.AUTH_ERROR })
+          Toast("Failed to add address.", ToastType.error)
+     }
+}
+
+// todo: remove the profile photo
+export const RemoveProfilePhoto = (userId: string, Toast: Function) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.AUTH_LOADING });
+     try {
+          const userRef = doc(db, `users`, userId)
+          await updateDoc(userRef, { photoURL: '' });
           dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
-          Toast("Profile photo has been updated successfully", ToastType.success);
+          Toast("Profile photo has been removed successfully", ToastType.success);
      } catch (error) {
           console.log('error: ', error);
           dispatch({ type: Types.AUTH_ERROR })

@@ -14,6 +14,13 @@ export interface IUser {
      timeStamp: number
 }
 
+// * updateuser interface
+export interface IUserProfileUpdate {
+     gender: string,
+     username: string,
+     phoneNumber: number
+}
+
 //* Single Product
 export interface IProduct {
      id: string 

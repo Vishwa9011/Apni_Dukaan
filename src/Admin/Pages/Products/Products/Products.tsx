@@ -1,16 +1,16 @@
 import { Box, Button, Flex, Grid, Heading, Image, Input, Select, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
-import { admin_delete_products, admin_products_update } from '../../../../Redux/Admin/Action.admin'
+import ProductCardAdmin from '../../../Components/ProductCardAdmin/ProductCardAdmin';
 import AddProduct, { initialStateAddProduct } from './../AddProduct/AddProduct';
+import { admin_delete_products } from '../../../../Redux/Admin/Action.admin'
 import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { IProduct, IProductUpdate } from '../../../../Constants/Constant'
 import React, { Dispatch, useEffect, useState } from 'react'
 import UseToggle from '../../../../Custom-hooks/UseToggle'
 import { db } from '../../../../Firebase/FirebaseConfig'
-import { useDispatch } from 'react-redux'
-import './Product.css'
-import ProductCardAdmin from '../../../Components/ProductCardAdmin/ProductCardAdmin';
 import { MdOutlineAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import './Product.css'
 
 const Products = () => {
    const [isOpen, toggle]: any = UseToggle();
