@@ -3,13 +3,12 @@
     color: aliceblue;
 }
 
-@media screen and (max-width: 600px){
-    .payStoreBtn{
-        display: flex;
-        flex-direction: column;
+@media screen and (max-width: 850px){
 
+    .footer_head{
+        display: none;
     }
-    .footerdown{
+    .footer_middle{
         display: none;
     }
  
@@ -17,12 +16,12 @@
 }
 
 @media screen and (max-width: 450px){
-    .payStoreBtn{
-        display: flex;
-        flex-direction: column;
+ 
 
+    .footer_head{
+        display: none;
     }
-    .footerdown{
+    .footer_middle{
         display: none;
     }
     

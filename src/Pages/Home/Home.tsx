@@ -21,33 +21,33 @@ function Home() {
                <Navbar />
                {/* mainslider */}
                <MainSlider />
-                    <SimpleGrid columns={[2,3,6]} w='100%' p="5">
+                    <SimpleGrid columns={[2,3,6]} w='100%' p="5" h="100%" m="auto">
 
-                         <Box alignItems={"center"} textAlign="center">
-                              <Image src="https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-bestseller-1671624963.jpg" />
-                              <Text fontWeight={"bold"}>Bestsellers</Text>
+                         <Box  className=".img_Box_text" alignItems={"center"} textAlign="center">
+                              <Image className="img_Box" src="https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-bestseller-1671624963.jpg" />
+                              <Text  fontWeight={"bold"}>Bestsellers</Text>
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
-                              <Image src="https://images.bewakoof.com/uploads/grid/app/Thumbnail-New-Arrivals-Common-1668508339.jpg" />
+                              <Image  className="img_Box" src="https://images.bewakoof.com/uploads/grid/app/Thumbnail-New-Arrivals-Common-1668508339.jpg" />
                               <Text fontWeight={"bold"}>New Arrivals</Text>
 
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
-                              <Image src="https://images.bewakoof.com/uploads/grid/app/hotdeals-2-1668491210.jpg" />
+                              <Image  className="img_Box" src="https://images.bewakoof.com/uploads/grid/app/hotdeals-2-1668491210.jpg" />
                               <Text fontWeight={"bold"}>Hot Deals</Text>
 
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
-                              <Image src="https://images.bewakoof.com/uploads/grid/app/Thumbnail-Collabs-Common-1668508338.jpg" />
+                              <Image  className="img_Box" src="https://images.bewakoof.com/uploads/grid/app/Thumbnail-Collabs-Common-1668508338.jpg" />
                               <Text fontWeight={"bold"}>Official Collaborations</Text>
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
-                              <Image src="https://images.bewakoof.com/uploads/grid/app/last-size-new-thumbnaik-1668508337.jpg" />
+                              <Image  className="img_Box" src="https://images.bewakoof.com/uploads/grid/app/last-size-new-thumbnaik-1668508337.jpg" />
                               <Text fontWeight={"bold"}>Last Sizes Left</Text>
 
                          </Box>
                          <Box alignItems={"center"} textAlign="center">
-                              <Image src="https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-copy-1669723278.jpg" />
+                              <Image  className="img_Box" src="https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-copy-1669723278.jpg" />
                               <Text fontWeight={"bold"}>Plus Size</Text>
                          </Box>
                     </SimpleGrid>
@@ -86,7 +86,7 @@ function Home() {
 
                          {/* https://images-static.nykaa.com/uploads/4a455f56-9cd6-4a70-8e44-221021721dc2.jpg?tr=w-300,cm-pad_resize */}
                   
-                    <SimpleGrid columns={[2,2,4]} m="auto" w="70%">
+                    <SimpleGrid  columns={[2,2,4]} m="auto" w="70%" alignItems={"center"}>
                          <Flex flexDir={'column'} align='center'  p="5" >
                               <Image src="https://images-static.nykaa.com/uploads/3f3ab163-a0a2-4076-823e-72dcbce05662.jpg?tr=w-480,cm-pad_resize" />
                               <Text>Sneaker</Text>
