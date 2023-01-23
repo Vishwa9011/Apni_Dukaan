@@ -10,7 +10,7 @@ const Footer = () => {
 
          <Box mt={"25px"} width={"100%"} h="40px" bg={"gray.100"}></Box>
 
-         <Box width={"100%"} bg={"gray.700"}>
+         <Box className="footer_head" width={"100%"} bg={"gray.700"}>
             <SimpleGrid margin={"auto"} padding="30px" width={"80%"} columns={[2, 2, 3]} color={"white"}>
                <Box>
                   <Text as="h5" fontSize={["sm","md","lg"]} fontWeight={"500"}>
@@ -55,7 +55,7 @@ const Footer = () => {
             </SimpleGrid>
          </Box>
 
-         <Box width={"100%"} bg={"black"}>
+         <Box className="footer_middle" width={"100%"} bg={"black"}>
             <SimpleGrid margin={"auto"} padding="40px" width={"80%"} columns={[2, 2, 4]} color={"white"} transition="all 600ms">
                <Flex flexDir={"column"} gap="10px" transition="all 600ms" cursor={"pointer"}>
                   <Text as="h4" fontStyle={"italic"} fontSize="xl" color={"red.500"}>

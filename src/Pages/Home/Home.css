@@ -1,16 +1,32 @@
-/* @media screen and (max-width: 600px){
-    .home_cate{
-        display: flex;
-        justify-content: center;
-    }
+ @media screen and (max-width: 700px){
+   
+.img_Box{
+    height: 70%;
+}
+.img_Box_text{
+    display: flex;
+    text-align: center;
+  
+    justify-content: center;
+    align-items: center;
+}
 }
 
 @media screen and (max-width: 400px){
-    .home_cate{
+    /* .home_cate{
         display: none;
     
+    } */
+    .img_Box{
+        height: 60%;
+   
     }
-} */
-/* .home_cate{
-    border: 2px solid red;
-} */
+    .img_Box_text{
+        display: flex;
+        text-align: center;
+      
+        justify-content: center;
+        align-items: center;
+        padding-left: 10px;
+    }
+}  
