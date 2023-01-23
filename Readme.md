@@ -1,3 +1,5 @@
+![Screenshot 2023-01-17 163625](https://user-images.githubusercontent.com/112635764/213986900-c64141ee-c488-411f-b01e-81ad0ad03adf.png)
+
 ### Libraries and Packages used:
 1. ReactJS
 2. Chakra-UI
