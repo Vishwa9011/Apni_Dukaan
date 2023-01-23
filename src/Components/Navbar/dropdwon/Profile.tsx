@@ -54,6 +54,7 @@ const Profile = () => {
             <hr style={{ margin: "10px 0px 10px 0px" }} />
             <Flex flexDir={"column"} fontSize={"sm"}>
               <Link to="/profile">Profile</Link>
+            {userCredential.isAdmin ? <Link to="/admin">Admin Panel</Link> : null}
               <Text cursor={'pointer'} _hover={{ fontWeight: 'semibold' }} onClick={Logout}>Logout</Text>
             </Flex>
           </>

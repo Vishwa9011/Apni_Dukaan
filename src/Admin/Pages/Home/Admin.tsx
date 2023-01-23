@@ -10,7 +10,9 @@ const Admin = () => {
 
      return (
           <Box m='auto'>
-               <Heading textAlign={'center'} py='4'>Admin</Heading>
+               <Link to='/'>
+                    <Heading textAlign={'center'} py='4'>Admin</Heading>
+               </Link>
                <Box display={'flex'} h='100vh' borderTop={'1px'} borderColor='green.200'>
                     <Box w='17%' borderRight={'2px'} borderColor='gray.200'>
                          <Sidebar />

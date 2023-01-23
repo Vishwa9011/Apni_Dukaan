@@ -34,6 +34,8 @@ export const signInWithGoogleAuth = (Toast: Function, navigate: Function, locati
                const credential = EmailAuthProvider.credential(user.email, resData?.password ? resData.password : user.uid);
                const linkedCred = await linkWithCredential(auth.currentUser, credential);
                console.log('linkedCred: ', linkedCred);
+          } else {
+               await updateDoc(userRef, { isActive: true })
           }
           Toast("Login Success", ToastType.success)
           dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
