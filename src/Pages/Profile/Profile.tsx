@@ -30,8 +30,8 @@ const Profile = () => {
 
 
     const ImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target?.files[0] === null) return
-        dispatch(updateProfilePhoto((e.target?.files[0]), userCredential, Toast))
+        // if (e.target?.files[0] === null) return
+        // dispatch(updateProfilePhoto((e.target?.files[0]), userCredential, Toast))
     }
 
 
