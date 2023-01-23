@@ -1,14 +1,16 @@
 import { Box, Flex, Grid, Image, Text } from '@chakra-ui/react'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { Dispatch, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { IOrdersProduct, IUser } from '../../../Constants/Constant'
-import { FindTotalRevenue } from '../../../Redux/Admin/Action.admin'
+import UseToastMsg from '../../../Custom-hooks/UseToastMsg'
+import { FindTotalRevenue, get_All_orders } from '../../../Redux/Admin/Action.admin'
 import { RootState } from '../../../Redux/store'
 import './Stats.css'
 type Props = {}
 
 const Stats = (props: Props) => {
-
+     const { Toast } = UseToastMsg()
+     const dispatch: Dispatch<any> = useDispatch()
      const { users, orders } = useSelector((store: RootState) => store.admin);
 
      // todo: active users
@@ -17,6 +19,9 @@ const Stats = (props: Props) => {
           return activeuser.length
      }
 
+     useEffect(() => {
+          dispatch(get_All_orders(Toast))
+     }, [])
 
 
 
