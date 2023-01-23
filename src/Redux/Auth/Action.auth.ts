@@ -1,11 +1,11 @@
 import { confirmPasswordReset, createUserWithEmailAndPassword, deleteUser, EmailAuthProvider, linkWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { Dispatch } from "redux"
-import { auth, db, provider } from "../../Firebase/FirebaseConfig"
+import { auth, db, provider, storage } from "../../Firebase/FirebaseConfig"
 import { IAddress, IAuthDetailLogin, IToastProps, IUser } from "../../Constants/Constant"
 import { deleteDoc, doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore"
 import * as Types from './Types.auth'
 import { ToastType } from './../../Custom-hooks/UseToastMsg';
-
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 // https://www.youtube.com/watch?v=MsDjbWUn3IE
 // https://firebase.google.com/docs/auth/web/account-linking
@@ -193,6 +193,46 @@ export const RemoveAddressUserProfile = (address: IAddress, userId: string, Toas
           await updateDoc(userRef, { address: '' });
           dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
           Toast("Address successfully removed.", ToastType.success);
+     } catch (error) {
+          console.log('error: ', error);
+          dispatch({ type: Types.AUTH_ERROR })
+          Toast("Failed to add address.", ToastType.error)
+     }
+}
+
+
+export const updateProfileInfo = (info: IUser, user: IUser, Toast: Function) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.AUTH_LOADING });
+     try {
+          const userRef = doc(db, `users`, user.uid)
+          await updateDoc(userRef, { ...info });
+          dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
+          Toast("Profile has been updated successfully", ToastType.success);
+     } catch (error) {
+          console.log('error: ', error);
+          dispatch({ type: Types.AUTH_ERROR })
+          Toast("Failed to add address.", ToastType.error)
+     }
+}
+
+
+export const updateProfilePhoto = (file: any, user: IUser, Toast: Function) => async (dispatch: Dispatch) => {
+     dispatch({ type: Types.AUTH_LOADING });
+     try {
+          const storageRef = ref(storage, `images/${Date.now() + user.email.split('@')[0]}`)
+          const uploadTask = uploadBytesResumable(storageRef, file);
+
+          // todo: upload on storage;
+          uploadTask.on((error) => {
+               console.log('error: ', error);
+          }, () => {
+               getDownloadURL(uploadTask.snapshot.ref)
+                    .then((res) => {
+                         console.log('res: ', res);
+                    }).catch(err => console.log(err))
+          })
+          dispatch({ type: Types.AUTH_OPERATION_SUCCESS })
+          Toast("Profile photo has been updated successfully", ToastType.success);
      } catch (error) {
           console.log('error: ', error);
           dispatch({ type: Types.AUTH_ERROR })

@@ -1,12 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo&family=Roboto+Mono&family=Sacramento&display=swap');
+
+.name {
+    font-family: 'Arvo', serif !important;
+}
+
+#image {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
 @media only screen and (width>=800px) {
-    /* For tablets: */
-    .profile{
-        display: flex;
-   }
-   .pic{
-    width: 60%;
-   }
-  }
 
-  
+    /* For tablets: */
+    .profile {
+        display: flex;
+    }
+
+    .pic {
+        width: 60%;
+    }
+}

@@ -78,13 +78,14 @@ export const Checkout = (cart: IProduct[], user: IUser, limit: number, navigate:
           for (let item = 0; item < limit; item++) {
                const orderedAt = Date.now();
                const orderID = `@${orderedAt}`
+               const email = user.email
                const ownerInfo = {
                     email: user.email,
                     ownerName: user.address?.name,
                     address: `${user.address}`
                }
                const deliveryStatus = 'PENDING';
-               const newProduct = { ...cart[item], orderID, orderedAt, ownerInfo, deliveryStatus }
+               const newProduct = { ...cart[item], email, orderID, orderedAt, ownerInfo, deliveryStatus }
                // todo: adding the order in the server
                const orderRef = doc(db, `orders`, orderID);
                await (setDoc(orderRef, newProduct))

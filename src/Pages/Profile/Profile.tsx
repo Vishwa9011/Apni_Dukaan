@@ -1,89 +1,136 @@
 import { Avatar, Box, Button, Flex, FormControl, FormLabel, Heading, Image, Input, Select, Text, WrapItem } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState, Dispatch } from 'react'
 import profile from '/Public/Images/profile.png'
 import "./profile.css"
 import { FaUpload } from 'react-icons/fa'
 import { RiDeleteBin5Fill } from 'react-icons/ri'
+import { MdDelete, MdDone } from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../Redux/store'
+import { IUser } from '../../Constants/Constant'
+import { updateProfilePhoto } from '../../Redux/Auth/Action.auth'
+import UseToastMsg from '../../Custom-hooks/UseToastMsg'
+
+
+interface IUserCred {
+    userCredential: IUser
+}
+
+const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+
 const Profile = () => {
+    const { Toast } = UseToastMsg()
+    const [username, setUserName] = useState('');
+    const [phone, setphone] = useState('');
+    const [gender, setGender] = useState('');
+    const dispatch: Dispatch<any> = useDispatch();
+    const { userCredential }: IUserCred = useSelector((store: RootState) => store.auth);
+    const date = new Date(userCredential.timeStamp);
+
+
+    const ImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target?.files[0] === null) return
+        dispatch(updateProfilePhoto((e.target?.files[0]), userCredential, Toast))
+    }
+
+
     return (
         <Box w={"100%"} bg={"#f5f5f0"}>
             <Flex justifyContent={"center"} alignItems="center" p="30px">
                 <Heading color={"red.500"}>Profile</Heading>
-              
             </Flex>
-            <Box className='profile' w="80%" margin={"auto"} p="30px" gap={"20px"} justifyContent={"center"} boxShadow='base' rounded='md' >
-                <Box className='pic' w="40%" p={"20px"} boxShadow='base' rounded='md' _hover={{ boxShadow: "md", transition: "all 600ms" }} transition="all 600ms">
+            <Flex className='profile' w="80%" margin={"auto"} p="30px" gap={"20px"} justifyContent={"center"} boxShadow='base' rounded='md' >
+                <Box className='pic' w="30%" p={"20px"} boxShadow='base' rounded='md' border={'1px'}>
                     <Flex flexDir={"column"} justifyContent="center">
-                        <Heading p={"30px"} textAlign={"center"} size={"lg"}>Name</Heading>
-                        <Flex justifyContent="center">
+                        <Heading p={"30px"} className='name' textAlign={"center"} size={"lg"} textTransform={'capitalize'}>{username ? username : userCredential.username ? userCredential.username : 'Enter your name'}</Heading>
+                        <Flex justifyContent="center" pos='relative'>
                             <Image w="40%" h="50%" rounded={"50%"} alt='Dan Abrahmov' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp=CAU' />
+                            <Button pos='absolute' className='btn-clicked' cursor={'pointer'} left='58%' h='30px' minW='30px' alignItems={"center"} justifyContent="center" top='0' borderRadius={'50%'} bg='gray.200' p='1'>
+                                <MdDelete />
+                            </Button>
                         </Flex>
-                        <Flex justify={"space-around"}>
-                            <Flex w="50px" h={"20px"} bg={"green.500"} p="18px" rounded={"2xl"} alignItems="center">
-                                <FormControl id="image" title='Change icon'>
-                                    <FormLabel title='Change icon' className='upload-label BtnClickEffect' _hover={{ color: "white" }}><FaUpload /></FormLabel>
-                                    <Input type='file' name='image' visibility='hidden' pos='absolute' zIndex={-1} />
-                                </FormControl>
+                        <Flex justify={"space-around"} >
+                            <Flex alignItems="center" justify={'center'} my='2'>
+                                <Button variant={'unstyled'} className='btn-clicked'>
+                                    <FormControl id="image" display='flex' alignItems="center" justifyContent={'center'} pos='relative'>
+                                        <FormLabel m='0' w='100%' px='4' py='2' bg='red.500' color='white' cursor='pointer'>UPLOAD IMAGE</FormLabel>
+                                        <Input onChange={ImageChange} type='file' name='image' visibility='hidden' pos='absolute' zIndex={-1} />
+                                    </FormControl>
+                                </Button>
                             </Flex>
-                                <Flex align={"center"} justify="center" bg={"red.500"} w="50px" rounded={"2xl"} _hover={{ color: "white" }}>
-                                    <RiDeleteBin5Fill/>
-                                </Flex>
                         </Flex>
                         <Box py={"20px"}>
-                            <Text fontSize={"md"} py={"5px"} _hover={{ color: "red", fontSize: "md", transition: "all 600ms" }} transition="all 600ms" >Name :</Text>
-                            <Text fontSize={"md"} py={"5px"} _hover={{ color: "red", fontSize: "md", transition: "all 600ms" }} transition="all 600ms">Email :</Text>
-                            <Text fontSize={"md"} py={"5px"} _hover={{ color: "red", fontSize: "md", transition: "all 600ms" }} transition="all 600ms">Number :</Text>
+                            <Flex align={'center'}>
+                                <Text w='20%' fontSize={"md"} py={"5px"}>Name :</Text>
+                                <Text w='80%' textTransform={'capitalize'} fontSize={"md"} py={"5px"}>{username}</Text>
+                            </Flex>
+                            <Flex align={'center'}>
+                                <Text w='20%' fontSize={"md"} py={"5px"}>Email :</Text>
+                                <Text w='80%' fontSize={"md"} py={"5px"}>{userCredential.email}</Text>
+                            </Flex>
+                            <Flex align={'center'}>
+                                <Text w='20%' fontSize={"md"} py={"5px"}>Phone :</Text>
+                                <Text w='80%' fontSize={"md"} py={"5px"}>{phone}</Text>
+                            </Flex>
+                            <Flex align={'center'}>
+                                <Text w='20%' fontSize={"md"} py={"5px"} >Joined :</Text>
+                                <Flex w='80%' fontSize={"md"} py={"5px"}>
+                                    {`${date.getDate()}-${month[date.getMonth()]}-${date.getFullYear()}`}
+                                    <Text></Text>
+                                </Flex>
+                            </Flex>
                         </Box>
                     </Flex>
                 </Box>
-                <Box w="70%" p={"60px"} boxShadow='base' rounded='md' _hover={{ boxShadow: "md", transition: "all 600ms" }} transition="all 600ms">
+
+                <Box w="70%" p={"60px"} boxShadow='base' rounded='md' border={'1px'}>
                     <Box>
                         <Flex pt={"10px"} gap="30px" justifyContent={"space-between"} >
-                            <FormControl id="userid" isRequired _hover={{ color: "red", fontSize: "lg", transition: "all 600ms" }} transition="all 600ms">
+                            <FormControl id="userid" isRequired>
                                 <FormLabel >User ID</FormLabel>
-                                <Input type={"url"} placeholder='' />
+                                <Input value={userCredential.uid} disabled />
                             </FormControl>
-                            <FormControl id="name" isRequired _hover={{ color: "red", fontSize: "lg", transition: "all 600ms" }} transition="all 600ms">
-                                <FormLabel>Full Name</FormLabel>
-                                <Input placeholder='' />
+                            <FormControl id="name" isRequired>
+                                <FormLabel>Username</FormLabel>
+                                <Input placeholder='Enter your username' value={username} onChange={(e) => setUserName(e.target.value)} />
                             </FormControl>
                         </Flex>
                         <Flex pt={"10px"} gap="30px" justifyContent={"space-between"}>
-                            <FormControl id="name" isRequired _hover={{ color: "red", fontSize: "lg", transition: "all 600ms" }} transition="all 600ms">
-                                <FormLabel>User Name</FormLabel>
-                                <Input type={"email"} placeholder='' />
-                            </FormControl>
-                            <FormControl id="name" isRequired _hover={{ color: "red", fontSize: "lg", transition: "all 600ms" }} transition="all 600ms">
+                            <FormControl id="name" isRequired>
                                 <FormLabel>Email Address</FormLabel>
-                                <Input type={"email"} placeholder='' />
+                                <Input value={userCredential.email} disabled />
                             </FormControl>
                         </Flex>
                         <Flex pt={"20px"} gap="30px"  >
-                            <Flex cursor="pointer" align={"center"} justify="space-around" boxShadow='base' rounded='md' p={"10px"} w="15%" border={"2px solid gray"} _hover={{ border: "2px solid red", fontSize: "lg", transition: "all 600ms" }} transition="all 600ms">
-                                <Image w="40%" src="https://bigbasketdatabase-65303.web.app/man1.png" />
+                            <Button className='btn-clicked' colorScheme={'white'} borderRadius='0' onClick={() => setGender('male')} border='2px' borderColor={gender == 'male' ? 'red.500' : 'blackAlpha.800'} cursor="pointer" gap='7px' color='black' alignItems={"center"} justifyContent="center" w='50%' fontWeight={'semibold'} py='2'>
+                                <Text fontSize={'1.5em'} color={gender == 'male' ? 'red.500' : 'blackAlpha.800'}><MdDone /> </Text>
                                 <Text fontSize={"md"}>Male</Text>
-                            </Flex>
-                            <Flex cursor="pointer" align={"center"} justify="space-around" boxShadow='base' rounded='md' p="10px" w="15%" border={"2px solid gray"} _hover={{ border: "2px solid red", fontSize: "lg", transition: "all 600ms" }} transition="all 600ms">
-                                <Image w="40%" src="https://bigbasketdatabase-65303.web.app/woman.png" />
+                            </Button>
+                            <Button className='btn-clicked' colorScheme={'white'} borderRadius='0' onClick={() => setGender('female')} border='2px' borderColor={gender == 'female' ? 'red.500' : 'blackAlpha.800'} cursor="pointer" gap='7px' color='black' alignItems={"center"} justifyContent="center" w='50%' fontWeight={'semibold'} py='2'>
+                                <Text fontSize={'1.5em'} color={gender == 'female' ? 'red.500' : 'blackAlpha.800'}><MdDone /> </Text>
                                 <Text fontSize={"md"}>Female</Text>
-                            </Flex>
+                            </Button>
                         </Flex>
                         <Flex pt={"10px"} gap="30px" justifyContent={"space-between"} >
-                            <FormControl id="password" isRequired _hover={{ color: "red", fontSize: "lg", transition: "all 600ms" }} transition="all 600ms">
+                            {/* <FormControl id="password" isRequired >
                                 <FormLabel>Password</FormLabel>
                                 <Input type={"email"} placeholder='' />
-                            </FormControl>
-                            <FormControl id="number" isRequired _hover={{ color: "red", fontSize: "lg", transition: "all 600ms" }} transition="all 600ms">
+                            </FormControl> */}
+                            <FormControl id="number" isRequired>
                                 <FormLabel>Phone Number</FormLabel>
-                                <Input type={"number"} placeholder='' />
+                                <Flex h='40px' w='100%' color='blackAlpha.800' align={'center'} border='1px' p='2' fontWeight={'semibold'} borderRadius={'5px'} borderColor='gray.200'>
+                                    <Text borderRight={'2px'} pr='2' color='blackAlpha.700'>+91</Text>
+                                    <Input letterSpacing={'2px'} onChange={(e) => setphone(e.target.value)} value={phone} placeholder='123-456-7890' fontWeight={'semibold'} pl='2' maxLength={10} type='number' variant={'unstyled'} h='100%' w='100%' />
+                                </Flex>
                             </FormControl>
                         </Flex>
-                        <Box pt={"30px"}>
-                            <Button w="100%" colorScheme='red' letterSpacing={"wide"} fontWeight="semibold" fontSize="lg">Submit</Button>
-                        </Box>
+                        <Flex pt={"30px"}>
+                            <Button colorScheme='red.500' bg='red.500' borderRadius={0} className='btn-clicked' letterSpacing={"wide"} fontWeight="semibold" fontSize="lg">Save Info</Button>
+                        </Flex>
                     </Box>
                 </Box>
-            </Box>
+            </Flex>
         </Box>
     )
 }

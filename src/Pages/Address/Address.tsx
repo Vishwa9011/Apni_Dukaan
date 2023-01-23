@@ -68,6 +68,15 @@ const Address = () => {
             return
          }
       }
+
+      if (address.phone.toString().length != 10) {
+         Toast('Phone number must be 10 digits only.', ToastType.warning)
+         return;
+      } else if (address.pincode.toString().length !== 6) {
+         Toast('Pincode must be 6 digits only.', ToastType.warning)
+         return;
+      }
+
       setAddress(initialAddress);
       dispatch(AddAddressUserProfile(address, userCredential?.uid, Toast))
       dispatch(getUserCredential(userCredential, Toast))
@@ -75,6 +84,7 @@ const Address = () => {
    }
 
    const RemoveAddress = () => {
+      setAddress(initialAddress)
       dispatch(RemoveAddressUserProfile(address, userCredential?.uid, Toast))
    }
 
@@ -139,7 +149,7 @@ const Address = () => {
                            <Flex gap='2' p='2' align={'center'} pos='relative'>
                               <Flex pos='absolute' top={'0'} right='0' align={'center'} gap='10px'>
                                  <Flex align={'center'} gap='5px' border={'1px'} _hover={{ color: 'red.500', }} fontWeight='semibold' cursor='pointer' px='2' fontSize={'.7em'} onClick={() => ToggleAddressInput(true)}>EDIT <FiEdit /> </Flex>
-                                 <Flex align={'center'} gap='5px' border={'1px'} _hover={{ color: 'red.500', }} fontWeight='semibold' cursor='pointer' px='2' fontSize={'.7em'} onClick={() => { RemoveAddress(), setAddress(initialAddress) }}>REMOVE <AiOutlineClose /> </Flex>
+                                 <Flex align={'center'} gap='5px' border={'1px'} _hover={{ color: 'red.500', }} fontWeight='semibold' cursor='pointer' px='2' fontSize={'.7em'} onClick={() => { RemoveAddress() }}>REMOVE <AiOutlineClose /> </Flex>
                               </Flex>
                               <Box h='100%' alignSelf={'stretch'} pt='1'>
                                  <Text border={'2px'} borderRadius='50%' color='red.500' fontSize={'1.2em'} h='fit-content'><GoPrimitiveDot /></Text>
